@@ -1,0 +1,205 @@
+.rtl {
+    app-root .dropdown-menu-right {
+        left: 0 !important;
+        right: auto!important;
+    }
+    text-align: right;
+    direction: rtl;
+    .sidebar.sidebar-left {
+        left: auto;
+        right: 0;
+        > ul.list-group {
+            padding: 0;
+        }
+    }
+    .input-group > .input-group-append > .input-group-text {
+        border-radius: 0.2rem 0 0 0.2rem !important;
+    }
+    .input-group > .form-control:not(:last-child),
+    .input-group > .custom-select:not(:last-child) {
+        border-radius: 0 0.2rem 0.2rem 0 !important;
+    }
+    .input-group > .input-group-prepend > .input-group-text {
+        border-radius: 0 0.2rem 0.2rem 0 !important;
+    }
+    .input-group > .input-group-prepend +.form-control {
+        border-radius: 0.2rem 0 0 0.2rem !important;
+    }
+    .search-header .input-group .form-control {
+        border-radius: 15px;
+    }
+    /*rtl dropdown items correction*/
+    .dropdown-menu {
+        text-align: right;
+    }
+    * {
+        direction: rtl;
+    }
+    .navbar * {
+        direction: rtl;
+    }
+    .sidebar * {
+        direction: rtl;
+    }
+    .sidebar.sidebar-right {
+        left: 0;
+        right: auto;
+        .close-sidebar {
+            left: auto;
+            right: -50px;
+            width: 50px;
+            border-radius: 0 4px 4px 0;
+        }
+    }
+    &.sidebar-right-close .sidebar-right {
+        left: -($sidebar-width + 10px);
+        right: auto;
+        .close-sidebar {
+            right: -50px;
+            border-radius: 0 4px 4px 0;
+            padding-right: 0
+        }
+    }
+    &.sidebar-left-close .sidebar-left {
+        right: -($sidebar-width + 10px);
+        left: auto
+    }
+    .settings-sidebar {
+        left: 0;
+        right: auto;
+        box-shadow: 5px 0px 5px 0px rgba(0, 0, 0, 0.05);
+        -moz-box-shadow: 5px 0px 5px 0px rgba(0, 0, 0, 0.05);
+        -webkit-box-shadow: 5px 0px 5px 0px rgba(0, 0, 0, 0.05);
+        -ms-box-shadow: 5px 0px 5px 0px rgba(0, 0, 0, 0.05);
+        .close-setting-sidebar {
+            border-radius: 0 4px 4px 0;
+            right: -50px;
+            left: auto;
+            padding-right: 0;
+            &.active {
+                width: 50px;
+                padding-right: 0;
+                left: auto;
+                right: -50px;
+            }
+        }
+    }
+    .settings-sidebar.close-settings-sidebar-backdrop {
+        right: auto;
+        left: -280px;
+    }
+    .chat-window {
+        left: 60px;
+        right: auto
+    }
+    &.setting-sidebar-open .chat-window {
+        left: 365px;
+        right: auto;
+    }
+    .navbar .dropdown-menu {
+        text-align: left;
+    }
+    .breadcrumb {
+        direction: ltr;
+        justify-content: flex-end;
+        * {
+            direction: ltr;
+        }
+    }
+    .datepicker-input {
+        direction: ltr;
+        .dropdown-menu {
+            direction: ltr;
+            * {
+                direction: ltr;
+            }
+        }
+    }
+    .input-group {
+        direction: rtl;
+    }
+    .pl-0 {
+        padding-right: 0 !important
+    }
+    .pr-0 {
+        padding-left: 0 !important
+    }
+    .nav {
+        padding-right: 0
+    }
+    .list-group {
+        padding-right: 0
+    }
+    .mr-2 {
+        margin-left: 0.5rem !important;
+    }
+    .ml-2 {
+        margin-right: 0.5rem !important;
+    }
+    .mr-3 {
+        margin-right: 0rem !important;
+        margin-left: 1rem !important;
+    }
+    .ml-3 {
+        margin-left: 0rem !important;
+        margin-right: 1rem !important;
+    }
+    .media {
+        display: flex;
+        align-items: flex-start;
+        text-align: right;
+    }
+    .float-right {
+        float: none !important;
+        float: left !important;
+    }
+    .float-left {
+        float: none !important;
+        float: right !important;
+    }
+    .text-left {
+        text-align: right !important;
+    }
+    .text-right {
+        text-align: left !important;
+    }
+    .time-day li:last-child {
+        border-left: 0px solid rgba(0, 0, 0, 0.1);
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    .top-right-icon {
+        right: auto;
+        left: 15px;
+    }
+    .media figure {
+        margin-right: 0px;
+        margin-left: 15px;
+    }
+    ul {
+        padding-right: 0
+    }
+}
+@media screen and (max-width: 992px) {
+    .rtl {
+        .navbar-brand {
+            direction: ltr;
+        }
+        .main-container {
+            margin-right: 0;
+        }
+        &.push-right {
+            .sidebar {
+                left: auto !important;
+                right: 0 !important;
+            }
+        }
+    }
+}
+@media screen and (max-width: 640px) {
+    .rtl {
+        &.setting-sidebar-open .chat-window {
+            left: 60px;
+            right: auto;
+        }
+    }
+}

@@ -1,0 +1,108 @@
+.daterangepicker {
+    color: #000000;
+    @extend .box-shadow-large;
+    border-radius: 5px;
+    border: 0;
+    margin-top: 1px;
+    .ranges {
+        margin: 0;
+        ul {
+            padding: 0.5em;
+            li {
+                border-radius: 1em;
+                font-size: 0.95em;
+                padding: .5rem .5rem;
+                color: #888888;
+                &.active {
+                    background-color: $blue;
+                    color: $white;
+                }
+            }
+        }
+    }
+    &:after {
+        display: none
+    }
+    &:before {
+        display: none
+    }
+    td.start-date {
+        border-radius: 15px 0 0 15px;
+    }
+    td.end-date {
+        border-radius: 0 15px 15px 0;
+    }
+}
+.daterange {
+    max-width: 200px;
+    background-image: url(../img/date.png);
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+        &.w-100{
+            max-width:100%    
+        }
+}
+.datepicker{
+    background-image: url(../img/date.png);
+    background-repeat: no-repeat;
+    background-position: center right;
+}
+
+.card .card-header .daterange {
+    border: 0;
+    color: $content-color-secondary
+}
+.daterangepicker td.in-range {
+    background-color: lighten($blue, 22%);
+}
+.daterangepicker td.active,
+.daterangepicker td.active:hover {
+    background-color: $blue;
+    border-color: transparent;
+    color: #fff;
+}
+.daterangeheader {
+    i {
+        margin-top: -6px
+    }
+}
+.overflow-x-auto {
+    overflow-x: auto;
+    &::-webkit-scrollbar {
+        width: 7px;
+        height: 7px;
+    }
+    &::-webkit-scrollbar-track {
+        background: rgba($blue, 0);
+        border-radius: 0;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: rgba($blue, 1);
+        border-radius: 0;
+        cursor: pointer
+    }
+}
+.date-list {
+    list-style: none;
+    width: auto;
+    padding: 0;
+    .date {
+        float: left;
+        padding: 10px;
+        line-height: 1em;
+        user-select: none;
+        cursor: pointer;
+        text-align: center;
+        border-radius: 4px;
+        small { font-size: 0.6em}
+        p {
+            text-transform: uppercase;
+        }
+        &.active{
+            p{ color: #ffffff}
+            h6{ color: #ffffff}
+        }
+    }
+}
+

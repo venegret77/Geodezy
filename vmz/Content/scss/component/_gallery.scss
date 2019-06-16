@@ -1,0 +1,21 @@
+.grid {
+    .grid-item {
+        width: 33.3%;
+        padding: 1px;
+        .swipebox {
+            width: 100%;
+            display: block;
+            img {
+                width: 100%
+            }
+        }
+    }
+    &.grid-four{
+        .grid-item {
+            width: 25%;
+        }
+    }
+}
+.pswp__bg {
+    opacity: 0.6 !important;
+}

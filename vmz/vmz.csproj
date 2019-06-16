@@ -1,0 +1,1016 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D0E93841-04E7-4CEF-AB10-D2A4D41334CE}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>vmz</RootNamespace>
+    <AssemblyName>vmz</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44368</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.4</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Models\AccountLoginModel.cs" />
+    <Compile Include="Models\AccountRegisterModel.cs" />
+    <Compile Include="Models\AddExternalLoginBindingModel.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AdmModel.cs" />
+    <Compile Include="Models\Brigade.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ExternalLoginViewModel.cs" />
+    <Compile Include="Models\GetServices_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetTasks_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetUsers_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListOfProfessions_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListOfServices.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListOfTasks.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListOfUsers.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListOfUsersAdm_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Profession.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Service.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Task.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\vmz.mdf" />
+    <Content Include="App_Data\vmz_log.ldf">
+      <DependentUpon>vmz.mdf</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\blue.css" />
+    <Content Include="Content\css\blueheader.css" />
+    <Content Include="Content\css\blueheadersidebar.css" />
+    <Content Include="Content\css\bluesidebar.css" />
+    <Content Include="Content\css\brown.css" />
+    <Content Include="Content\css\brownheader.css" />
+    <Content Include="Content\css\brownheadersidebar.css" />
+    <Content Include="Content\css\brownsidebar.css" />
+    <Content Include="Content\css\dark-blue.css" />
+    <Content Include="Content\css\dark-blueheader.css" />
+    <Content Include="Content\css\dark-blueheadersidebar.css" />
+    <Content Include="Content\css\dark-bluesidebar.css" />
+    <Content Include="Content\css\dark-brown.css" />
+    <Content Include="Content\css\dark-brownheader.css" />
+    <Content Include="Content\css\dark-brownheadersidebar.css" />
+    <Content Include="Content\css\dark-brownsidebar.css" />
+    <Content Include="Content\css\dark-green.css" />
+    <Content Include="Content\css\dark-greenheader.css" />
+    <Content Include="Content\css\dark-greenheadersidebar.css" />
+    <Content Include="Content\css\dark-greensidebar.css" />
+    <Content Include="Content\css\dark-grey.css" />
+    <Content Include="Content\css\dark-greyheader.css" />
+    <Content Include="Content\css\dark-greyheadersidebar.css" />
+    <Content Include="Content\css\dark-greysidebar.css" />
+    <Content Include="Content\css\dark-maroon.css" />
+    <Content Include="Content\css\dark-maroonheader.css" />
+    <Content Include="Content\css\dark-maroonheadersidebar.css" />
+    <Content Include="Content\css\dark-maroonsidebar.css" />
+    <Content Include="Content\css\dark-pink.css" />
+    <Content Include="Content\css\dark-pinkheader.css" />
+    <Content Include="Content\css\dark-pinkheadersidebar.css" />
+    <Content Include="Content\css\dark-pinksideabr.css" />
+    <Content Include="Content\css\dark-purple.css" />
+    <Content Include="Content\css\dark-purpleheader.css" />
+    <Content Include="Content\css\dark-purpleheadersidebar.css" />
+    <Content Include="Content\css\dark-purplesidebar.css" />
+    <Content Include="Content\css\grey.css" />
+    <Content Include="Content\css\greyheader.css" />
+    <Content Include="Content\css\greyheadersidebar.css" />
+    <Content Include="Content\css\greysidebar.css" />
+    <Content Include="Content\css\orange.css" />
+    <Content Include="Content\css\orangeheader.css" />
+    <Content Include="Content\css\orangeheadersidebar.css" />
+    <Content Include="Content\css\orangesidebar.css" />
+    <Content Include="Content\css\purple.css" />
+    <Content Include="Content\css\purpleheader.css" />
+    <Content Include="Content\css\purpleheadersidebar.css" />
+    <Content Include="Content\css\purplesidebar.css" />
+    <Content Include="Content\css\red.css" />
+    <Content Include="Content\css\redheader.css" />
+    <Content Include="Content\css\redheadersidebar.css" />
+    <Content Include="Content\css\redsidebar.css" />
+    <Content Include="Content\css\skyblue.css" />
+    <Content Include="Content\css\skyblueheader.css" />
+    <Content Include="Content\css\skyblueheadersidebar.css" />
+    <Content Include="Content\css\skybluesidebar.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\styleheader.css" />
+    <Content Include="Content\css\styleheadersidebar.css" />
+    <Content Include="Content\css\stylesidebar.css" />
+    <Content Include="Content\css\teal.css" />
+    <Content Include="Content\css\tealheader.css" />
+    <Content Include="Content\css\tealheadersidebar.css" />
+    <Content Include="Content\css\tealsidebar.css" />
+    <Content Include="Content\img\4042.png" />
+    <Content Include="Content\img\avatar.png" />
+    <Content Include="Content\img\band-2264972_640.jpg" />
+    <Content Include="Content\img\banner.png" />
+    <Content Include="Content\img\banner2.png" />
+    <Content Include="Content\img\birtmsg.png" />
+    <Content Include="Content\img\bw.jpg" />
+    <Content Include="Content\img\callimage.jpg" />
+    <Content Include="Content\img\canada.png" />
+    <Content Include="Content\img\china.png" />
+    <Content Include="Content\img\comingsoon.png" />
+    <Content Include="Content\img\connection_error.png" />
+    <Content Include="Content\img\cpu.png" />
+    <Content Include="Content\img\date.png" />
+    <Content Include="Content\img\error.png" />
+    <Content Include="Content\img\excel.png" />
+    <Content Include="Content\img\facebook-w.png" />
+    <Content Include="Content\img\facebook.png" />
+    <Content Include="Content\img\fashion-1063100_640.jpg" />
+    <Content Include="Content\img\favicon-apple.png" />
+    <Content Include="Content\img\favicon.png" />
+    <Content Include="Content\img\geodezy1.png" />
+    <Content Include="Content\img\geodezy2.png" />
+    <Content Include="Content\img\india.png" />
+    <Content Include="Content\img\linkedin-w.png" />
+    <Content Include="Content\img\linkedin.png" />
+    <Content Include="Content\img\loader-bg.png" />
+    <Content Include="Content\img\loader-hole.png" />
+    <Content Include="Content\img\logo-icon.png" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\news_small1.jpg" />
+    <Content Include="Content\img\news_small2.jpg" />
+    <Content Include="Content\img\news_small3.jpg" />
+    <Content Include="Content\img\news_small4.jpg" />
+    <Content Include="Content\img\paid.png" />
+    <Content Include="Content\img\pattern-1.png" />
+    <Content Include="Content\img\pattern-2.png" />
+    <Content Include="Content\img\pattern-3.png" />
+    <Content Include="Content\img\pattern-4.png" />
+    <Content Include="Content\img\pattern-5.png" />
+    <Content Include="Content\img\paymentfailed.png" />
+    <Content Include="Content\img\paypal.png" />
+    <Content Include="Content\img\pinterest-w.png" />
+    <Content Include="Content\img\pinterest.png" />
+    <Content Include="Content\img\ppt.png" />
+    <Content Include="Content\img\sidebar-1.png" />
+    <Content Include="Content\img\sidebar-11.png" />
+    <Content Include="Content\img\sidebar-12.png" />
+    <Content Include="Content\img\sidebar-13.png" />
+    <Content Include="Content\img\sidebar-14.png" />
+    <Content Include="Content\img\sidebar-15.png" />
+    <Content Include="Content\img\sidebar-2.png" />
+    <Content Include="Content\img\sidebar-3.png" />
+    <Content Include="Content\img\sidebar-4.png" />
+    <Content Include="Content\img\sidebar-5.png" />
+    <Content Include="Content\img\sidebar-texture1.png" />
+    <Content Include="Content\img\sidebar-texture2.png" />
+    <Content Include="Content\img\sidebar-texture3.png" />
+    <Content Include="Content\img\sidebar-texture4.png" />
+    <Content Include="Content\img\sidebar-texture5.png" />
+    <Content Include="Content\img\singer-690117_640.jpg" />
+    <Content Include="Content\img\sunflowers-3640935_640.jpg" />
+    <Content Include="Content\img\team.jpg" />
+    <Content Include="Content\img\theme.png" />
+    <Content Include="Content\img\timeout.png" />
+    <Content Include="Content\img\tshirt.jpg" />
+    <Content Include="Content\img\tshirt.png" />
+    <Content Include="Content\img\tshirt1.png" />
+    <Content Include="Content\img\tshirt2.png" />
+    <Content Include="Content\img\twitter-w.png" />
+    <Content Include="Content\img\twitter.png" />
+    <Content Include="Content\img\uk.png" />
+    <Content Include="Content\img\unitedstates.png" />
+    <Content Include="Content\img\user1.png" />
+    <Content Include="Content\img\user2.png" />
+    <Content Include="Content\img\user3.png" />
+    <Content Include="Content\img\voice.png" />
+    <Content Include="Content\img\word.png" />
+    <Content Include="Content\js\autocomplete.js" />
+    <Content Include="Content\js\contextmenu.js" />
+    <Content Include="Content\js\dashboard-finance.js" />
+    <Content Include="Content\js\dashboard-network.js" />
+    <Content Include="Content\js\dashboard-social.js" />
+    <Content Include="Content\js\dashboard.js" />
+    <Content Include="Content\js\dragable_sortable.js" />
+    <Content Include="Content\js\jquery-3.2.1.min.js" />
+    <Content Include="Content\js\main-with-style-switcher.js" />
+    <Content Include="Content\js\main.js" />
+    <Content Include="Content\js\photoswipesctipt.js" />
+    <Content Include="Content\js\popper.min.js" />
+    <Content Include="Content\vendor\animatecss\animate.css" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\js\bootstrap.min.js" />
+    <Content Include="Content\vendor\bootstrap-daterangepicker-master\daterangepicker.css" />
+    <Content Include="Content\vendor\bootstrap-daterangepicker-master\daterangepicker.js" />
+    <Content Include="Content\vendor\bootstrap-daterangepicker-master\demo.html" />
+    <Content Include="Content\vendor\bootstrap-daterangepicker-master\moment.js" />
+    <Content Include="Content\vendor\bootstrap-daterangepicker-master\moment.min.js" />
+    <Content Include="Content\vendor\bootstrap_tour\css\bootstrap-tour-standalone.css" />
+    <Content Include="Content\vendor\bootstrap_tour\js\bootstrap-tour-standalone.js" />
+    <Content Include="Content\vendor\bootstrap_tour\js\bootstrap-tour-standalone.min.js" />
+    <Content Include="Content\vendor\chartjs\chart-js-data.js" />
+    <Content Include="Content\vendor\chartjs\Chart.bundle.js" />
+    <Content Include="Content\vendor\chartjs\Chart.bundle.min.js" />
+    <Content Include="Content\vendor\chartjs\Chart.js" />
+    <Content Include="Content\vendor\chartjs\Chart.min.js" />
+    <Content Include="Content\vendor\chartjs\utils.js" />
+    <Content Include="Content\vendor\chosen1.8\chosen-sprite%402x.png" />
+    <Content Include="Content\vendor\chosen1.8\chosen-sprite.png" />
+    <Content Include="Content\vendor\chosen1.8\chosen.css" />
+    <Content Include="Content\vendor\chosen1.8\chosen.jquery.js" />
+    <Content Include="Content\vendor\chosen1.8\chosen.jquery.min.js" />
+    <Content Include="Content\vendor\chosen1.8\chosen.min.css" />
+    <Content Include="Content\vendor\chosen1.8\chosen.proto.js" />
+    <Content Include="Content\vendor\chosen1.8\chosen.proto.min.js" />
+    <Content Include="Content\vendor\chosen1.8\index.html" />
+    <Content Include="Content\vendor\chosen1.8\index.proto.html" />
+    <Content Include="Content\vendor\chosen1.8\options.html" />
+    <Content Include="Content\vendor\circle-progress\circle-progress.min.js" />
+    <Content Include="Content\vendor\ckeditor\ckeditor.js" />
+    <Content Include="Content\vendor\colorpicker\css\colorpicker.css" />
+    <Content Include="Content\vendor\colorpicker\css\layout.css" />
+    <Content Include="Content\vendor\colorpicker\images\blank.gif" />
+    <Content Include="Content\vendor\colorpicker\images\colorpicker_background.png" />
+    <Content Include="Content\vendor\colorpicker\images\colorpicker_hex.png" />
+    <Content Include="Content\vendor\colorpicker\images\colorpicker_hsb_b.png" />
+    <Content Include="Content\vendor\colorpicker\images\colorpicker_hsb_h.png" />
+    <Content Include="Content\vendor\colorpicker\images\colorpicker_hsb_s.png" />
+    <Content Include="Content\vendor\colorpicker\images\colorpicker_indic.gif" />
+    <Content Include="Content\vendor\colorpicker\images\colorpicker_overlay.png" />
+    <Content Include="Content\vendor\colorpicker\images\colorpicker_rgb_b.png" />
+    <Content Include="Content\vendor\colorpicker\images\colorpicker_rgb_g.png" />
+    <Content Include="Content\vendor\colorpicker\images\colorpicker_rgb_r.png" />
+    <Content Include="Content\vendor\colorpicker\images\colorpicker_select.gif" />
+    <Content Include="Content\vendor\colorpicker\images\colorpicker_submit.png" />
+    <Content Include="Content\vendor\colorpicker\images\custom_background.png" />
+    <Content Include="Content\vendor\colorpicker\images\custom_hex.png" />
+    <Content Include="Content\vendor\colorpicker\images\custom_hsb_b.png" />
+    <Content Include="Content\vendor\colorpicker\images\custom_hsb_h.png" />
+    <Content Include="Content\vendor\colorpicker\images\custom_hsb_s.png" />
+    <Content Include="Content\vendor\colorpicker\images\custom_indic.gif" />
+    <Content Include="Content\vendor\colorpicker\images\custom_rgb_b.png" />
+    <Content Include="Content\vendor\colorpicker\images\custom_rgb_g.png" />
+    <Content Include="Content\vendor\colorpicker\images\custom_rgb_r.png" />
+    <Content Include="Content\vendor\colorpicker\images\custom_submit.png" />
+    <Content Include="Content\vendor\colorpicker\images\select.png" />
+    <Content Include="Content\vendor\colorpicker\images\select2.png" />
+    <Content Include="Content\vendor\colorpicker\images\slider.png" />
+    <Content Include="Content\vendor\colorpicker\index.html" />
+    <Content Include="Content\vendor\colorpicker\js\colorpicker.js" />
+    <Content Include="Content\vendor\colorpicker\js\eye.js" />
+    <Content Include="Content\vendor\colorpicker\js\jquery.js" />
+    <Content Include="Content\vendor\colorpicker\js\layout.js" />
+    <Content Include="Content\vendor\colorpicker\js\utils.js" />
+    <Content Include="Content\vendor\cookie\jquery.cookie.js" />
+    <Content Include="Content\vendor\DataTables-1.10.18\css\dataTables.bootstrap.css" />
+    <Content Include="Content\vendor\DataTables-1.10.18\css\dataTables.bootstrap.min.css" />
+    <Content Include="Content\vendor\DataTables-1.10.18\css\dataTables.bootstrap4.css" />
+    <Content Include="Content\vendor\DataTables-1.10.18\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\vendor\DataTables-1.10.18\css\dataTables.foundation.css" />
+    <Content Include="Content\vendor\DataTables-1.10.18\css\dataTables.foundation.min.css" />
+    <Content Include="Content\vendor\DataTables-1.10.18\css\dataTables.jqueryui.css" />
+    <Content Include="Content\vendor\DataTables-1.10.18\css\dataTables.jqueryui.min.css" />
+    <Content Include="Content\vendor\DataTables-1.10.18\css\dataTables.semanticui.css" />
+    <Content Include="Content\vendor\DataTables-1.10.18\css\dataTables.semanticui.min.css" />
+    <Content Include="Content\vendor\DataTables-1.10.18\css\jquery.dataTables.css" />
+    <Content Include="Content\vendor\DataTables-1.10.18\css\jquery.dataTables.min.css" />
+    <Content Include="Content\vendor\DataTables-1.10.18\css\responsive.dataTables.min.css" />
+    <Content Include="Content\vendor\DataTables-1.10.18\images\sort_asc.png" />
+    <Content Include="Content\vendor\DataTables-1.10.18\images\sort_asc_disabled.png" />
+    <Content Include="Content\vendor\DataTables-1.10.18\images\sort_both.png" />
+    <Content Include="Content\vendor\DataTables-1.10.18\images\sort_desc.png" />
+    <Content Include="Content\vendor\DataTables-1.10.18\images\sort_desc_disabled.png" />
+    <Content Include="Content\vendor\DataTables-1.10.18\js\dataTables.bootstrap.js" />
+    <Content Include="Content\vendor\DataTables-1.10.18\js\dataTables.bootstrap.min.js" />
+    <Content Include="Content\vendor\DataTables-1.10.18\js\dataTables.bootstrap4.js" />
+    <Content Include="Content\vendor\DataTables-1.10.18\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Content\vendor\DataTables-1.10.18\js\dataTables.foundation.js" />
+    <Content Include="Content\vendor\DataTables-1.10.18\js\dataTables.foundation.min.js" />
+    <Content Include="Content\vendor\DataTables-1.10.18\js\dataTables.jqueryui.js" />
+    <Content Include="Content\vendor\DataTables-1.10.18\js\dataTables.jqueryui.min.js" />
+    <Content Include="Content\vendor\DataTables-1.10.18\js\dataTables.responsive.min.js" />
+    <Content Include="Content\vendor\DataTables-1.10.18\js\dataTables.semanticui.js" />
+    <Content Include="Content\vendor\DataTables-1.10.18\js\dataTables.semanticui.min.js" />
+    <Content Include="Content\vendor\DataTables-1.10.18\js\jquery.dataTables.js" />
+    <Content Include="Content\vendor\DataTables-1.10.18\js\jquery.dataTables.min.js" />
+    <Content Include="Content\vendor\dropzone-master\dist\basic.css" />
+    <Content Include="Content\vendor\dropzone-master\dist\dropzone-amd-module.js" />
+    <Content Include="Content\vendor\dropzone-master\dist\dropzone.css" />
+    <Content Include="Content\vendor\dropzone-master\dist\dropzone.js" />
+    <Content Include="Content\vendor\dropzone-master\dist\min\basic.min.css" />
+    <Content Include="Content\vendor\dropzone-master\dist\min\dropzone-amd-module.min.js" />
+    <Content Include="Content\vendor\dropzone-master\dist\min\dropzone.min.css" />
+    <Content Include="Content\vendor\dropzone-master\dist\min\dropzone.min.js" />
+    <Content Include="Content\vendor\dropzone-master\dropzone.js" />
+    <Content Include="Content\vendor\EasyAutocomplete-1.3.5\easy-autocomplete.css" />
+    <Content Include="Content\vendor\EasyAutocomplete-1.3.5\jquery.easy-autocomplete.js" />
+    <Content Include="Content\vendor\EasyAutocomplete-1.3.5\jquery.easy-autocomplete.min.js" />
+    <Content Include="Content\vendor\footable-bootstrap\css\footable.bootstrap.css" />
+    <Content Include="Content\vendor\footable-bootstrap\css\footable.bootstrap.min.css" />
+    <Content Include="Content\vendor\footable-bootstrap\js\footable.js" />
+    <Content Include="Content\vendor\footable-bootstrap\js\footable.min.js" />
+    <Content Include="Content\vendor\highlightjs\default.min.css" />
+    <Content Include="Content\vendor\highlightjs\highlight.min.js" />
+    <Content Include="Content\vendor\jquery-jvectormap\jquery-jvectormap-2.0.3.css" />
+    <Content Include="Content\vendor\jquery-jvectormap\jquery-jvectormap-africa-mill.js" />
+    <Content Include="Content\vendor\jquery-jvectormap\jquery-jvectormap-asia-mill.js" />
+    <Content Include="Content\vendor\jquery-jvectormap\jquery-jvectormap-in-mill.js" />
+    <Content Include="Content\vendor\jquery-jvectormap\jquery-jvectormap-us-aea.js" />
+    <Content Include="Content\vendor\jquery-jvectormap\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="Content\vendor\jquery-jvectormap\jquery-jvectormap.js" />
+    <Content Include="Content\vendor\jquery-toast-plugin-master\demos\css\jquery.toast.css" />
+    <Content Include="Content\vendor\jquery-toast-plugin-master\demos\index.html" />
+    <Content Include="Content\vendor\jquery-toast-plugin-master\demos\js\jquery.toast.js" />
+    <Content Include="Content\vendor\jquery-toast-plugin-master\dist\jquery.toast.min.css" />
+    <Content Include="Content\vendor\jquery-toast-plugin-master\dist\jquery.toast.min.js" />
+    <Content Include="Content\vendor\jquery-toast-plugin-master\src\jquery.toast.css" />
+    <Content Include="Content\vendor\jquery-toast-plugin-master\src\jquery.toast.js" />
+    <Content Include="Content\vendor\jquery_contextmenu\jquery.contextMenu.css" />
+    <Content Include="Content\vendor\jquery_contextmenu\jquery.contextMenu.js" />
+    <Content Include="Content\vendor\jquery_contextmenu\jquery.contextMenu.min.css" />
+    <Content Include="Content\vendor\jquery_contextmenu\jquery.contextMenu.min.js" />
+    <Content Include="Content\vendor\jquery_contextmenu\jquery.ui.position.js" />
+    <Content Include="Content\vendor\jquery_contextmenu\jquery.ui.position.min.js" />
+    <Content Include="Content\vendor\LineControl-Editor\demo.html" />
+    <Content Include="Content\vendor\LineControl-Editor\editor.css" />
+    <Content Include="Content\vendor\LineControl-Editor\editor.js" />
+    <Content Include="Content\vendor\LineControl-Editor\license.txt" />
+    <Content Include="Content\vendor\masonry_swipebox\icons.png" />
+    <Content Include="Content\vendor\masonry_swipebox\icons.svg" />
+    <Content Include="Content\vendor\masonry_swipebox\loader.gif" />
+    <Content Include="Content\vendor\masonry_swipebox\masonry.pkgd.min.js" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\dist\default-skin\default-skin.css" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\dist\default-skin\default-skin.png" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\dist\default-skin\default-skin.svg" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\dist\default-skin\preloader.gif" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\dist\photoswipe-ui-default.js" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\dist\photoswipe-ui-default.min.js" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\dist\photoswipe.css" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\dist\photoswipe.js" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\dist\photoswipe.min.js" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\Gruntfile.js" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\src\css\default-skin\default-skin.png" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\src\css\default-skin\default-skin.svg" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\src\css\default-skin\preloader.gif" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\src\js\core.js" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\src\js\desktop-zoom.js" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\src\js\framework-bridge.js" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\src\js\gestures.js" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\src\js\history.js" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\src\js\items-controller.js" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\src\js\show-hide-transition.js" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\src\js\tap.js" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\src\js\ui\photoswipe-ui-default.js" />
+    <Content Include="Content\vendor\materializeicon\material-icons.css" />
+    <Content Include="Content\vendor\materializeicon\MaterialIcons-Regular.svg" />
+    <Content Include="Content\vendor\sortable\Sortable.js" />
+    <Content Include="Content\vendor\sparklines\jquery.sparkline.min.js" />
+    <Content Include="Content\vendor\swiper\css\swiper.css" />
+    <Content Include="Content\vendor\swiper\css\swiper.min.css" />
+    <Content Include="Content\vendor\swiper\js\swiper.esm.bundle.js" />
+    <Content Include="Content\vendor\swiper\js\swiper.esm.js" />
+    <Content Include="Content\vendor\swiper\js\swiper.js" />
+    <Content Include="Content\vendor\swiper\js\swiper.min.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Models\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Views\gtml\profile.html" />
+    <Content Include="Views\gtml\team.html" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\css\blue.map" />
+    <Content Include="Content\css\blueheader.map" />
+    <Content Include="Content\css\blueheadersidebar.map" />
+    <Content Include="Content\css\bluesidebar.map" />
+    <Content Include="Content\css\brown.map" />
+    <Content Include="Content\css\brownheader.map" />
+    <Content Include="Content\css\brownheadersidebar.map" />
+    <Content Include="Content\css\brownsidebar.map" />
+    <Content Include="Content\css\dark-blue.map" />
+    <Content Include="Content\css\dark-blueheader.map" />
+    <Content Include="Content\css\dark-blueheadersidebar.map" />
+    <Content Include="Content\css\dark-bluesidebar.map" />
+    <Content Include="Content\css\dark-brown.map" />
+    <Content Include="Content\css\dark-brownheader.map" />
+    <Content Include="Content\css\dark-brownheadersidebar.map" />
+    <Content Include="Content\css\dark-brownsidebar.map" />
+    <Content Include="Content\css\dark-green.map" />
+    <Content Include="Content\css\dark-greenheader.map" />
+    <Content Include="Content\css\dark-greenheadersidebar.map" />
+    <Content Include="Content\css\dark-greensidebar.map" />
+    <Content Include="Content\css\dark-grey.map" />
+    <Content Include="Content\css\dark-greyheader.map" />
+    <Content Include="Content\css\dark-greyheadersidebar.map" />
+    <Content Include="Content\css\dark-greysidebar.map" />
+    <Content Include="Content\css\dark-maroon.map" />
+    <Content Include="Content\css\dark-maroonheader.map" />
+    <Content Include="Content\css\dark-maroonheadersidebar.map" />
+    <Content Include="Content\css\dark-maroonsidebar.map" />
+    <Content Include="Content\css\dark-pink.map" />
+    <Content Include="Content\css\dark-pinkheader.map" />
+    <Content Include="Content\css\dark-pinkheadersidebar.map" />
+    <Content Include="Content\css\dark-pinksideabr.map" />
+    <Content Include="Content\css\dark-purple.map" />
+    <Content Include="Content\css\dark-purpleheader.map" />
+    <Content Include="Content\css\dark-purpleheadersidebar.map" />
+    <Content Include="Content\css\dark-purplesidebar.map" />
+    <Content Include="Content\css\grey.map" />
+    <Content Include="Content\css\greyheader.map" />
+    <Content Include="Content\css\greyheadersidebar.map" />
+    <Content Include="Content\css\greysidebar.map" />
+    <Content Include="Content\css\orange.map" />
+    <Content Include="Content\css\orangeheader.map" />
+    <Content Include="Content\css\orangeheadersidebar.map" />
+    <Content Include="Content\css\orangesidebar.map" />
+    <Content Include="Content\css\purple.map" />
+    <Content Include="Content\css\purpleheader.map" />
+    <Content Include="Content\css\purpleheadersidebar.map" />
+    <Content Include="Content\css\purplesidebar.map" />
+    <Content Include="Content\css\red.map" />
+    <Content Include="Content\css\redheader.map" />
+    <Content Include="Content\css\redheadersidebar.map" />
+    <Content Include="Content\css\redsidebar.map" />
+    <Content Include="Content\css\skyblue.map" />
+    <Content Include="Content\css\skyblueheader.map" />
+    <Content Include="Content\css\skyblueheadersidebar.map" />
+    <Content Include="Content\css\skybluesidebar.map" />
+    <Content Include="Content\css\style.map" />
+    <Content Include="Content\css\styleheader.map" />
+    <Content Include="Content\css\styleheadersidebar.map" />
+    <Content Include="Content\css\stylesidebar.map" />
+    <Content Include="Content\css\teal.map" />
+    <Content Include="Content\css\tealheader.map" />
+    <Content Include="Content\css\tealheadersidebar.map" />
+    <Content Include="Content\css\tealsidebar.map" />
+    <Content Include="Content\scss\blue.scss" />
+    <Content Include="Content\scss\blueheader.scss" />
+    <Content Include="Content\scss\blueheadersidebar.scss" />
+    <Content Include="Content\scss\bluesidebar.scss" />
+    <Content Include="Content\scss\brown.scss" />
+    <Content Include="Content\scss\brownheader.scss" />
+    <Content Include="Content\scss\brownheadersidebar.scss" />
+    <Content Include="Content\scss\brownsidebar.scss" />
+    <Content Include="Content\scss\component\_avatar.scss" />
+    <Content Include="Content\scss\component\_card.scss" />
+    <Content Include="Content\scss\component\_carousel.scss" />
+    <Content Include="Content\scss\component\_chat-window.scss" />
+    <Content Include="Content\scss\component\_colors.scss" />
+    <Content Include="Content\scss\component\_daterange.scss" />
+    <Content Include="Content\scss\component\_dropdown.scss" />
+    <Content Include="Content\scss\component\_dropzone.scss" />
+    <Content Include="Content\scss\component\_form-control.scss" />
+    <Content Include="Content\scss\component\_gallery.scss" />
+    <Content Include="Content\scss\component\_global.scss" />
+    <Content Include="Content\scss\component\_header.scss" />
+    <Content Include="Content\scss\component\_icons.scss" />
+    <Content Include="Content\scss\component\_loaders.scss" />
+    <Content Include="Content\scss\component\_log-information.scss" />
+    <Content Include="Content\scss\component\_media.scss" />
+    <Content Include="Content\scss\component\_multiselect.scss" />
+    <Content Include="Content\scss\component\_rtl.scss" />
+    <Content Include="Content\scss\component\_setting-sidebar.scss" />
+    <Content Include="Content\scss\component\_sidebar.scss" />
+    <Content Include="Content\scss\component\_table.scss" />
+    <Content Include="Content\scss\component\_tabs.scss" />
+    <Content Include="Content\scss\component\_theme-color.scss" />
+    <Content Include="Content\scss\component\_timeline.scss" />
+    <Content Include="Content\scss\component\_toast_messages.scss" />
+    <Content Include="Content\scss\component\_wizard.scss" />
+    <Content Include="Content\scss\dark-blue.scss" />
+    <Content Include="Content\scss\dark-blueheader.scss" />
+    <Content Include="Content\scss\dark-blueheadersidebar.scss" />
+    <Content Include="Content\scss\dark-bluesidebar.scss" />
+    <Content Include="Content\scss\dark-brown.scss" />
+    <Content Include="Content\scss\dark-brownheader.scss" />
+    <Content Include="Content\scss\dark-brownheadersidebar.scss" />
+    <Content Include="Content\scss\dark-brownsidebar.scss" />
+    <Content Include="Content\scss\dark-green.scss" />
+    <Content Include="Content\scss\dark-greenheader.scss" />
+    <Content Include="Content\scss\dark-greenheadersidebar.scss" />
+    <Content Include="Content\scss\dark-greensidebar.scss" />
+    <Content Include="Content\scss\dark-grey.scss" />
+    <Content Include="Content\scss\dark-greyheader.scss" />
+    <Content Include="Content\scss\dark-greyheadersidebar.scss" />
+    <Content Include="Content\scss\dark-greysidebar.scss" />
+    <Content Include="Content\scss\dark-maroon.scss" />
+    <Content Include="Content\scss\dark-maroonheader.scss" />
+    <Content Include="Content\scss\dark-maroonheadersidebar.scss" />
+    <Content Include="Content\scss\dark-maroonsidebar.scss" />
+    <Content Include="Content\scss\dark-pink.scss" />
+    <Content Include="Content\scss\dark-pinkheader.scss" />
+    <Content Include="Content\scss\dark-pinkheadersidebar.scss" />
+    <Content Include="Content\scss\dark-pinksideabr.scss" />
+    <Content Include="Content\scss\dark-purple.scss" />
+    <Content Include="Content\scss\dark-purpleheader.scss" />
+    <Content Include="Content\scss\dark-purpleheadersidebar.scss" />
+    <Content Include="Content\scss\dark-purplesidebar.scss" />
+    <Content Include="Content\scss\grey.scss" />
+    <Content Include="Content\scss\greyheader.scss" />
+    <Content Include="Content\scss\greyheadersidebar.scss" />
+    <Content Include="Content\scss\greysidebar.scss" />
+    <Content Include="Content\scss\orange.scss" />
+    <Content Include="Content\scss\orangeheader.scss" />
+    <Content Include="Content\scss\orangeheadersidebar.scss" />
+    <Content Include="Content\scss\orangesidebar.scss" />
+    <Content Include="Content\scss\purple.scss" />
+    <Content Include="Content\scss\purpleheader.scss" />
+    <Content Include="Content\scss\purpleheadersidebar.scss" />
+    <Content Include="Content\scss\purplesidebar.scss" />
+    <Content Include="Content\scss\red.scss" />
+    <Content Include="Content\scss\redheader.scss" />
+    <Content Include="Content\scss\redheadersidebar.scss" />
+    <Content Include="Content\scss\redsidebar.scss" />
+    <Content Include="Content\scss\skyblue.scss" />
+    <Content Include="Content\scss\skyblueheader.scss" />
+    <Content Include="Content\scss\skyblueheadersidebar.scss" />
+    <Content Include="Content\scss\skybluesidebar.scss" />
+    <Content Include="Content\scss\style.scss" />
+    <Content Include="Content\scss\styleheader.scss" />
+    <Content Include="Content\scss\styleheadersidebar.scss" />
+    <Content Include="Content\scss\stylesidebar.scss" />
+    <Content Include="Content\scss\teal.scss" />
+    <Content Include="Content\scss\tealheader.scss" />
+    <Content Include="Content\scss\tealheadersidebar.scss" />
+    <Content Include="Content\scss\tealsidebar.scss" />
+    <Content Include="Content\scss\_variables-blue-header-sidebar.scss" />
+    <Content Include="Content\scss\_variables-blue-header.scss" />
+    <Content Include="Content\scss\_variables-blue-sidebar.scss" />
+    <Content Include="Content\scss\_variables-blue.scss" />
+    <Content Include="Content\scss\_variables-brown-header-sidebar.scss" />
+    <Content Include="Content\scss\_variables-brown-header.scss" />
+    <Content Include="Content\scss\_variables-brown-sidebar.scss" />
+    <Content Include="Content\scss\_variables-brown.scss" />
+    <Content Include="Content\scss\_variables-dark-blue-header-sidebar.scss" />
+    <Content Include="Content\scss\_variables-dark-blue-header.scss" />
+    <Content Include="Content\scss\_variables-dark-blue-sidebar.scss" />
+    <Content Include="Content\scss\_variables-dark-blue.scss" />
+    <Content Include="Content\scss\_variables-dark-brown-header-sidebar.scss" />
+    <Content Include="Content\scss\_variables-dark-brown-header.scss" />
+    <Content Include="Content\scss\_variables-dark-brown-sidebar.scss" />
+    <Content Include="Content\scss\_variables-dark-brown.scss" />
+    <Content Include="Content\scss\_variables-dark-green-header-sidebar.scss" />
+    <Content Include="Content\scss\_variables-dark-green-header.scss" />
+    <Content Include="Content\scss\_variables-dark-green-sidebar.scss" />
+    <Content Include="Content\scss\_variables-dark-green.scss" />
+    <Content Include="Content\scss\_variables-dark-grey-header-sidebar.scss" />
+    <Content Include="Content\scss\_variables-dark-grey-header.scss" />
+    <Content Include="Content\scss\_variables-dark-grey-sidebar.scss" />
+    <Content Include="Content\scss\_variables-dark-grey.scss" />
+    <Content Include="Content\scss\_variables-dark-maroon-header-sidebar.scss" />
+    <Content Include="Content\scss\_variables-dark-maroon-header.scss" />
+    <Content Include="Content\scss\_variables-dark-maroon-sidebar.scss" />
+    <Content Include="Content\scss\_variables-dark-maroon.scss" />
+    <Content Include="Content\scss\_variables-dark-pink-header-sidebar.scss" />
+    <Content Include="Content\scss\_variables-dark-pink-header.scss" />
+    <Content Include="Content\scss\_variables-dark-pink-sidebar.scss" />
+    <Content Include="Content\scss\_variables-dark-pink.scss" />
+    <Content Include="Content\scss\_variables-dark-purple-header-sidebar.scss" />
+    <Content Include="Content\scss\_variables-dark-purple-header.scss" />
+    <Content Include="Content\scss\_variables-dark-purple-sidebar.scss" />
+    <Content Include="Content\scss\_variables-dark-purple.scss" />
+    <Content Include="Content\scss\_variables-grey-header-sidebar.scss" />
+    <Content Include="Content\scss\_variables-grey-header.scss" />
+    <Content Include="Content\scss\_variables-grey-sidebar.scss" />
+    <Content Include="Content\scss\_variables-grey.scss" />
+    <Content Include="Content\scss\_variables-header-sidebar.scss" />
+    <Content Include="Content\scss\_variables-header.scss" />
+    <Content Include="Content\scss\_variables-orange-header-sidebar.scss" />
+    <Content Include="Content\scss\_variables-orange-header.scss" />
+    <Content Include="Content\scss\_variables-orange-sidebar.scss" />
+    <Content Include="Content\scss\_variables-orange.scss" />
+    <Content Include="Content\scss\_variables-purple-header-sidebar.scss" />
+    <Content Include="Content\scss\_variables-purple-header.scss" />
+    <Content Include="Content\scss\_variables-purple-sidebar.scss" />
+    <Content Include="Content\scss\_variables-purple.scss" />
+    <Content Include="Content\scss\_variables-red-header-sidebar.scss" />
+    <Content Include="Content\scss\_variables-red-header.scss" />
+    <Content Include="Content\scss\_variables-red-sidebar.scss" />
+    <Content Include="Content\scss\_variables-red.scss" />
+    <Content Include="Content\scss\_variables-sidebar.scss" />
+    <Content Include="Content\scss\_variables-skyblue-header-sidebar.scss" />
+    <Content Include="Content\scss\_variables-skyblue-header.scss" />
+    <Content Include="Content\scss\_variables-skyblue-sidebar.scss" />
+    <Content Include="Content\scss\_variables-skyblue.scss" />
+    <Content Include="Content\scss\_variables-teal-header-sidebar.scss" />
+    <Content Include="Content\scss\_variables-teal-header.scss" />
+    <Content Include="Content\scss\_variables-teal-sidebar.scss" />
+    <Content Include="Content\scss\_variables-teal.scss" />
+    <Content Include="Content\scss\_variables.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\bootstrap-grid.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\bootstrap-reboot.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\bootstrap.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_alert.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_background-variant.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_badge.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_border-radius.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_box-shadow.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_breakpoints.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_buttons.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_caret.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_clearfix.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_float.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_forms.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_gradients.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_grid-framework.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_grid.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_hover.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_image.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_list-group.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_lists.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_nav-divider.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_pagination.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_reset-text.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_resize.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_screen-reader.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_size.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_table-row.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_text-emphasis.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_text-hide.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_text-truncate.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_transition.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\mixins\_visibility.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\utilities\_align.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\utilities\_background.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\utilities\_borders.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\utilities\_clearfix.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\utilities\_display.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\utilities\_embed.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\utilities\_flex.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\utilities\_float.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\utilities\_position.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\utilities\_screenreaders.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\utilities\_shadows.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\utilities\_sizing.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\utilities\_spacing.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\utilities\_text.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\utilities\_visibility.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_alert.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_badge.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_breadcrumb.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_button-group.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_buttons.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_card.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_carousel.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_close.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_code.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_custom-forms.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_dropdown.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_forms.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_functions.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_grid.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_images.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_input-group.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_jumbotron.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_list-group.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_media.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_mixins.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_modal.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_nav.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_navbar.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_pagination.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_popover.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_print.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_progress.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_reboot.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_root.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_tables.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_tooltip.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_transitions.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_type.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_utilities.scss" />
+    <Content Include="Content\vendor\bootstrap-4.1.3\scss\_variables.scss" />
+    <Content Include="Content\vendor\bootstrap-daterangepicker-master\daterangepicker.scss" />
+    <Content Include="Content\vendor\bootstrap-daterangepicker-master\README.md" />
+    <Content Include="Content\vendor\chartjs\LICENSE.md" />
+    <Content Include="Content\vendor\chosen1.8\composer.json" />
+    <Content Include="Content\vendor\chosen1.8\LICENSE.md" />
+    <Content Include="Content\vendor\colorpicker\images\Thumbs.db" />
+    <Content Include="Content\vendor\dropzone-master\dist\readme.md" />
+    <Content Include="Content\vendor\dropzone-master\LICENSE" />
+    <Content Include="Content\vendor\dropzone-master\README.md" />
+    <Content Include="Content\vendor\dropzone-master\src\basic.scss" />
+    <Content Include="Content\vendor\dropzone-master\src\dropzone.coffee" />
+    <Content Include="Content\vendor\dropzone-master\src\dropzone.scss" />
+    <Content Include="Content\vendor\jquery-toast-plugin-master\bower.json" />
+    <Content Include="Content\vendor\jquery-toast-plugin-master\package.json" />
+    <Content Include="Content\vendor\jquery-toast-plugin-master\README.md" />
+    <Content Include="Content\vendor\jquery_contextmenu\font\context-menu-icons.eot" />
+    <Content Include="Content\vendor\jquery_contextmenu\font\context-menu-icons.ttf" />
+    <Content Include="Content\vendor\jquery_contextmenu\font\context-menu-icons.woff" />
+    <Content Include="Content\vendor\jquery_contextmenu\font\context-menu-icons.woff2" />
+    <Content Include="Content\vendor\jquery_contextmenu\jquery.contextMenu.min.css.map" />
+    <Content Include="Content\vendor\jquery_contextmenu\jquery.contextMenu.min.js.map" />
+    <Content Include="Content\vendor\jquery_contextmenu\LICENSE" />
+    <Content Include="Content\vendor\LineControl-Editor\README.md" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\bower.json" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\component.json" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\LICENSE" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\package.json" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\photoswipe.json" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\README.md" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\src\css\default-skin\default-skin-svg.sketch\Data" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\src\css\default-skin\default-skin-svg.sketch\metadata" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\src\css\default-skin\default-skin-svg.sketch\version" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\src\css\default-skin\default-skin.psd" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\src\css\default-skin\default-skin.scss" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\src\css\main.scss" />
+    <Content Include="Content\vendor\masonry_swipebox\PhotoSwipe-master\src\css\_main-settings.scss" />
+    <Content Include="Content\vendor\materializeicon\codepoints" />
+    <Content Include="Content\vendor\materializeicon\MaterialIcons-Regular.eot" />
+    <Content Include="Content\vendor\materializeicon\MaterialIcons-Regular.ijmap" />
+    <Content Include="Content\vendor\materializeicon\MaterialIcons-Regular.ttf" />
+    <Content Include="Content\vendor\materializeicon\MaterialIcons-Regular.woff" />
+    <Content Include="Content\vendor\materializeicon\MaterialIcons-Regular.woff2" />
+    <Content Include="Content\vendor\materializeicon\README.md" />
+    <Content Include="Content\vendor\swiper\js\swiper.min.js.map" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <None Include="packages.config" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Registration.cshtml" />
+    <Content Include="Views\Home\Profile.cshtml" />
+    <Content Include="Views\Account\Logout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>20744</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44368/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

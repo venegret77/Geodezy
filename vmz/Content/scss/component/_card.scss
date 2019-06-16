@@ -1,0 +1,11 @@
+.card{
+    background-color: lighten($background-color, 8%);
+    border: 0;
+     @extend .box-shadow; 
+    .card-header{ background: none; border:0;padding: 0.75em 0.95em;}
+    .card-footer{ background: none; border:0;padding: 0.75em 0.95em;}
+    .card-body{ padding: 1em 0.95em;}    
+    .card-title{ font-size: 1.2em; line-height: 1.8em; font-weight:normal}
+    .card-subtitle{ font-size: 0.9em; line-height: 1em; font-weight:normal}
+    .card-text{font-size: 0.8em;}
+}

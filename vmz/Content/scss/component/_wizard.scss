@@ -1,0 +1,224 @@
+.wizard-1.nav-tabs {
+    border: 0;
+    .nav-item {
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        position: relative;
+        &:after {
+            content: "";
+            bottom: 0;
+            width: 8px;
+            right: 0px;
+            height: 30px;
+            border-right: 20px solid lighten($background-color, 2%);
+            border-left: 20px solid transparent;
+            border-top: 31px solid transparent;
+            position: absolute;
+            z-index: 1;
+        }
+        &:before {
+            content: "";
+            top: 0;
+            width: 8px;
+            right: 0px;
+            height: 30px;
+            border-right: 20px solid lighten($background-color, 2%);
+            border-left: 20px solid transparent;
+            border-bottom: 31px solid transparent;
+            position: absolute;
+            z-index: 1;
+        }
+        &:last-child {
+            &:after {
+                display: none;
+            }
+            &:before {
+                display: none;
+            }
+        }
+        &:first-child {
+            a.nav-link {
+                &:after {
+                    display: none;
+                }
+                &:before {
+                    display: none;
+                }
+            }
+        }
+        a.nav-link {
+            line-height: 40px;
+            padding: 10px 20px;
+            width: 100%;
+            text-align: center;
+            opacity: 1;
+            background-color:lighten($background-color, 2%); 
+            border: 0;
+            &:hover{ border: 0}            
+            &.active {
+                background-color: $blue;
+                color: #ffffff;
+                position: relative;
+                border: 0;
+                &:after {
+                    content: "";
+                    bottom: 0;
+                    width: 8px;
+                    left: 0px;
+                    height: 30px;
+                    border-left: 20px solid lighten($background-color, 2%);
+                    border-right: 20px solid transparent;
+                    border-bottom: 30px solid transparent;
+                    position: absolute;
+                }
+                &:before {
+                    content: "";
+                    top: 0;
+                    width: 8px;
+                    left: 0px;
+                    height: 30px;
+                    border-left: 20px solid lighten($background-color, 2%);
+                    border-right: 20px solid transparent;
+                    border-top: 30px solid transparent;
+                    position: absolute;
+                }
+                span{ color:#ffffff;}
+                .icon-circle{ background-color: rgba($white, 0.2);}
+            }
+            &.disabled{
+                cursor: not-allowed;
+                span{
+                    opacity: 0.5                    
+                }
+            }
+        }
+    }
+    &.wizard-danger {
+        .nav-item {
+            &:after {
+                border-right-color:$red;
+            }
+            &:before {
+                border-right-color:$red;
+            }
+            a.nav-link {
+                background-color: $red;
+                color: #ffffff;
+                &:after {
+                    border-left-color:$red;
+                }
+                &:before {
+                    border-left-color:$red;
+                }
+                &.active{
+                    background-color: $black;
+                }
+            }
+        }
+    }
+    &.wizard-success {
+        .nav-item {
+            &:after {
+                border-right-color:$green;
+            }
+            &:before {
+                border-right-color:$green;
+            }
+            a.nav-link {
+                background-color: $green;
+                color: #ffffff;
+                &:after {
+                    border-left-color:$green;
+                }
+                &:before {
+                    border-left-color:$green;
+                }
+                &.active{
+                    background-color: $black;
+                }
+            }
+        }
+    }
+    &.wizard-warning {
+        .nav-item {
+            &:after {
+                border-right-color:$yellow;
+            }
+            &:before {
+                border-right-color:$yellow;
+            }
+            a.nav-link {
+                background-color: $yellow;
+                color: #ffffff;
+                &:after {
+                    border-left-color:$yellow;
+                }
+                &:before {
+                    border-left-color:$yellow;
+                }
+                &.active{
+                    background-color: $black;
+                }
+            }
+        }
+    }
+    &.wizard-secondary {
+        .nav-item {
+            &:after {
+                border-right-color:lighten($black, 10%);
+            }
+            &:before {
+                border-right-color:lighten($black, 10%);
+            }
+            a.nav-link {
+                background-color: lighten($black, 10%);
+                color: #ffffff;
+                &:after {
+                    border-left-color:lighten($black, 10%);
+                }
+                &:before {
+                    border-left-color:lighten($black, 10%);
+                }
+                &.active{
+                    background-color: $black;
+                }
+            }
+        }
+    }
+    &.wizard-primary {
+        .nav-item {
+            &:after {
+                border-right-color:lighten($blue, 10%);
+            }
+            &:before {
+                border-right-color:lighten($blue, 10%);
+            }
+            a.nav-link {
+                background-color: lighten($blue, 10%);
+                color: #ffffff;
+                &:after {
+                    border-left-color:lighten($blue, 10%);
+                }
+                &:before {
+                    border-left-color:lighten($blue, 10%);
+                }
+                &.active{
+                    background-color: $black;
+                }
+            }
+        }
+    }
+}
+.card-header{ .wizard-1{border-radius: 4px 4px 0 0; overflow: hidden}}
+.card-footer{ .wizard-1{border-radius: 0 0 4px 4px; overflow: hidden}}
+@media screen and (max-width:640px){
+    .wizard-1.nav-tabs {
+        .nav-item {
+            a.nav-link{
+                padding: 10px 15px;
+                font-size: 0.8em
+            }       
+        }
+    }
+}

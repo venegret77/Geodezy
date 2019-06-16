@@ -1,0 +1,171 @@
+﻿@{
+    Layout = null;
+}
+
+<head>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/Content/js", "~/Content/vendor")
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+
+    <!-- favicons -->
+    <link rel="apple-touch-icon" href="~/Content/img/favicon-apple.png">
+    <link rel="icon" href="~/Content/img/favicon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/Content/vendor/bootstrap-4.1.3/css/bootstrap.min.css">
+
+    <!-- Material design icons CSS -->
+    <link rel="stylesheet" href="~/Content/vendor/materializeicon/material-icons.css">
+
+    <!-- aniamte CSS -->
+    <link rel="stylesheet" href="~/Content/vendor/animatecss/animate.css">
+
+    <!-- swiper slider CSS -->
+    <link rel="stylesheet" href="~/Content/vendor/swiper/css/swiper.min.css">
+
+    <!-- app CSS -->
+    <link id="theme" rel="stylesheet" href="~/Content/css/purplesidebar.css" type="text/css">
+
+    <title>Авторизация</title>
+</head>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+<body class="fixed-header sidebar-right-close sidebar-left-close">
+    <!-- page loader -->
+    <div class="loader justify-content-center pink-gradient">
+        <div class="align-self-center text-center">
+            <div class="logo-img-loader">
+                <img src="~/Content/img/loader-hole.png" alt="" class="logo-image">
+                <img src="~/Content/img/loader-bg.png" alt="" class="logo-bg-image">
+            </div>
+        </div>
+    </div>
+    <!-- page loader ends  -->
+    <div class="wrapper h-100 h-sm-auto ">
+        <!-- main header -->
+        <header class="main-header">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-auto pl-15">
+                        <a href="index.html" class="btn success-gradient btn-sm rounded d-inline-block">На главную</a>
+                    </div>
+                    <div class="col-auto ml-auto">
+                        <button class="btn btn-link text-hide-md header-color-secondary font-small px-0" type="button"><i class="material-icons">text_format</i></button>
+                        <button class="btn btn-link text-hide-md header-color-secondary font-big px-0 mr-3" type="button"><i class="material-icons">text_format</i></button>
+                        <a href="~/Account/Registration" class="btn success-gradient btn-sm rounded d-inline-block"><i class="material-icons">person</i> Зарегистрироваться</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- main header ends -->
+        <!-- content page -->
+        <div class="container-fluid h-100 h-sm-auto">
+            <div class="row h-100 h-sm-auto">
+                <div class="col-12 col-md-6 h-md-100 order-2 order-md-1">
+                    <div class="row align-items-center h-100">
+                        <form method="post">
+                            <div class="col-12 col-md-10 col-lg-8 col-xl-6 mx-auto mt-2">
+                                @if (@Html.ValidationMessage("Err").ToString().Contains("Неверный логин или пароль"))
+                                {
+                                    <div class="alert alert-danger" role="alert">
+                                        @Html.ValidationMessage("Err");
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                }
+                                <h1 class="font-weight-light mb-3 content-color-secondary text-left">Добро пожаловать! </h1>
+                                <h4 class="font-weight-light mb-5 content-color-secondary text-left">Пожалуйста введите данные для авторизации.<br></h4>
+                                <div class="card mb-2">
+                                    <div class="card-body p-0">
+                                        <label for="inputEmail" class="sr-only">Имя пользователя</label>
+                                        <input type="text" name="Login" id="inputEmail" class="form-control form-control-lg border-0" placeholder="Имя пользователя" required="">
+                                        <hr class="my-0">
+                                        <label for="inputPassword" class="sr-only">Пароль</label>
+                                        <input type="password" name="Password" id="inputPassword" class="form-control form-control-lg border-0" placeholder="Пароль" required="">
+                                    </div>
+                                </div>
+
+                                <div class="my-4 row">
+                                    <div class="col">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck111" checked>
+                                            <label class="custom-control-label" for="customCheck111">Запомнить меня</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center mb-4">
+                                    <button type="submit" class="btn btn-primary success-gradient">Войти</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 h-md-100 order-1 order-md-2 min-height-300 p-0 bg-dark ">
+                    <div class="carosel swiper-location-carousel h-100">
+                        <div data-pagination='{"el": ".swiper-pagination"}' data-space-between="0" data-slides-per-view="1" class="swiper-container swiper-init swiper-signin h-100">
+                            <div class="swiper-pagination"></div>
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide text-center ">
+                                    <div class="background-img"><img src="~/Content/img/geodezy1.png" alt="" class="w-auto float-right"></div>
+                                    <div class="row align-items-center h-100 text-white">
+                                        <div class="col-10 col-md-8 col-lg-6 mx-auto my-4">
+                                            <h1 class="font-weight-light mb-4">Геодезические прокты<br></h1>
+                                            <p>Быстро, качественно, не дорого!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide text-center">
+                                    <div class="background-img"><img src="~/Content/img/geodezy2.png" alt="" class="w-auto"></div>
+                                    <div class="row align-items-center h-100 text-white">
+                                        <div class="col-10 col-md-8 col-lg-6 mx-auto my-4">
+                                            <h1 class="font-weight-light mb-4">Мы на рынке уже много лет!</h1>
+                                            <p>У нас огромная база клиентов по всему миру!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- content page ends -->
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="~/Content/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/js/popper.min.js"></script>
+    <script src="~/Content/vendor/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+
+    <!-- Cookie jquery file -->
+    <script src="~/Content/vendor/cookie/jquery.cookie.js"></script>
+
+    <!-- swiper slider jquery file -->
+    <script src="~/Content/vendor/swiper/js/swiper.min.js"></script>
+
+    <!-- Application main common jquery file -->
+    <script src="~/Content/js/main.js"></script>
+
+    <!-- page specific script -->
+    <script>
+        'use strict';
+        var mySwiper = new Swiper('.swiper-signin', {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            autoplay: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            }
+        });
+    </script>
+</body>
+}

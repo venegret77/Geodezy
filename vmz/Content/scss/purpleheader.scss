@@ -1,0 +1,113 @@
+/* ========================================================== *
+/*!
+ * GoTRI v1.0.1
+*/
+/*---------------------------------------------------------
+
+[Table of contents]
+
+1. Bootstrap Componets css
+
+Cutomize css starts
+
+2. global
+3. colors
+4. loaders
+5. header
+6. sidebar
+7. card
+8. avatar
+9. dropdown
+10. media
+11. icons
+12. tabs
+13. form-control
+14. theme-color
+15. table
+16. setting-sidebar
+17. chat-window
+18. log-information
+19. carousel
+20. daterange
+21. gallery
+22. timeline
+23. wizard
+24. rtl
+---------------------------------------------------------*/
+
+
+/*!
+ * Bootstrap v4.1.3 (https://getbootstrap.com/)
+ * Copyright 2011-2018 The Bootstrap Authors
+ * Copyright 2011-2018 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+
+@import "../vendor/bootstrap-4.1.3/scss/functions";
+@import "../vendor/bootstrap-4.1.3/scss/variables";
+@import "../vendor/bootstrap-4.1.3/scss/mixins";
+@import "../vendor/bootstrap-4.1.3/scss/root";
+@import "../vendor/bootstrap-4.1.3/scss/reboot";
+@import "../vendor/bootstrap-4.1.3/scss/type";
+@import "../vendor/bootstrap-4.1.3/scss/images";
+@import "../vendor/bootstrap-4.1.3/scss/code";
+@import "../vendor/bootstrap-4.1.3/scss/grid";
+@import "../vendor/bootstrap-4.1.3/scss/tables";
+@import "../vendor/bootstrap-4.1.3/scss/forms";
+@import "../vendor/bootstrap-4.1.3/scss/buttons";
+@import "../vendor/bootstrap-4.1.3/scss/transitions";
+@import "../vendor/bootstrap-4.1.3/scss/dropdown";
+@import "../vendor/bootstrap-4.1.3/scss/button-group";
+@import "../vendor/bootstrap-4.1.3/scss/input-group";
+@import "../vendor/bootstrap-4.1.3/scss/custom-forms";
+@import "../vendor/bootstrap-4.1.3/scss/nav";
+@import "../vendor/bootstrap-4.1.3/scss/navbar";
+@import "../vendor/bootstrap-4.1.3/scss/card";
+@import "../vendor/bootstrap-4.1.3/scss/breadcrumb";
+@import "../vendor/bootstrap-4.1.3/scss/pagination";
+@import "../vendor/bootstrap-4.1.3/scss/badge";
+@import "../vendor/bootstrap-4.1.3/scss/jumbotron";
+@import "../vendor/bootstrap-4.1.3/scss/alert";
+@import "../vendor/bootstrap-4.1.3/scss/progress";
+@import "../vendor/bootstrap-4.1.3/scss/media";
+@import "../vendor/bootstrap-4.1.3/scss/list-group";
+@import "../vendor/bootstrap-4.1.3/scss/close";
+@import "../vendor/bootstrap-4.1.3/scss/modal";
+@import "../vendor/bootstrap-4.1.3/scss/tooltip";
+@import "../vendor/bootstrap-4.1.3/scss/popover";
+@import "../vendor/bootstrap-4.1.3/scss/carousel";
+@import "../vendor/bootstrap-4.1.3/scss/utilities";
+@import "../vendor/bootstrap-4.1.3/scss/print";
+
+
+
+
+/*!
+ * GoTRI(https://bootstraptemplatedesign.com/)
+ * Copyright 2018 maxartkiller
+ * Licensed under themeforest purchase, make sure you have proper licence purchased before use
+ */
+
+@import "variables-purple-header";
+@import "component/global";
+@import "component/colors";
+@import "component/loaders";
+@import "component/header";
+@import "component/sidebar";
+@import "component/card";
+@import "component/avatar";
+@import "component/dropdown";
+@import "component/media";
+@import "component/icons";
+@import "component/tabs";
+@import "component/form-control";
+@import "component/theme-color";
+@import "component/table";
+@import "component/setting-sidebar";
+@import "component/chat-window";
+@import "component/log-information";
+@import "component/carousel";
+@import "component/daterange";
+@import "component/gallery";
+@import "component/timeline";
+@import "component/wizard";@import "component/rtl";

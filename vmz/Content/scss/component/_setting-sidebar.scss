@@ -1,0 +1,78 @@
+.settings-sidebar-backdrop {
+    z-index: 9;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: none;
+    position: fixed;
+    opacity: 0.2;
+}
+.settings-sidebar {
+    width: 300px;
+    height: 100%;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    background: lighten($background-color, 10%);
+    box-shadow: -5px 0px 5px 0px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: -5px 0px 5px 0px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: -5px 0px 5px 0px rgba(0, 0, 0, 0.05);
+    -ms-box-shadow: -5px 0px 5px 0px rgba(0, 0, 0, 0.05);
+    @include transition;
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    .tab-content {
+        height: 100%;
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        -webkit-flex-direction: column;
+        -moz-flex-direction: column;
+        -ms-flex-direction: column;
+        .tab-pane {
+            max-height: 100%;
+            overflow-y: auto;
+        }
+    }
+    &.close-settings-sidebar-backdrop {
+        right: -310px;
+        &+ .settings-sidebar-backdrop {
+            display: none
+        }
+    }
+    ngb-tabset{ height: 100%; .nav-tabs{ display: flex; li{flex-basis: 0; flex-grow: 1;  max-width: 100%; text-align: center;}}}    
+}
+.close-setting-sidebar {
+    height: 40px;
+    width: 50px;
+    padding: 0px;
+    padding-right: 10px;
+    background: lighten($background-color, 10%);
+    box-shadow: -5px 0px 5px 0px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: -5px 0px 5px 0px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: -5px 0px 5px 0px rgba(0, 0, 0, 0.05);
+    -ms-box-shadow: -5px 0px 5px 0px rgba(0, 0, 0, 0.05);
+    position: absolute;
+    border-radius: 4px 0 0 4px;
+    bottom: 0;
+    left: -50px;
+    &.active {
+        width: 40px;
+        padding-right: 0;
+        left: -40px;
+        i {
+            transform: rotate(180deg);
+            -webkit-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+        }
+    }
+}

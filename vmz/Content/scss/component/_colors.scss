@@ -1,0 +1,347 @@
+.bg-dark {
+    background-color: #111111 !important
+}
+
+/* pink gradient */
+
+.pink-gradient,
+.pink-gradient-active.active,
+.pink-gradient-active.router-link-active,
+.pink-gradient-active.active:hover,
+.pink-gradient-active:active {
+    color: #ffffff !important;
+    background-image: -moz-linear-gradient( 45deg, $pink1 0%, $pink2 100%)!important;
+    background-image: -webkit-linear-gradient( 45deg, $pink1 0%, $pink2 100%)!important;
+    background-image: -ms-linear-gradient( 45deg, $pink1 0%, $pink2 100%)!important;
+    border-color: transparent;
+    background-color: $pink1 !important;
+    background-size: cover;
+    background-repeat: repeat;
+    @extend .transition;
+    h5,
+    .header-color-primary {
+        color: #ffffff;
+    }
+    p,
+    .header-color-secondary {
+        color: #ffffff;
+        opacity: 0.7
+    }
+    &.media {
+        h5,
+        small {
+            color: #ffffff;
+        }
+        p,
+        .text-muted {
+            color: #ffffff !important;
+            opacity: 0.7
+        }
+    }
+}
+.btn.pink-gradient:hover {
+    color: #ffffff !important;
+    background-image: -moz-linear-gradient( 45deg, darken($pink1, 10%) 0%, darken($pink2, 10%) 100%) !important;
+    background-image: -webkit-linear-gradient( 45deg, darken($pink1, 10%) 0%, darken($pink2, 10%) 100%) !important;
+    background-image: -ms-linear-gradient( 45deg, darken($pink1, 10%) 0%, darken($pink2, 10%) 100%) !important;
+}
+
+/* primary gradient */
+
+.primary-gradient,
+.primary-gradient-active.active,
+.primary-gradient-active.router-link-active,
+.primary-gradient-active.active:hover,
+.primary-gradient-active:active {
+    color: #ffffff !important;
+    background-image: -moz-linear-gradient( 45deg, $primary1 0%, $primary2 100%)!important;
+    background-image: -webkit-linear-gradient( 45deg, $primary1 0%, $primary2 100%)!important;
+    background-image: -ms-linear-gradient( 45deg, $primary1 0%, $primary2 100%)!important;
+    border-color: transparent;
+    background-color: $primary1 !important;
+    @extend .transition;
+    h5,
+    .header-color-primary {
+        color: #ffffff;
+    }
+    p,
+    .header-color-secondary {
+        color: #ffffff;
+        opacity: 0.7
+    }
+    &.media {
+        h5,
+        small {
+            color: #ffffff;
+        }
+        p,
+        .text-muted {
+            color: #ffffff !important;
+            opacity: 0.7
+        }
+    }
+}
+.btn.primary-gradient:hover {
+    color: #ffffff !important;
+    background-image: -moz-linear-gradient( 45deg, darken($primary1, 10%) 0%, darken($primary2, 10%) 100%) !important;
+    background-image: -webkit-linear-gradient( 45deg, darken($primary1, 10%) 0%, darken($primary2, 10%) 100%) !important;
+    background-image: -ms-linear-gradient( 45deg, darken($primary1, 10%) 0%, darken($primary2, 10%) 100%) !important;
+}
+
+/* success gradient */
+
+.success-gradient,
+.success-gradient-active.active,
+.success-gradient-active.router-link-active,
+.success-gradient-active.active:hover,
+.success-gradient-active:active {
+    color: #ffffff !important;
+    background-image: -moz-linear-gradient( 45deg, $success1 0%, $success2 100%)!important;
+    background-image: -webkit-linear-gradient( 45deg, $success1 0%, $success2 100%)!important;
+    background-image: -ms-linear-gradient( 45deg, $success1 0%, $success2 100%)!important;
+    border-color: transparent;
+    background-color: $success1 !important;
+    @extend .transition;
+    h5,
+    .header-color-success {
+        color: #ffffff;
+    }
+    p,
+    .header-color-secondary {
+        color: #ffffff;
+        opacity: 0.7
+    }
+    &.media {
+        h5,
+        small {
+            color: #ffffff;
+        }
+        p,
+        .text-muted {
+            color: #ffffff !important;
+            opacity: 0.7
+        }
+    }
+}
+.btn.success-gradient:hover {
+    color: #ffffff !important;
+    background-image: -moz-linear-gradient( 45deg, darken($success1, 10%) 0%, darken($success2, 10%) 100%) !important;
+    background-image: -webkit-linear-gradient( 45deg, darken($success1, 10%) 0%, darken($success2, 10%) 100%) !important;
+    background-image: -ms-linear-gradient( 45deg, darken($success1, 10%) 0%, darken($success2, 10%) 100%) !important;
+}
+
+/* warning gradient */
+
+.warning-gradient,
+.warning-gradient-active.active,
+.warning-gradient-active.router-link-active,
+.warning-gradient-active.active:hover,
+.warning-gradient-active:active {
+    color: #ffffff !important;
+    background-image: -moz-linear-gradient( 45deg, $warning1 0%, $warning2 100%)!important;
+    background-image: -webkit-linear-gradient( 45deg, $warning1 0%, $warning2 100%)!important;
+    background-image: -ms-linear-gradient( 45deg, $warning1 0%, $warning2 100%)!important;
+    border-color: transparent;
+    background-color: $warning1 !important;
+    @extend .transition;
+    h5,
+    .header-color-primary {
+        color: #ffffff;
+    }
+    p,
+    .header-color-secondary {
+        color: #ffffff;
+        opacity: 0.7
+    }
+    &.media {
+        h5,
+        small {
+            color: #ffffff;
+        }
+        p,
+        .text-muted {
+            color: #ffffff !important;
+            opacity: 0.7
+        }
+    }
+}
+.btn.warning-gradient:hover {
+    color: #ffffff !important;
+    background-image: -moz-linear-gradient( 45deg, darken($warning1, 10%) 0%, darken($warning2, 10%) 100%) !important;
+    background-image: -webkit-linear-gradient( 45deg, darken($warning1, 10%) 0%, darken($warning2, 10%) 100%) !important;
+    background-image: -ms-linear-gradient( 45deg, darken($warning1, 10%) 0%, darken($warning2, 10%) 100%) !important;
+}
+
+/* danger gradient */
+
+.danger-gradient,
+.danger-gradient-active.active,
+.danger-gradient-active.router-link-active,
+.danger-gradient-active.active:hover,
+.danger-gradient-active:active {
+    color: #ffffff !important;
+    background-image: -moz-linear-gradient( 45deg, $danger1 0%, $danger2 100%)!important;
+    background-image: -webkit-linear-gradient( 45deg, $danger1 0%, $danger2 100%)!important;
+    background-image: -ms-linear-gradient( 45deg, $danger1 0%, $danger2 100%)!important;
+    border-color: transparent;
+    background-color: $danger1 !important;
+    @extend .transition;
+    h5,
+    .header-color-primary {
+        color: #ffffff;
+    }
+    p,
+    .header-color-secondary {
+        color: #ffffff;
+        opacity: 0.7
+    }
+    &.media {
+        h5,
+        small {
+            color: #ffffff;
+        }
+        p,
+        .text-muted {
+            color: #ffffff !important;
+            opacity: 0.7
+        }
+    }
+}
+.btn.danger-gradient:hover {
+    color: #ffffff !important;
+    background-image: -moz-linear-gradient( 45deg, darken($danger1, 10%) 0%, darken($danger2, 10%) 100%) !important;
+    background-image: -webkit-linear-gradient( 45deg, darken($danger1, 10%) 0%, darken($danger2, 10%) 100%) !important;
+    background-image: -ms-linear-gradient( 45deg, darken($danger1, 10%) 0%, darken($pink2, 10%) 100%) !important;
+}
+
+/* secondary gradient */
+
+.secondary-gradient,
+.secondary-gradient-active.active,
+.secondary-gradient-active.router-link-active,
+.secondary-gradient-active.active:hover,
+.secondary-gradient-active:active {
+    color: #ffffff !important;
+    background-image: -moz-linear-gradient( 45deg, #6c757d 0%, #d2d9de 100%)!important;
+    background-image: -webkit-linear-gradient( 45deg, #6c757d 0%, #d2d9de 100%)!important;
+    background-image: -ms-linear-gradient( 45deg, #6c757d 0%, #d2d9de 100%)!important;
+    border-color: transparent;
+    background-color: #6c757d !important;
+    @extend .transition;
+    h5,
+    .header-color-primary {
+        color: #ffffff;
+    }
+    p,
+    .header-color-secondary {
+        color: #ffffff;
+        opacity: 0.7
+    }
+    &.media {
+        h5,
+        small {
+            color: #ffffff;
+        }
+        p,
+        .text-muted {
+            color: #ffffff !important;
+            opacity: 0.7
+        }
+    }
+}
+.btn.secondary-gradient:hover {
+    color: #ffffff !important;
+    background-image: -moz-linear-gradient( 45deg, darken($danger1, 10%) 0%, darken($danger2, 10%) 100%) !important;
+    background-image: -webkit-linear-gradient( 45deg, darken($danger1, 10%) 0%, darken($danger2, 10%) 100%) !important;
+    background-image: -ms-linear-gradient( 45deg, darken($danger1, 10%) 0%, darken($pink2, 10%) 100%) !important;
+}
+.btn.pink-gradient,
+.btn.primary-gradient,
+.btn.success-gradient,
+.btn.warning-gradient,
+.btn.danger-gradient,
+.btn.secondary-gradient,
+.shadow-light {
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.25);
+    -ms-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.25);
+}
+.bg-light-white {
+    background-color: rgba($white, 0.3) !important;
+    color: $white;
+}
+.bg-light-danger {
+    background-color: rgba($red, 0.15) !important;
+    color: $red;
+}
+.bg-light-warning {
+    background-color: rgba($yellow, 0.15) !important;
+    color: $yellow;
+}
+.bg-light-success {
+    background-color: rgba($green, 0.15) !important;
+    color: $green;
+}
+.bg-light-primary {
+    background-color: rgba($blue, 0.15) !important;
+    color: $blue;
+}
+.bg-light-pink {
+    background-color: rgba($pink2, 0.15) !important;
+    color: $pink2;
+}
+.card .card-footer.bg-light-secondary,
+.bg-light-secondary {
+    background-color: rgba($content-color-primary, 0.06) !important;
+    color: $content-color-secondary; 
+}
+.bg-light {
+    background-color: rgba($content-color-secondary, 0.15) !important;
+}
+.border-top,
+.border-bottom,
+.border-left,
+.border-right,
+.border,
+.list-group-item,
+.table th,
+.table td {
+    border-color: rgba($content-color-secondary, 0.1) !important;
+}
+.main-header {
+    .border-top,
+    .border-bottom,
+    .border-left,
+    .border-right,
+    .border,
+    .list-group-item,
+    .table th,
+    .table td {
+        border-color: rgba($header-color-secondary, 0.1) !important;
+    }
+    .bg-light {
+        background-color: rgba($header-color-secondary, 0.15) !important;
+    }
+}
+.sidebar {
+    .border-top,
+    .border-bottom,
+    .border-left,
+    .border-right,
+    .border,
+    .list-group-item,
+    .table th,
+    .table td {
+        border-color: rgba($sidebar-color-secondary, 0.1) !important;
+    }
+    .bg-light {
+        background-color: rgba($sidebar-color-secondary, 0.15) !important;
+    }
+}
+.bg-dark {
+    .text-secondary {
+        color: #ffffff !important;
+        opacity: 0.7;
+    }
+}

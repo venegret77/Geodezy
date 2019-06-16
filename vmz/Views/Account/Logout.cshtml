@@ -1,0 +1,79 @@
+﻿@{
+    Layout = null;
+}
+
+<head>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/Content/js", "~/Content/vendor")
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+
+    <!-- favicons -->
+    <link rel="apple-touch-icon" href="~/Content/img/favicon-apple.png">
+    <link rel="icon" href="~/Content/img/favicon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/Content/vendor/bootstrap-4.1.3/css/bootstrap.min.css">
+
+    <!-- Material design icons CSS -->
+    <link rel="stylesheet" href="~/Content/vendor/materializeicon/material-icons.css">
+
+    <!-- aniamte CSS -->
+    <link rel="stylesheet" href="~/Content/vendor/animatecss/animate.css">
+
+    <!-- swiper carousel CSS -->
+    <link rel="stylesheet" href="~/Content/vendor/swiper/css/swiper.min.css">
+
+    <!-- daterange CSS -->
+    <link rel="stylesheet" href="~/Content/vendor/bootstrap-daterangepicker-master/daterangepicker.css">
+
+    <!-- footable CSS -->
+    <link rel="stylesheet" href="~/Content/vendor/footable-bootstrap/css/footable.bootstrap.min.css">
+
+    <!-- jvector map CSS -->
+    <link rel="stylesheet" href="~/Content/vendor/jquery-jvectormap/jquery-jvectormap-2.0.3.css">
+
+    <!-- app CSS -->
+    <link id="theme" rel="stylesheet" href="~/Content/css/purplesidebar.css" type="text/css">
+
+    <title>Выход</title>
+</head>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+    <body class="fixed-header sidebar-right-close sidebar-left-close">
+        <!-- page loader -->
+        <div class="loader justify-content-center pink-gradient">
+            <div class="align-self-center text-center">
+                <div class="logo-img-loader">
+                    <img src="~/Content/img/loader-hole.png" alt="" class="logo-image">
+                    <img src="~/Content/img/loader-bg.png" alt="" class="logo-bg-image">
+                </div>
+            </div>
+        </div>
+        <!-- page specific script -->
+        <script src="~/Content/js/jquery-3.2.1.min.js"></script>
+        <script src="~/Content/js/popper.min.js"></script>
+        <script src="~/Content/vendor/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+        <script src="~/Content/vendor/cookie/jquery.cookie.js"></script>
+        <script src="~/Content/vendor/sparklines/jquery.sparkline.min.js"></script>
+        <script src="~/Content/vendor/circle-progress/circle-progress.min.js"></script>
+        <script src="~/Content/vendor/swiper/js/swiper.min.js"></script>
+        <script src="~/Content/vendor/chartjs/Chart.bundle.min.js"></script>
+        <script src="~/Content/vendor/chartjs/utils.js"></script>
+        <script src="~/Content/vendor/footable-bootstrap/js/footable.min.js"></script>
+        <script src="~/Content/vendor/bootstrap-daterangepicker-master/moment.js"></script>
+        <script src="~/Content/vendor/bootstrap-daterangepicker-master/daterangepicker.js"></script>
+        <script src="~/Content/vendor/jquery-jvectormap/jquery-jvectormap.js"></script>
+        <script src="~/Content/vendor/jquery-jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+        <script src="~/Content/vendor/sortable/Sortable.js"></script>
+        <script src="~/Content/js/main.js"></script>
+        <script src="~/Content/js/dragable_sortable.js"></script>
+        <!-- page specific script -->
+    </body>
+
+}

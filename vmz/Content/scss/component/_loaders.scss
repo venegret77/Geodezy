@@ -1,0 +1,119 @@
+/* basic layout css */
+.loader {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background: $background-color;
+    z-index: 9999;
+    display: flex;
+    left: 0;
+    top: 0;
+    @extend .transition;
+}
+.maxui-roller {
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+}
+.maxui-roller div {
+    animation: maxui-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    transform-origin: 32px 32px;
+}
+.maxui-roller div:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $blue;
+    margin: -3px 0 0 -3px;
+}
+.maxui-roller div:nth-child(1) {
+    animation-delay: -0.036s;
+}
+.maxui-roller div:nth-child(1):after {
+    top: 50px;
+    left: 50px;
+}
+.maxui-roller div:nth-child(2) {
+    animation-delay: -0.072s;
+}
+.maxui-roller div:nth-child(2):after {
+    top: 54px;
+    left: 45px;
+}
+.maxui-roller div:nth-child(3) {
+    animation-delay: -0.108s;
+}
+.maxui-roller div:nth-child(3):after {
+    top: 57px;
+    left: 39px;
+}
+.maxui-roller div:nth-child(4) {
+    animation-delay: -0.144s;
+}
+.maxui-roller div:nth-child(4):after {
+    top: 58px;
+    left: 32px;
+}
+.maxui-roller div:nth-child(5) {
+    animation-delay: -0.18s;
+}
+.maxui-roller div:nth-child(5):after {
+    top: 57px;
+    left: 25px;
+}
+.maxui-roller div:nth-child(6) {
+    animation-delay: -0.216s;
+}
+.maxui-roller div:nth-child(6):after {
+    top: 54px;
+    left: 19px;
+}
+.maxui-roller div:nth-child(7) {
+    animation-delay: -0.252s;
+}
+.maxui-roller div:nth-child(7):after {
+    top: 50px;
+    left: 14px;
+}
+.maxui-roller div:nth-child(8) {
+    animation-delay: -0.288s;
+}
+.maxui-roller div:nth-child(8):after {
+    top: 45px;
+    left: 10px;
+}
+@keyframes maxui-roller {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.fooicon-loader:before{
+    content: "+";
+    height: 30px;
+    width: 30px;
+    color: #ffffff;
+    line-height: 30px;
+    vertical-align: middle;
+    text-align: center;
+    display: block; 
+    border-radius: 50%;
+    background: $blue;
+    background-size: 100%;
+}
+.fooicon-loader:after{
+    
+}
+
+.logo-img-loader{
+    width: 100px; margin: 0 auto; position: relative;
+    .logo-image{ position: relative; z-index: 1;}
+    .logo-bg-image{ position: absolute; z-index: 0; animation: maxui-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite; top: 3px; left: 3px}
+   & + h2{ small{ font-size: 50%}}
+}

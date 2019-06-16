@@ -1,0 +1,92 @@
+.avatar {
+    margin: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    @extend .transition;
+    text-align: center;
+    img {
+        width: 100%;
+        min-height: 100%;
+        @extend .transition;
+        vertical-align: top
+    }
+    &:hover {
+        img {
+            margin-top: -10%;
+            margin-left: -10%;
+            width: 120%;
+            min-height: 120%;
+        }
+    }
+}
+.avatar-250 {
+    height: 250px;
+    width: 250px;
+}
+.avatar-200 {
+    height: 200px;
+    width: 200px;
+}
+.avatar-150 {
+    height: 150px;
+    width: 150px;
+}
+.avatar-120 {
+    height: 120px;
+    width: 120px;
+}
+.avatar-110 {
+    height: 110px;
+    width: 110px;
+}
+.avatar-100 {
+    height: 100px;
+    width: 100px;
+}
+.avatar-90 {
+    height: 90px;
+    width: 90px;
+}
+.avatar-80 {
+    height: 80px;
+    width: 80px;
+}
+.avatar-70 {
+    height: 70px;
+    width: 70px;
+}
+.avatar-60 {
+    height: 60px;
+    width: 60px;
+}
+.avatar-50 {
+    height: 50px;
+    width: 50px;
+}
+.avatar-40 {
+    height: 40px;
+    width: 40px;
+}
+.avatar-30 {
+    height: 30px;
+    width: 30px;
+}
+.avatar-24 {
+    height: 24px;
+    width: 24px;
+}
+.avatar-20 {
+    height: 20px;
+    width: 20px;
+}
+.avatar-15 {
+    height: 15px;
+    width: 15px;
+}
+.staked {
+    border: 2px solid lighten($background-color, 20%);
+    margin-left: -40px;
+    &:first-child{
+        margin-left:0;
+    }
+}

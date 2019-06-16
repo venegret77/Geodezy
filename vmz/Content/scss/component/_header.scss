@@ -1,0 +1,273 @@
+/* header */
+
+.main-header {
+    color: $header-color-primary;
+    background-color: $header-background;
+    @extend .box-shadow;
+    width: 100%;
+    height: auto;
+    min-height: $header-min-height;
+    z-index: 8;
+    display: flex;
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: -moz-flex;
+    align-items: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    .btn {
+        border-radius: 0
+    }
+    .btn-icon {
+        height: $header-min-height;
+        line-height: $header-min-height - 20px;
+        width: $header-min-height;
+        padding: 5px 0;
+    }
+    .dropdown-toggle{
+        &:after{ display: none}
+    }
+    .dropdown-menu {
+        background: #ffffff;
+        color: #888888;
+        .dropdown-item {
+            color: #000000;
+        }
+        .dropdown-divider {
+            border-top-color: rgba(0, 0, 0, 0.05)
+        }
+        .card {
+            background: #ffffff;
+        }
+        .header-color-primary,
+         .media h5 {
+            color: #000000;
+        }
+        .header-color-secondary,
+        .media p {
+            color: #888888
+        }
+    }
+    .pink-gradient, .success-gradient, .primary-gradient, .danger-gradient, .secondary-gradient, .warning-gradient{
+        h5 {
+            color: #ffffff;
+        }
+    }
+}
+.logo {
+    font-weight: 300;
+    color: $header-color-secondary;
+    line-height: ($header-min-height - 4)/2;
+    font-size: 1.2em;
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: none;
+    margin-left: $spacer/2;
+    margin-right: $spacer/2;
+    line-height: 34px;
+    span {
+        margin-top: -2px;
+        vertical-align: middle;
+        float: none;
+        display: inline-block;
+        line-height: 16px;
+        .small{ font-size: 10px}        
+    }
+    b {
+        color: $header-color-primary;
+        font-weight: 600
+    }
+    img {
+        max-height: 34px;
+        border: 0;
+        float: left;
+        margin-top: 0;
+        vertical-align: top;
+        margin-right: $spacer/2;
+    }
+}
+.search-header {
+    display: inline-block;
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;    
+    display: none;
+    .input-group {
+        .btn {
+            border: 0;
+            min-height: $header-min-height/2;
+            line-height: 1em;
+            border-radius: 15px;
+            padding: 0;
+            margin-left: 5px;
+            width: $header-min-height/2;
+            background: none;
+            color: $header-color-secondary;
+        }
+        .form-control {
+            font-size: 0.9em;
+            background-color: rgba($background-color, 0.5);
+            border-radius: $header-min-height/4;
+            line-height: 1em;
+            border: 0;
+            min-height: $header-min-height/2;
+            height: $header-min-height/2;
+        }
+    }
+}
+.btn-search {
+    background: none; 
+}
+.username {
+    height: $header-min-height;
+    line-height: $header-min-height - 20px;
+    figure.userpic {
+        height: $header-min-height/2;
+        width: $header-min-height/2;
+        border-radius: $header-min-height/2;
+        margin: 0 10px 0 0;
+        overflow: hidden;
+        display: inline-block;
+        vertical-align: middle;
+        img {
+            max-width: 100%;
+            min-height: 100%;
+            vertical-align: top
+        }
+        & + h5 {
+            font-weight: normal;
+            font-size: 1em;
+            line-height: 1em;
+            text-align: left;
+            display: inline-block;
+            margin-bottom: 0;
+            vertical-align: middle;
+            small {
+                line-height: 1em;
+                font-size: 0.7em;
+                display: block;
+            }
+        }
+    }
+}
+.time-day {
+    list-style: none;
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    padding-left: 0;
+    li {
+        display: inline-block;
+        vertical-align: middle;
+        &:last-child {
+            border-left: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        p {
+            vertical-align: top;
+            display: inline-block;
+            margin: 0;
+            font-size: 1em;
+            line-height: 1.4em;
+            small {
+                display: block;
+                font-size: 0.8em;
+                line-height: 0.9em;
+            }
+            span {
+                display: block
+            }
+        }
+        h2 {
+            vertical-align: top;
+            display: inline-block;
+            margin: 0 10px;
+        }
+    }
+}
+.fixed-header {
+    .wrapper {
+        padding-top: $header-min-height;
+    }
+    .main-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+}
+.profile-dropdown {
+    width: 280px;
+    .btn {
+        border-radius: 4px;
+        i {
+            vertical-align: middle
+        }
+    }
+}
+.logout {
+    width: 30px;
+    display: inline-block;
+    border-radius: 4px;
+    padding: 0;
+    height: 29px;
+    vertical-align: middle;
+    i {
+        vertical-align: middle;
+    }
+}
+.notification-dropdown {
+    width: 280px;
+    .media {
+        font-size: 0.8em;
+        padding: 10px 15px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        @extend .transition;
+        h5 {
+            color: $header-color-primary;
+        }
+        p {
+            color: $header-color-secondary;
+        }
+        &.new {
+            background-color: rgba(0, 70, 255, 0.05);
+        }
+    }
+    .btn {
+        border-radius: 4px;
+        i {
+            vertical-align: middle
+        }
+    }
+    &.align-center {
+        margin-left: -108px;
+        &.arrow-top {
+            margin-top: 0px;
+            .arrow {
+                height: 20px;
+                width: 20px;
+                transform: rotate(45deg);
+                -webkit-transform: rotate(45deg);
+                -moz-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                display: inline-block;
+                position: absolute;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                margin-top: -7px;
+                z-index: -1;
+                border-radius: 4px 0 0 0;
+            }
+        }
+    }
+}
+
+@media screen and (max-width:640px){ 
+    .text-hide-xs{
+     display: none !important
+    }
+    .username figure.userpic{ margin-right: 0}
+}

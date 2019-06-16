@@ -1,0 +1,39 @@
+.table th, .table td {
+    padding: .75em;
+}
+.table-sm th, .table-sm td {
+    padding: .3em;
+}
+.table th {
+    font-weight: 500
+}
+.table td {
+    position: relative;
+    font-size: 1em;
+}
+.table td,
+.table td .btn {
+    vertical-align: middle;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba($gray-400, 0.2);
+}
+.footable-toggle {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+}
+.footable-detail-row {
+    td {
+        padding: 0;
+        text-align: left !important
+    }
+}
+.footable-loader {
+    height: 225px !important;
+    min-height: none
+}

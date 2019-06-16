@@ -1,0 +1,163 @@
+.theme-color {
+    width: 100%;
+    display: block;
+    text-align: center;
+    .custom-control {
+        padding: 2px;
+        width: 12.5%;
+        float: left;
+        .custom-control-label {
+            width: 100%;
+            height: 20px;
+            border-radius: 2px;
+            float: left;
+            cursor: pointer;
+            border:1px solid rgba(0, 0, 0, 0.1);
+            &:before {
+                display: block; height: 16px; width: 16px; left: 0; background: none; top: 0; 
+            }
+            &:after {
+                display: inline-block; left: 0; top: 0px; 
+            }
+        }
+    }
+    .custom-control-input:checked ~ .custom-control-label {
+        border: 2px solid $blue ;        
+    }
+}
+.dark-blue {
+    background-color: #252d47;
+}
+.dark-purple {
+    background-color: #3d274a;
+}
+.dark-maroon {
+    background-color: #521e2e;
+}
+.dark-grey {
+    background-color: #252525;
+}
+.dark-pink {
+    background-color: #841845;
+}
+.dark-brown {
+    background-color: #462a1a;
+}
+.dark-green {
+    background-color: #023c29;
+}
+.red {
+    background-color: #f44336;
+}
+.pink {
+    background-color: #e91e63;
+}
+.purple {
+    background-color: #673ab7;
+}
+.blue {
+    background-color: #2587e8;
+}
+.teal {
+    background-color: #00bcd4;
+}
+.skyblue {
+    background-color: #0faff7;
+}
+.parrotgreen {
+    background-color: #8bc34a;
+}
+.green {
+    background-color: #009688;
+}
+.amber {
+    background-color: #ffc107;
+}
+.orange {
+    background-color: #ff9800;
+}
+.brown {
+    background-color: #795548;
+}
+.grey {
+    background-color: #607d8b;
+}
+.sidebar-image {
+    width: 100%;
+    display: block;
+    text-align: center;
+    .custom-control {
+        padding: 2px;
+        width: 33.30%;
+        float: left;
+        .custom-control-label {
+            width: 100%;
+            height: 100px;
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: #ffffff;
+            cursor: pointer;
+            img {
+                width: 100%;
+            }
+            &:before {
+                background-color: transparent;
+                left: 5px;
+                top: 5px;
+                height: 20px;
+                width: 20px;
+                border-radius: 3px;
+            }
+        }
+        .custom-control-input.bg-repeat {
+            &+.custom-control-label {
+                height: 58px;
+            }
+        }
+    }
+    .custom-control-input:checked ~ .custom-control-label {
+        border: 3px solid $blue;
+        &:before {
+            display: none
+        }
+        &:after {
+            display: none
+        }
+    }
+}
+.main-container {
+    .theme-color {
+        .custom-control {
+            padding: 2px;
+            width: 36px;
+            height: 32px;
+            margin-bottom: 5px;
+            .custom-control-label{
+                 height: 32px;
+                &:before{
+                    top: 6px;
+                    left: 6px
+                }
+                &:after{
+                    top: 6px;
+                    left: 6px
+                }
+            }
+        }
+    }
+    .sidebar-image {
+        .custom-control {
+            width: 100px;
+            height: auto;
+            .custom-control-label {
+                height: 150px;
+            }
+        }
+        .custom-control-input.bg-repeat {
+            &+.custom-control-label {
+                height: 70px;
+            }
+        }
+    }
+}
+

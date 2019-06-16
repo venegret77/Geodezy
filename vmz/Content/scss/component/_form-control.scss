@@ -1,0 +1,145 @@
+.switch {
+    display: none;
+    &+label {
+        width: 60px;
+        height: 30px;
+        display: inline-block;
+        position: relative;
+        border-radius: 20px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        vertical-align: middle;
+        margin: 0;
+        cursor: pointer;
+        background-color: darken($background-color, 5%);
+        &:before {
+            content: '';
+            border-radius: 50%;
+            background-color: #ffffff;
+            box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            top: 0px;
+            left: 0;
+            width: 28px;
+            height: 28px;
+            display: block;
+            z-index: 1;
+            margin-top: 0px;
+        }
+    }
+    &:not(:checked) + label {
+        background-image: none !important;
+        background-color: darken($background-color, 5%) !important
+    }
+    &:checked + label {}
+    &:checked + label:before {
+        left: 30px;
+    }
+    &.switch-sm {
+        &+label {
+            width: 40px;
+            height: 20px;
+            margin-top: 2px;
+            &:before {
+                width: 18px;
+                height: 18px;
+            }
+        }
+        &:checked + label:before {
+            left: 20px;
+        }
+    }
+}
+.todohide {
+    display: none
+}
+.list-group-item {
+    &:hover {
+        .todohide {
+            display: block
+        }
+    }
+}
+.todo-checkbox {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 0.6em;
+    .custom-control-label {
+        display: inline-block;
+        vertical-align: top;
+        &:after {
+            border-radius: 50%;
+            height: 1.4em;
+            width: 1.4em;
+        }
+        &:before {
+            border-radius: 50%;
+            height: 1.4em;
+            width: 1.4em;
+        }
+    }
+}
+.more-item-todo {
+    .more-data-todo {
+        display: none
+    }
+    &.active {
+        background: rgba($blue, 0.1);
+        h6 {
+            color: $content-color-primary
+        }
+        .more-data-todo {
+            display: flex
+        }
+    }
+    &:hover {
+        background: rgba($blue, 0.06);
+        .more-data-todo {
+            display: flex
+        }
+    }
+}
+.form-control-rounded {
+    border-radius: 20px !important;
+}
+.checkbox-user-check {
+    height: 100%;
+    width: 100%;
+    display: block;
+    position: absolute;
+    text-align: center;
+    input[type="checkbox"] {
+        display: none;
+    }
+    i {
+        line-height: 40px;
+        vertical-align: middle;
+        width: 100%;
+        text-align: center;
+        display: none;
+    }
+    &.active{
+        background: $blue;
+        i{ display:inline-block; color: #ffffff;}
+    }
+}
+.form-control{
+    background-color: lighten($background-color,3%);
+    border-color: rgba($content-color-primary, 0.2); 
+    color: $content-color-primary;
+    &::placeholder{ color: rgba($content-color-primary, 0.60); }
+    &:focus{ border-color: rgba($content-color-primary, 0.5);  background-color: lighten($background-color,10%); color: rgba($content-color-primary, 0.60); }
+}
+
+.line-control-menu-bar, .line-control-status-bar{
+    background: $background-color;
+    .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-submenu:hover>a, .dropdown-submenu:focus>a{
+        background-color: $blue;
+        color: $white;
+    }
+}
+.ck.ck-content {
+    min-height:200px;
+}
+.easy-autocomplete{
+  width:100% !important
+}

@@ -1,0 +1,53 @@
+.media {
+    font-size: 0.9em;
+    figure {
+        margin-right: 15px;
+        position: relative
+    }
+    h5 {
+        font-weight: 500;
+        color: $content-color-primary;
+        small {
+            margin-top: 3px;
+        }
+    }
+    h4 {
+        font-size: 1.4em;
+        font-weight: 500;
+        small {
+            margin-top: 3px;
+        }
+    }
+    p {
+        line-height: 1.4em;
+        margin-bottom: 0;
+        color: $content-color-secondary;
+        display: inline-block;
+        width: 100%;
+    }
+}
+.main-header {
+     h5 {
+        color: $header-color-primary;
+    }
+    .media {
+        p {
+            color: $header-color-secondary;
+        }
+    }
+}
+.sidebar {
+     h5 {
+        color: $sidebar-color-primary;
+    }
+    .media {
+        p {
+            color: $sidebar-color-secondary;
+        }
+    }
+}
+a.media {
+    &:hover {
+        background-color: rgba($background-color, 0.4);
+    }
+}
