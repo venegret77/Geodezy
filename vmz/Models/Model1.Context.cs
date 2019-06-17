@@ -15,10 +15,10 @@ namespace vmz.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class vmzEntities : DbContext
+    public partial class Entities : DbContext
     {
-        public vmzEntities()
-            : base("name=vmzEntities")
+        public Entities()
+            : base("name=Entities")
         {
         }
     

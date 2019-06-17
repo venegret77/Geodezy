@@ -88,7 +88,7 @@
           <Property Name="professionid" Type="int" Nullable="false" />
           <Property Name="md5" Type="nvarchar(max)" Nullable="false" />
           <Property Name="login" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="confprofid" Type="int" />
+          <Property Name="confprofid" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__Brigade__brigadi__2739D489">
           <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -150,7 +150,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User__profession__0C1BC9F9">
+        <Association Name="FK__User__profession__7908F585">
           <End Role="Profession" Type="Self.Profession" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
@@ -212,7 +212,7 @@
             <End Role="Brigade" EntitySet="Brigade" />
             <End Role="Task" EntitySet="Task" />
           </AssociationSet>
-          <AssociationSet Name="FK__User__profession__0C1BC9F9" Association="Self.FK__User__profession__0C1BC9F9">
+          <AssociationSet Name="FK__User__profession__7908F585" Association="Self.FK__User__profession__7908F585">
             <End Role="Profession" EntitySet="Profession" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
@@ -267,7 +267,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User" Relationship="vmzModel.FK__User__profession__0C1BC9F9" FromRole="Profession" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="Self.FK__User__profession__19AACF41" FromRole="Profession" ToRole="User" />
         </EntityType>
         <EntityType Name="Service">
           <Key>
@@ -302,10 +302,10 @@
           <Property Name="professionid" Type="Int32" Nullable="false" />
           <Property Name="md5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="confprofid" Type="Int32" />
+          <Property Name="confprofid" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Brigade" Relationship="Self.FK__Brigade__brigadi__2739D489" FromRole="User" ToRole="Brigade" />
           <NavigationProperty Name="ListOfUsers" Relationship="Self.FK__ListOfUse__useri__282DF8C2" FromRole="User" ToRole="ListOfUsers" />
-          <NavigationProperty Name="Profession" Relationship="vmzModel.FK__User__profession__0C1BC9F9" FromRole="User" ToRole="Profession" />
+          <NavigationProperty Name="Profession" Relationship="Self.FK__User__profession__19AACF41" FromRole="User" ToRole="Profession" />
         </EntityType>
         <EntityType Name="ListOfServices">
           <Key>
@@ -364,6 +364,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__User__profession__19AACF41">
+          <End Role="Profession" Type="Self.Profession" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profession">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="professionid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__ListOfSer__servi__236943A5">
           <End Role="Service" Type="Self.Service" Multiplicity="1" />
           <End Role="ListOfServices" Type="Self.ListOfServices" Multiplicity="*" />
@@ -376,7 +388,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="vmzEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Brigade" EntityType="Self.Brigade" />
           <EntitySet Name="ListOfTasks" EntityType="Self.ListOfTasks" />
           <EntitySet Name="ListOfUsers" EntityType="Self.ListOfUsers" />
@@ -402,6 +414,10 @@
             <End Role="User" EntitySet="User" />
             <End Role="ListOfUsers" EntitySet="ListOfUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK__User__profession__19AACF41" Association="Self.FK__User__profession__19AACF41">
+            <End Role="Profession" EntitySet="Profession" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
           <AssociationSet Name="FK__ListOfSer__servi__236943A5" Association="Self.FK__ListOfSer__servi__236943A5">
             <End Role="Service" EntitySet="Service" />
             <End Role="ListOfServices" EntitySet="ListOfServices" />
@@ -421,10 +437,6 @@
             <Parameter Name="uid" Mode="In" Type="Int32" />
             <Parameter Name="pid" Mode="In" Type="Int32" />
           </FunctionImport>
-          <AssociationSet Name="FK__User__profession__0C1BC9F9" Association="vmzModel.FK__User__profession__0C1BC9F9">
-            <End Role="Profession" EntitySet="Profession" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetServices_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -458,24 +470,12 @@
           <Property Type="Int32" Name="cpid" Nullable="true" />
           <Property Type="String" Name="cpname" Nullable="true" />
         </ComplexType>
-        <Association Name="FK__User__profession__0C1BC9F9">
-          <End Type="vmzModel.Profession" Role="Profession" Multiplicity="1" />
-          <End Type="vmzModel.User" Role="User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Profession">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="professionid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище vmzModelContainer" CdmEntityContainer="vmzEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище vmzModelContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="Brigade">
             <EntityTypeMapping TypeName="vmzModel.Brigade">
               <MappingFragment StoreEntitySet="Brigade">
