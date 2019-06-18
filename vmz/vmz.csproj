@@ -142,7 +142,8 @@
     <Compile Include="Models\Brigade.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CreateOrderModel.cs" />
+    <Compile Include="Models\BrigadeModel.cs" />
+    <Compile Include="Models\ClientModel.cs" />
     <Compile Include="Models\ExternalLoginViewModel.cs" />
     <Compile Include="Models\GetServices_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -193,6 +194,7 @@
     <Compile Include="Models\Profession.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SecretaryModel.cs" />
     <Compile Include="Models\Service.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -572,8 +574,6 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Views\gtml\profile.html" />
-    <Content Include="Views\gtml\team.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -973,6 +973,7 @@
     <Content Include="Views\Account\Logout.cshtml" />
     <Content Include="Views\Home\Client.cshtml" />
     <Content Include="Views\Home\Secretary.cshtml" />
+    <Content Include="Views\Home\Brigadier.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

@@ -93,7 +93,7 @@ namespace vmz.Controllers
                 return RedirectToAction("Profile", "Account");
         }
         [HttpPost]
-        public ActionResult Client(CreateOrderModel model)
+        public ActionResult Client(ClientModel model)
         {
             int id = FillViewBag(true);
             if (id != -1)
@@ -132,6 +132,129 @@ namespace vmz.Controllers
             return RedirectToAction("Profile", "Account");
         }
         #endregion
+        #region Секретарь
+        public ActionResult Secretary()
+        {
+            bool test = FillViewBag();
+            if (test & ViewBag.UserProfession != null)
+                return View();
+            else
+                return RedirectToAction("Profile", "Account");
+        }
+        [HttpPost]
+        public ActionResult Secretary(SecretaryModel model)
+        {
+            using (Entities db = new Entities())
+            {
+                try
+                {
+                    //
+                    db.SaveChanges();
+                    return RedirectToAction("Secretary", "Home");
+                }
+                catch
+                {
+                    return RedirectToAction("Secretary", "Home");
+                }
+            }
+        }
+        #endregion
+        #region Бригадир
+        public ActionResult Brigadier()
+        {
+            bool test = FillViewBag();
+            if (test & ViewBag.UserProfession != null)
+                return View();
+            else
+                return RedirectToAction("Profile", "Account");
+        }
+        [HttpPost]
+        public ActionResult Brigadier(BrigadeModel model)
+        {
+            int id = FillViewBag(true);
+            if (id != -1)
+            {
+                using (Entities db = new Entities())
+                {
+                    try
+                    {
+                        switch (model.action)
+                        {
+                            case "addserv":
+                                db.Service.Add(new Service
+                                {
+                                    name = model.servicen,
+                                    description = model.serviced,
+                                });
+                                break;
+                            case "createbr":
+                                db.Brigade.Add(new Brigade
+                                {
+                                    brigadierid = id,
+                                    name = model.name,
+                                    description = model.description
+                                });
+                                db.SaveChanges();
+                                var brigade = db.Brigade.FirstOrDefault(b => b.brigadierid == id);
+                                foreach(var u in model.ulist)
+                                {
+                                    int uid = Convert.ToInt32(u);
+                                    db.ListOfUsers.Add(new ListOfUsers
+                                    {
+                                        brigadeid = brigade.id,
+                                        userid = uid
+                                    });
+                                }
+                                foreach(var s in model.slist)
+                                {
+                                    int sid = Convert.ToInt32(s);
+                                    db.ListOfServices.Add(new ListOfServices
+                                    {
+                                        brigadeortaskid = brigade.id,
+                                        serviceid = sid
+                                    });
+                                }
+                                break;
+                        }
+                        db.SaveChanges();
+                        return RedirectToAction("Brigadier", "Home");
+                    }
+                    catch
+                    {
+                        return RedirectToAction("Brigadier", "Home");
+                    }
+                }
+            }
+            return RedirectToAction("Profile", "Account");
+        }
+        #endregion
+        #region Тест
+        public ActionResult Test()
+        {
+            bool test = FillViewBag();
+            if (test & ViewBag.UserProfession != null)
+                return View();
+            else
+                return RedirectToAction("Profile", "Account");
+        }
+        [HttpPost]
+        public ActionResult Test(SecretaryModel model)
+        {
+            using (Entities db = new Entities())
+            {
+                try
+                {
+                    //
+                    db.SaveChanges();
+                    return RedirectToAction("Secretary", "Home");
+                }
+                catch
+                {
+                    return RedirectToAction("Secretary", "Home");
+                }
+            }
+        }
+        #endregion
         private bool FillViewBag()
         {
             var cookie = Request.Cookies["user"];
@@ -166,6 +289,22 @@ namespace vmz.Controllers
                         }
                         _Orders = _Orders.OrderByDescending(o => o.Order.datestart).ToList();
                         ViewBag.Orders = _Orders;
+                        break;
+                    case "Бригадир":
+                        var Brigade = db.Brigade.FirstOrDefault(b => b.brigadierid == id);
+                        if (Brigade != null)
+                        {
+                            int idbr = Brigade.id;
+                            var ListOfUsers = db.ListOfUsers.Where(l => l.brigadeid == idbr).ToList();
+                            ViewBag.Brigade = Brigade;
+                            ViewBag.ListOfUsers = ListOfUsers;
+                            ViewBag.Workers = db.User.Where(u => (u.Profession.name == "Рабочий") & (u.ListOfUsers == null)).ToList();
+                        }
+                        else
+                        {
+                            ViewBag.Workers = db.User.Where(u => (u.Profession.name == "Рабочий") & (u.ListOfUsers == null)).ToList();
+                            ViewBag.Services = db.Service.ToList();
+                        }
                         break;
                     default:
                         break;
