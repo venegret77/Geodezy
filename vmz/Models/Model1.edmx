@@ -47,8 +47,10 @@
           <Property Name="name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="description" Type="nvarchar(max)" />
           <Property Name="listoftasksid" Type="int" />
-          <Property Name="datestart" Type="datetime" Nullable="false" />
-          <Property Name="dateend" Type="datetime" />
+          <Property Name="datestart" Type="date" Nullable="false" />
+          <Property Name="dateend" Type="date" />
+          <Property Name="clientid" Type="int" Nullable="false" />
+          <Property Name="priority" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Profession">
           <Key>
@@ -74,8 +76,8 @@
           <Property Name="name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="description" Type="nvarchar(max)" />
           <Property Name="listofservices" Type="int" Nullable="false" />
-          <Property Name="datestart" Type="datetime" />
-          <Property Name="dateend" Type="datetime" />
+          <Property Name="datestart" Type="date" />
+          <Property Name="dateend" Type="date" />
           <Property Name="brigadeid" Type="int" />
         </EntityType>
         <EntityType Name="User">
@@ -88,7 +90,7 @@
           <Property Name="professionid" Type="int" Nullable="false" />
           <Property Name="md5" Type="nvarchar(max)" Nullable="false" />
           <Property Name="login" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="confprofid" Type="int" Nullable="false" />
+          <Property Name="confprofid" Type="int" />
         </EntityType>
         <Association Name="FK__Brigade__brigadi__2739D489">
           <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -138,6 +140,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Order__clientid__1F2E9E6D">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="clientid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Task__brigadeid__3C34F16F">
           <End Role="Brigade" Type="Self.Brigade" Multiplicity="0..1" />
           <End Role="Task" Type="Self.Task" Multiplicity="*" />
@@ -150,7 +164,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User__profession__7908F585">
+        <Association Name="FK__User__profession__0C1BC9F9">
           <End Role="Profession" Type="Self.Profession" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
@@ -167,6 +181,9 @@
         </Function>
         <Function Name="GetTasks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="orderid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUserOrders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="uid" Type="int" Mode="In" />
         </Function>
         <Function Name="GetUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="brigadeid" Type="int" Mode="In" />
@@ -208,11 +225,15 @@
             <End Role="User" EntitySet="User" />
             <End Role="ListOfUsers" EntitySet="ListOfUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK__Order__clientid__1F2E9E6D" Association="Self.FK__Order__clientid__1F2E9E6D">
+            <End Role="User" EntitySet="User" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
           <AssociationSet Name="FK__Task__brigadeid__3C34F16F" Association="Self.FK__Task__brigadeid__3C34F16F">
             <End Role="Brigade" EntitySet="Brigade" />
             <End Role="Task" EntitySet="Task" />
           </AssociationSet>
-          <AssociationSet Name="FK__User__profession__7908F585" Association="Self.FK__User__profession__7908F585">
+          <AssociationSet Name="FK__User__profession__0C1BC9F9" Association="Self.FK__User__profession__0C1BC9F9">
             <End Role="Profession" EntitySet="Profession" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
@@ -257,8 +278,11 @@
           <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="listoftasksid" Type="Int32" />
-          <Property Name="datestart" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="dateend" Type="DateTime" Precision="3" />
+          <Property Name="datestart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="dateend" Type="DateTime" Precision="0" />
+          <Property Name="priority" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="clientid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="vmzModel.FK__Order__clientid__1F2E9E6D" FromRole="Order" ToRole="User" />
         </EntityType>
         <EntityType Name="Profession">
           <Key>
@@ -286,8 +310,8 @@
           <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="listofservices" Type="Int32" Nullable="false" />
-          <Property Name="datestart" Type="DateTime" Precision="3" />
-          <Property Name="dateend" Type="DateTime" Precision="3" />
+          <Property Name="datestart" Type="DateTime" Precision="0" />
+          <Property Name="dateend" Type="DateTime" Precision="0" />
           <Property Name="brigadeid" Type="Int32" />
           <NavigationProperty Name="Brigade" Relationship="Self.FK__Task__brigadeid__3C34F16F" FromRole="Task" ToRole="Brigade" />
           <NavigationProperty Name="ListOfTasks" Relationship="Self.FK__ListOfTas__taski__208CD6FA" FromRole="Task" ToRole="ListOfTasks" />
@@ -302,10 +326,11 @@
           <Property Name="professionid" Type="Int32" Nullable="false" />
           <Property Name="md5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="confprofid" Type="Int32" Nullable="false" />
+          <Property Name="confprofid" Type="Int32" />
           <NavigationProperty Name="Brigade" Relationship="Self.FK__Brigade__brigadi__2739D489" FromRole="User" ToRole="Brigade" />
           <NavigationProperty Name="ListOfUsers" Relationship="Self.FK__ListOfUse__useri__282DF8C2" FromRole="User" ToRole="ListOfUsers" />
           <NavigationProperty Name="Profession" Relationship="Self.FK__User__profession__19AACF41" FromRole="User" ToRole="Profession" />
+          <NavigationProperty Name="Order" Relationship="vmzModel.FK__Order__clientid__1F2E9E6D" FromRole="User" ToRole="Order" />
         </EntityType>
         <EntityType Name="ListOfServices">
           <Key>
@@ -437,6 +462,13 @@
             <Parameter Name="uid" Mode="In" Type="Int32" />
             <Parameter Name="pid" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK__Order__clientid__1F2E9E6D" Association="vmzModel.FK__Order__clientid__1F2E9E6D">
+            <End Role="User" EntitySet="User" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <FunctionImport Name="GetUserOrders" ReturnType="Collection(vmzModel.GetUserOrders_Result)">
+          <Parameter Name="uid" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetServices_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -469,6 +501,31 @@
           <Property Type="String" Name="pname" Nullable="true" />
           <Property Type="Int32" Name="cpid" Nullable="true" />
           <Property Type="String" Name="cpname" Nullable="true" />
+        </ComplexType>
+        <Association Name="FK__Order__clientid__1F2E9E6D">
+          <End Type="vmzModel.User" Role="User" Multiplicity="1" />
+          <End Type="vmzModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="clientid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetUserOrders_Result">
+          <Property Type="Int32" Name="oid" Nullable="false" />
+          <Property Type="String" Name="oname" Nullable="false" />
+          <Property Type="DateTime" Name="ods" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="ode" Nullable="true" Precision="23" />
+          <Property Type="String" Name="odesc" Nullable="true" />
+          <Property Type="String" Name="opr" Nullable="true" />
+          <Property Type="Int32" Name="tid" Nullable="true" />
+          <Property Type="String" Name="tname" Nullable="true" />
+          <Property Type="DateTime" Name="tds" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="tde" Nullable="true" Precision="23" />
+          <Property Type="String" Name="tdesc" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -506,6 +563,8 @@
           <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="vmzModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="clientid" ColumnName="clientid" />
+                <ScalarProperty Name="priority" ColumnName="priority" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="description" ColumnName="description" />
@@ -620,6 +679,23 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SetUserProf" FunctionName="Хранилище vmzModel.SetUserProf" />
+          <FunctionImportMapping FunctionImportName="GetUserOrders" FunctionName="Хранилище vmzModel.GetUserOrders">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="vmzModel.GetUserOrders_Result">
+                <ScalarProperty Name="oid" ColumnName="oid" />
+                <ScalarProperty Name="oname" ColumnName="oname" />
+                <ScalarProperty Name="ods" ColumnName="ods" />
+                <ScalarProperty Name="ode" ColumnName="ode" />
+                <ScalarProperty Name="odesc" ColumnName="odesc" />
+                <ScalarProperty Name="opr" ColumnName="opr" />
+                <ScalarProperty Name="tid" ColumnName="tid" />
+                <ScalarProperty Name="tname" ColumnName="tname" />
+                <ScalarProperty Name="tds" ColumnName="tds" />
+                <ScalarProperty Name="tde" ColumnName="tde" />
+                <ScalarProperty Name="tdesc" ColumnName="tdesc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

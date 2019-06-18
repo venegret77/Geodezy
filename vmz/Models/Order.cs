@@ -20,5 +20,9 @@ namespace vmz.Models
         public Nullable<int> listoftasksid { get; set; }
         public System.DateTime datestart { get; set; }
         public Nullable<System.DateTime> dateend { get; set; }
+        public string priority { get; set; }
+        public int clientid { get; set; }
+    
+        public virtual User User { get; set; }
     }
 }

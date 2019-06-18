@@ -13,7 +13,7 @@ namespace vmz.Controllers
     [RoutePrefix("Account")]
     public class AccountController : Controller
     {
-        vmzEntities db = new vmzEntities();
+        Entities db = new Entities();
         public ActionResult Registration()
         {
             ViewBag.Prof = db.Profession.Where(p => p.name != "Не подтвержден").ToList();

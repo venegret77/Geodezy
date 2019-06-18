@@ -86,5 +86,14 @@ namespace vmz.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SetUserProf", uidParameter, pidParameter);
         }
+    
+        public virtual ObjectResult<GetUserOrders_Result> GetUserOrders(Nullable<int> uid)
+        {
+            var uidParameter = uid.HasValue ?
+                new ObjectParameter("uid", uid) :
+                new ObjectParameter("uid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserOrders_Result>("GetUserOrders", uidParameter);
+        }
     }
 }

@@ -18,6 +18,7 @@ namespace vmz.Models
         public User()
         {
             this.Brigade = new HashSet<Brigade>();
+            this.Order = new HashSet<Order>();
         }
     
         public int id { get; set; }
@@ -26,11 +27,13 @@ namespace vmz.Models
         public int professionid { get; set; }
         public string md5 { get; set; }
         public string login { get; set; }
-        public int confprofid { get; set; }
+        public Nullable<int> confprofid { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Brigade> Brigade { get; set; }
         public virtual ListOfUsers ListOfUsers { get; set; }
         public virtual Profession Profession { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Order { get; set; }
     }
 }

@@ -20,6 +20,7 @@
         <AssociationConnector Association="vmzModel.FK__ListOfUse__useri__282DF8C2" ManuallyRouted="false" />
         <AssociationConnector Association="vmzModel.FK__User__profession__19AACF41" ManuallyRouted="false" />
         <AssociationConnector Association="vmzModel.FK__ListOfSer__servi__236943A5" ManuallyRouted="false" />
+        <AssociationConnector Association="vmzModel.FK__Order__clientid__1F2E9E6D" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -149,9 +149,13 @@
     <Compile Include="Models\GetTasks_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetUserOrders_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetUsers_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LeftJoin.cs" />
     <Compile Include="Models\ListOfProfessions_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -966,6 +970,7 @@
     <Content Include="Views\Account\Registration.cshtml" />
     <Content Include="Views\Home\Profile.cshtml" />
     <Content Include="Views\Account\Logout.cshtml" />
+    <Content Include="Views\Home\Client.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
