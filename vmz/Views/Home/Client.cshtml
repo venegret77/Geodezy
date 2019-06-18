@@ -98,7 +98,6 @@
                                         <div class="col">
                                             Выйти
                                         </div>
-
                                         <div class="col-auto">
                                             <div class="text-danger ml-2"><i class="material-icons vm">exit_to_app</i></div>
                                         </div>
@@ -118,7 +117,7 @@
                 <div class="container my-3 main-container">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h2 class="content-color-primary page-title">Список не выполненных заказов</h2>
+                            <h2 class="content-color-primary page-title">Мои заказы</h2>
                         </div>
                         <div class="col-auto">
                             <button type="button" class="btn btn-rounded success-gradient text-uppercase" data-toggle="modal" data-target="#exampleModal">
@@ -130,16 +129,100 @@
             </div>
         </div>
         <!-- content page title ends -->
-            <!-- unconfusers -->
-            <div class="container mt-4 main-container">
-                <div class="row">
-                    @foreach (var order in ViewBag.Orders)
+        <!-- unconfusers -->
+        <div class="container mt-4 main-container">
+            <div class="row storyline mb-3">
+                @for (int i = 0; i < ViewBag.Orders.Count; i++)
+                {
+                    string val = "left";
+                    if (i % 2 == 0)
                     {
-                        <h2>@order.oname</h2>
+                        val = "right";
                     }
-                </div>
+                    else
+                    {
+                        val = "left";
+                    }
+                    if (ViewBag.Orders[i].Order.dateend == null)
+                    {
+                        <div class="story-block @val border-warning">
+                            <span class="timeline-bubble bg-warning"></span>
+                            <div class="card border-0 rounded-0 mb-3 ">
+                                <div class="card-body p-5">
+                                    <h4>@ViewBag.Orders[i].Order.name</h4>
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <h5>@ViewBag.Orders[i].Order.description</h5>
+                                            <p class=" mb-3"></p>
+                                            Дата начала: @ViewBag.Orders[i].Order.datestart.ToShortDateString()
+                                            <p class=" mb-3"></p>
+                                            Приоритет: @ViewBag.Orders[i].Order.priority
+                                            <p class=" mb-3"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                @if (ViewBag.Orders[i].Tasks != null)
+                                {
+                                    <div class="card-footer text-left border-top">
+                                        <ul class="list-group draglist">
+                                            @foreach (var t in ViewBag.Orders[i].Tasks)
+                                            {
+                                                if (t.dateend == null)
+                                                {
+                                                    <li class="list-group-item list-group-item-success">@t.name</li>
+                                                }
+                                                else
+                                                {
+                                                    <li class="list-group-item list-group-item-warning">t.name</li>
+                                                }
+                                            }
+                                        </ul>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="card-footer text-left border-top align-items-center">
+                                        <button type="submit" class="btn btn-rounded warning-gradient text-uppercase" name="oid" value="@ViewBag.Orders[i].Order.id">Отменить заказ</button> 
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="story-block @val border-success">
+                            <span class="timeline-bubble bg-success"></span>
+                            <div class="card border-0 rounded-0 mb-3 ">
+                                <div class="card-body p-5">
+                                    <h4>@ViewBag.Orders[i].Order.name</h4>
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <h5>@ViewBag.Orders[i].Order.description</h5>
+                                            <p class=" mb-3"></p>
+                                            Дата начала: @ViewBag.Orders[i].Order.datestart.ToShortDateString()
+                                            <p class=" mb-3"></p>
+                                            Приоритет: @ViewBag.Orders[i].Order.priority
+                                            <p class=" mb-3"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                @if (ViewBag.Orders[i].Tasks != null)
+                                {
+                                    <div class="card-footer text-left border-top">
+                                        <ul class="list-group draglist">
+                                            @foreach (var t in ViewBag.Orders[i].Tasks)
+                                            {
+                                                <li class="list-group-item list-group-item-success">@t.name</li>
+                                            }
+                                        </ul>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                }
             </div>
-        }
+        </div>
     </div>
     <!-- modal for create form -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="createOrderTitle" aria-hidden="true">
@@ -147,8 +230,7 @@
             <div class="modal-content">
                 <div class="modal-header pink-gradient" id="createOrderTitle">
                     <div class="col text-center">
-                        <h5 class="mt-3">Create Task </h5>
-                        <p>Set Reminder with your preferances</p>
+                        <h5 class="mt-3">Создание заказа </h5>
                     </div>
                     <button type="button" class="close absolute" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -159,66 +241,38 @@
                         <div class="col-md-10 mx-auto">
                             <div class="form-group row">
                                 <div class="col-lg-12 col-md-12">
-                                    <label>Task Name</label>
-                                    <input type="text" class="form-control" placeholder="">
+                                    <label>Наименование</label>
+                                    <input type="text" name="name" class="form-control form-control-lg" placeholder="" required="" value="Наименование заказа">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-lg-12 col-md-12">
-                                    <label>Description</label>
-                                    <textarea class="form-control" placeholder="" id="linedemo"></textarea>
+                                    <label>Развернутое описание заказа</label>
+                                    <textarea name="description" class="form-control form-control-lg" placeholder="" id="linedemo"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class=" col-md-6 col-lg-6">
-                                    <label>Priority</label>
-                                    <select class="form-control " data-live-search="true" tabindex="-1" aria-hidden="true">
-                                        <option>High Priority</option>
-                                        <option>Medium Priority</option>
-                                        <option>Low Priority</option>
-                                    </select>
-                                </div>
-                                <div class=" col-md-6 col-lg-6">
-                                    <label>Repeat</label>
-                                    <select class="form-control " data-live-search="true" tabindex="-1" aria-hidden="true">
-                                        <option>One day</option>
-                                        <option>Weekly</option>
-                                        <option>Monthly</option>
-                                        <option>Yearly</option>
+                                    <label>Приоритет</label>
+                                    <select class="form-control" name="priority" data-live-search="true" tabindex="-1" aria-hidden="true">
+                                        <option>Высокий приоритет</option>
+                                        <option>Средний приоритет</option>
+                                        <option>Низкий приоритет</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-lg-6 col-md-6">
-                                    <label>Start Date</label>
-                                    <input type="text" class="form-control datepicker" placeholder="">
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <label>End Date</label>
-                                    <input type="text" class="form-control datepicker" placeholder="">
-                                </div>
-                            </div>
-
-                            <br>
-                            <div class="form-group row">
-                                <div class="col-md-12">
-                                    <label>Attachments</label>
-                                    <br>
-                                    <div class="custom-dropzone text-center align-items-center" id="my-dropzone">
-                                        <div class="dz-default dz-message" data-dz-message>
-                                            <h3 class="mb-0"><i class="material-icons">cloud_download</i></h3>
-                                            <p>Drop here or click here to upload</p>
-                                        </div>
-                                    </div>
-
+                                    <label>Дата начала</label>
+                                    <input name ="datestart" type="date" class="form-control form-control-lg" placeholder="">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Create Task</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
+                    <button type="submit" class="btn btn-primary">Создать</button>
                 </div>
             </div>
         </div>

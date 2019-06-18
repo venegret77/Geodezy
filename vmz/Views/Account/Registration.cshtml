@@ -66,7 +66,6 @@
                 <div class="row h-100 h-sm-auto">
                     <div class="col-12 col-md-6 h-md-100 order-2 order-md-1">
                         <div class="row align-items-center h-100">
-                            <form method="post">
                                 <div class="col-12 col-md-10 col-lg-8 col-xl-6 mx-auto mt-2">
                                     @if (@Html.ValidationMessage("Err").ToString().Contains("Пользователь с таким логином уже существует")
                                         || @Html.ValidationMessage("Err").ToString().Contains("Пароли не совпадают"))
@@ -89,7 +88,7 @@
                                             <input type="text" id="name" name="Name" class="form-control form-control-lg border-0" placeholder="Имя" required="" autofocus="">
                                             <hr class="my-0">
                                             <label for="name" class="sr-only">Отчество</label>
-                                            <input type="text" id="name" name="Secondname" class="form-control form-control-lg border-0" placeholder="Отчество" required="" autofocus="">
+                                            <input type="text" id="name" name="Secondname" class="form-control form-control-lg border-0" placeholder="Отчество" autofocus="">
                                             <hr class="my-0">
                                             <label for="inputEmail" class="sr-only">Имя пользователя</label>
                                             <input type="text" id="inputEmail" name="Login" class="form-control form-control-lg border-0" placeholder="Имя пользователя" required="">
@@ -122,7 +121,6 @@
                                         <button type="submit" class="btn btn-primary success-gradient">Зарегистрироваться</button>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                     </div>
                     <div class="col-12 col-md-6 h-md-100 order-1 order-md-2 min-height-300 p-0 bg-dark ">

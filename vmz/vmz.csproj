@@ -142,6 +142,7 @@
     <Compile Include="Models\Brigade.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CreateOrderModel.cs" />
     <Compile Include="Models\ExternalLoginViewModel.cs" />
     <Compile Include="Models\GetServices_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -971,6 +972,7 @@
     <Content Include="Views\Home\Profile.cshtml" />
     <Content Include="Views\Account\Logout.cshtml" />
     <Content Include="Views\Home\Client.cshtml" />
+    <Content Include="Views\Home\Secretary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
