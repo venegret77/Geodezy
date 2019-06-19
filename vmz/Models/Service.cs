@@ -17,7 +17,7 @@ namespace vmz.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Service()
         {
-            this.ListOfServices = new HashSet<ListOfServices>();
+            this.JoinService = new HashSet<JoinService>();
         }
     
         public int id { get; set; }
@@ -25,6 +25,6 @@ namespace vmz.Models
         public string description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ListOfServices> ListOfServices { get; set; }
+        public virtual ICollection<JoinService> JoinService { get; set; }
     }
 }

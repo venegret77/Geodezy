@@ -145,6 +145,9 @@
     <Compile Include="Models\BrigadeModel.cs" />
     <Compile Include="Models\ClientModel.cs" />
     <Compile Include="Models\ExternalLoginViewModel.cs" />
+    <Compile Include="Models\GetServicesOnBorT_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetServices_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -157,11 +160,14 @@
     <Compile Include="Models\GetUsers_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LeftJoin.cs" />
-    <Compile Include="Models\ListOfProfessions_Result.cs">
+    <Compile Include="Models\JoinBrorTask.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ListOfServices.cs">
+    <Compile Include="Models\JoinService.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LeftJoin.cs" />
+    <Compile Include="Models\ListOfProfessions_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ListOfTasks.cs">
@@ -295,6 +301,7 @@
     <Content Include="Content\img\connection_error.png" />
     <Content Include="Content\img\cpu.png" />
     <Content Include="Content\img\date.png" />
+    <Content Include="Content\img\delete.png" />
     <Content Include="Content\img\error.png" />
     <Content Include="Content\img\excel.png" />
     <Content Include="Content\img\facebook-w.png" />

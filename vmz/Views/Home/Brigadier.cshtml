@@ -103,10 +103,10 @@
                 </div>
             </div>
         </header>
-        @if (ViewBag.Brigade == null)
-        {
-            <div class="container mt-4 main-container">
-                <div class="row">
+        <div class="container mt-4 main-container">
+            <div class="row">
+                @if (ViewBag.Brigade == null)
+                {
                     <div class="col-sm-12">
                         <div class="card mb-4">
                             <div class="card-header">
@@ -152,37 +152,215 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <h6 class="card-title">Создание новой услуги</h6>
+                    </div>
+                }
+                else
+                {
+            <div class="container mt-4 main-container">
+                <div class="row">
+                    <div class="col-12 col-md-12">
+                        <div class="card mb-4 ">
+                            <div class="card-header p-0">
+                                <ul class="nav nav-tabs wizard-1" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="tabhome123-tab" data-toggle="tab" href="#tabhome123" role="tab" aria-controls="tabhome123" aria-selected="true">
+                                            <span>Моя бригада</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="tabhome223-tab" data-toggle="tab" href="#tabhome223" role="tab" aria-controls="tabhome223" aria-selected="false">
+                                            <span>Изменение бригады</span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
-                            <form method="post">
-                                <div class="card-body">
-                                    <div class="form-group row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <h6><label>Наименование услуги</label></h6>
-                                            <input type="text" name="servicen" class="form-control" placeholder="" value="">
-                                            <br />
-                                            <button type="submit" class="btn btn-primary success-gradient" name="action" value="addserv">Добавить новую услугу</button>
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="tabhome123" role="tabpanel" aria-labelledby="tabhome123-tab">
+
+                                        <div class="card-header">
+                                            <h6 class="card-title">Наименование: @ViewBag.Brigade.name</h6>
+                                            <h2 class="card-title">Описание: @ViewBag.Brigade.description</h2>
                                         </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <h6><label>Описание услуги</label></h6>
-                                            <input type="text" name="serviced" class="form-control" placeholder="" value="">
+                                        <form method="post">
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <div class="card mb-4 ">
+                                                            <div class="card-header">
+                                                                <div class="media">
+                                                                    <div class="media-body">
+                                                                        <h5 class="mt-1">Список сотрудников</h5>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body px-0 py-0">
+                                                                <ul class="list-group border-top border-bottom list-group-flush">
+                                                                    @foreach (var u in ViewBag.ListOfUsers)
+                                                                    {
+                                                                        <li class="list-group-item">
+                                                                            <div class="media">
+                                                                                <figure class="avatar avatar-50 mr-3">
+                                                                                    <img src="~/Content/img/avatar.png" alt="Generic placeholder image">
+                                                                                </figure>
+                                                                                <div class="media-body">
+                                                                                    <h6 class="my-0 mt-1">@u.User.name</h6>
+                                                                                    <p class="small">@u.User.Profession.name</p>
+                                                                                    <p class="small">@u.User.description</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    }
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <div class="card mb-4 ">
+                                                            <div class="card-header">
+                                                                <div class="media">
+                                                                    <div class="media-body">
+                                                                        <h5 class="mt-1">Список услуг</h5>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body px-0 py-0">
+                                                                <ul class="list-group border-top border-bottom list-group-flush">
+                                                                    @foreach (var s in ViewBag.ListOfServices)
+                                                                    {
+                                                                        <li class="list-group-item">
+                                                                            <div class="media">
+                                                                                <div class="media-body">
+                                                                                    <h6 class="my-0 mt-1">@s.name</h6>
+                                                                                    <p class="small">@s.description</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    }
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btn btn-rounded success-gradient text-uppercase" data-toggle="modal" data-target="#exampleModal">
+                                                    Изменение бригады
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane fade" id="tabhome223" role="tabpanel" aria-labelledby="tabhome223-tab">
+
+                                        <div class="card-header">
+                                            <h6 class="card-title">Создание новой бригады</h6>
                                         </div>
+                                        <form method="post">
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <h6><label>Наименование бригады</label></h6>
+                                                        <input type="text" name="name" class="form-control" placeholder="" required="" value="">
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <h6><label>Описание бригады</label></h6>
+                                                        <input type="text" name="description" class="form-control" placeholder="" value="">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <h6><label>Выберите услуги, оказываемые бригадой</label></h6>
+                                                        <select name="slist" required class="chosen-container-multi form-control" tabindex="2" multiple>
+                                                            @foreach (var s in ViewBag.Services)
+                                                            {
+                                                                <option value="@s.id">@s.name</option>
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <h6><label>Выберите работников бригады</label></h6>
+                                                        <select name="ulist" required class="chosen-container-multi form-control" tabindex="2" multiple>
+                                                            @foreach (var w in ViewBag.Workers)
+                                                            {
+                                                                <option value="@w.id">@w.name</option>
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-lg-6 col-md-6 right">
+                                                        <button type="submit" class="btn btn-primary success-gradient" name="action" value="createbr">Создать</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        }
-        else
-        {
-        }
-    </div>
+                }
+                <div class="col-sm-12">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h6 class="card-title">Услуги</h6>
+                        </div>
+                        <form method="post">
+                            <div class="card-body">
+                                <div class="col-sm-12">
+                                    <div class="form-group row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group row">
+                                                <h6><label>Наименование услуги</label></h6>
+                                                <input type="text" name="servicen" class="form-control" placeholder="" value="" required>
+                                            </div>
+                                            <div class="form-group row">
+                                                <h6><label>Описание услуги</label></h6>
+                                                <input type="text" name="serviced" class="form-control" placeholder="" value="">
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-lg-3 col-md-3">
+                                                </div>
+                                                <div class="col-lg-2 col-md-2">
+                                                    <button type="submit" class="btn btn-primary success-gradient" name="action" value="addserv">Добавить новую услугу</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-1 col-md-1">
+                                        </div>
+                                        <div class="col-lg-5 col-md-5">
+                                            <div class="form-group row">
+                                                <h6><label>Выберите услугу для удаления из списка ниже</label></h6>
+                                            </div>
 
-    <!-- modal for create form ends-->
+                                            <div class="form-group row">
+                                                <div class="col-lg-11 col-md-11">
+                                                    <select name="slist" required class="chosen_select form-control" tabindex="2">
+                                                        @foreach (var s in ViewBag.Services)
+                                                        {
+                                                            <option value="@s.id">@s.name</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-lg-2 col-md-2">
+                                                </div>
+                                                <div class="col-lg-2 col-md-2">
+                                                    <br />
+                                                    <button type="submit" class="btn btn-primary danger-gradient" name="action" value="deleteserv">Удалить выбранную услугу</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- page specific script -->
     <script src="~/Content/js/jquery-3.2.1.min.js"></script>
     <script src="~/Content/js/popper.min.js"></script>

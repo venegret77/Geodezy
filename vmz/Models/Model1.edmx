@@ -9,21 +9,25 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="listofusersid" Type="int" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="brigadierid" Type="int" Nullable="false" />
           <Property Name="name" Type="nvarchar(max)" />
           <Property Name="description" Type="nvarchar(max)" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "D:\VMZ\VMZ\APP_DATA\VMZ.MDF.dbo.ListOfServices" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
-        <EntityType Name="ListOfServices">
+        <EntityType Name="JoinBrorTask">
           <Key>
-            <PropertyRef Name="brigadeortaskid" />
-            <PropertyRef Name="serviceid" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="brigadeortaskid" Type="int" Nullable="false" />
+          <Property Name="idbrortask" Type="int" Nullable="false" />
+          <Property Name="idjs" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JoinService">
+          <Key>
+            <PropertyRef Name="idjs" />
+          </Key>
           <Property Name="serviceid" Type="int" Nullable="false" />
+          <Property Name="idjs" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="ListOfTasks">
           <Key>
@@ -92,7 +96,7 @@
           <Property Name="login" Type="nvarchar(max)" Nullable="false" />
           <Property Name="confprofid" Type="int" />
         </EntityType>
-        <Association Name="FK__Brigade__brigadi__2739D489">
+        <Association Name="FK__Brigade__brigadi__473C8FC7">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Brigade" Type="Self.Brigade" Multiplicity="*" />
           <ReferentialConstraint>
@@ -104,14 +108,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ListOfSer__servi__236943A5">
+        <Association Name="FK__JoinServi__servi__6E565CE8">
           <End Role="Service" Type="Self.Service" Multiplicity="1" />
-          <End Role="ListOfServices" Type="Self.ListOfServices" Multiplicity="*" />
+          <End Role="JoinService" Type="Self.JoinService" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Service">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="ListOfServices">
+            <Dependent Role="JoinService">
               <PropertyRef Name="serviceid" />
             </Dependent>
           </ReferentialConstraint>
@@ -152,7 +156,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Task__brigadeid__3C34F16F">
+        <Association Name="FK__Task__brigadeid__4830B400">
           <End Role="Brigade" Type="Self.Brigade" Multiplicity="0..1" />
           <End Role="Task" Type="Self.Task" Multiplicity="*" />
           <ReferentialConstraint>
@@ -176,8 +180,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="GetServices" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="brigadeortaskid" Type="int" Mode="In" />
+        <Function Name="GetServicesOnBorT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idbort" Type="int" Mode="In" />
         </Function>
         <Function Name="GetTasks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="orderid" Type="int" Mode="In" />
@@ -196,6 +200,8 @@
         </Function>
         <EntityContainer Name="Хранилище vmzModelContainer">
           <EntitySet Name="Brigade" EntityType="Self.Brigade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JoinBrorTask" EntityType="Self.JoinBrorTask" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JoinService" EntityType="Self.JoinService" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ListOfTasks" EntityType="Self.ListOfTasks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ListOfUsers" EntityType="Self.ListOfUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
@@ -203,19 +209,13 @@
           <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ListOfServices" EntityType="Self.ListOfServices" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ListOfServices].[brigadeortaskid] AS [brigadeortaskid], 
-    [ListOfServices].[serviceid] AS [serviceid]
-    FROM [dbo].[ListOfServices] AS [ListOfServices]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK__Brigade__brigadi__2739D489" Association="Self.FK__Brigade__brigadi__2739D489">
+          <AssociationSet Name="FK__Brigade__brigadi__473C8FC7" Association="Self.FK__Brigade__brigadi__473C8FC7">
             <End Role="User" EntitySet="User" />
             <End Role="Brigade" EntitySet="Brigade" />
           </AssociationSet>
-          <AssociationSet Name="FK__ListOfSer__servi__236943A5" Association="Self.FK__ListOfSer__servi__236943A5">
+          <AssociationSet Name="FK__JoinServi__servi__6E565CE8" Association="Self.FK__JoinServi__servi__6E565CE8">
             <End Role="Service" EntitySet="Service" />
-            <End Role="ListOfServices" EntitySet="ListOfServices" />
+            <End Role="JoinService" EntitySet="JoinService" />
           </AssociationSet>
           <AssociationSet Name="FK__ListOfTas__taski__208CD6FA" Association="Self.FK__ListOfTas__taski__208CD6FA">
             <End Role="Task" EntitySet="Task" />
@@ -229,7 +229,7 @@
             <End Role="User" EntitySet="User" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <AssociationSet Name="FK__Task__brigadeid__3C34F16F" Association="Self.FK__Task__brigadeid__3C34F16F">
+          <AssociationSet Name="FK__Task__brigadeid__4830B400" Association="Self.FK__Task__brigadeid__4830B400">
             <End Role="Brigade" EntitySet="Brigade" />
             <End Role="Task" EntitySet="Task" />
           </AssociationSet>
@@ -242,211 +242,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="vmzModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Brigade">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="listofusersid" Type="Int32" />
-          <Property Name="brigadierid" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User" Relationship="Self.FK__Brigade__brigadi__2739D489" FromRole="Brigade" ToRole="User" />
-          <NavigationProperty Name="Task" Relationship="Self.FK__Task__brigadeid__3C34F16F" FromRole="Brigade" ToRole="Task" />
-        </EntityType>
-        <EntityType Name="ListOfTasks">
-          <Key>
-            <PropertyRef Name="taskid" />
-          </Key>
-          <Property Name="orderid" Type="Int32" Nullable="false" />
-          <Property Name="taskid" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Task" Relationship="Self.FK__ListOfTas__taski__208CD6FA" FromRole="ListOfTasks" ToRole="Task" />
-        </EntityType>
-        <EntityType Name="ListOfUsers">
-          <Key>
-            <PropertyRef Name="userid" />
-          </Key>
-          <Property Name="brigadeid" Type="Int32" Nullable="false" />
-          <Property Name="userid" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK__ListOfUse__useri__282DF8C2" FromRole="ListOfUsers" ToRole="User" />
-        </EntityType>
-        <EntityType Name="Order">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="listoftasksid" Type="Int32" />
-          <Property Name="datestart" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="dateend" Type="DateTime" Precision="0" />
-          <Property Name="priority" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="clientid" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="vmzModel.FK__Order__clientid__1F2E9E6D" FromRole="Order" ToRole="User" />
-        </EntityType>
-        <EntityType Name="Profession">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User" Relationship="Self.FK__User__profession__19AACF41" FromRole="Profession" ToRole="User" />
-        </EntityType>
-        <EntityType Name="Service">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ListOfServices" Relationship="Self.FK__ListOfSer__servi__236943A5" FromRole="Service" ToRole="ListOfServices" />
-        </EntityType>
-        <EntityType Name="Task">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="listofservices" Type="Int32" Nullable="false" />
-          <Property Name="datestart" Type="DateTime" Precision="0" />
-          <Property Name="dateend" Type="DateTime" Precision="0" />
-          <Property Name="brigadeid" Type="Int32" />
-          <NavigationProperty Name="Brigade" Relationship="Self.FK__Task__brigadeid__3C34F16F" FromRole="Task" ToRole="Brigade" />
-          <NavigationProperty Name="ListOfTasks" Relationship="Self.FK__ListOfTas__taski__208CD6FA" FromRole="Task" ToRole="ListOfTasks" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="professionid" Type="Int32" Nullable="false" />
-          <Property Name="md5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="confprofid" Type="Int32" />
-          <NavigationProperty Name="Brigade" Relationship="Self.FK__Brigade__brigadi__2739D489" FromRole="User" ToRole="Brigade" />
-          <NavigationProperty Name="ListOfUsers" Relationship="Self.FK__ListOfUse__useri__282DF8C2" FromRole="User" ToRole="ListOfUsers" />
-          <NavigationProperty Name="Profession" Relationship="Self.FK__User__profession__19AACF41" FromRole="User" ToRole="Profession" />
-          <NavigationProperty Name="Order" Relationship="vmzModel.FK__Order__clientid__1F2E9E6D" FromRole="User" ToRole="Order" />
-        </EntityType>
-        <EntityType Name="ListOfServices">
-          <Key>
-            <PropertyRef Name="brigadeortaskid" />
-            <PropertyRef Name="serviceid" />
-          </Key>
-          <Property Name="brigadeortaskid" Type="Int32" Nullable="false" />
-          <Property Name="serviceid" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Service" Relationship="Self.FK__ListOfSer__servi__236943A5" FromRole="ListOfServices" ToRole="Service" />
-        </EntityType>
-        <Association Name="FK__Brigade__brigadi__2739D489">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Brigade" Type="Self.Brigade" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Brigade">
-              <PropertyRef Name="brigadierid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Task__brigadeid__3C34F16F">
-          <End Role="Brigade" Type="Self.Brigade" Multiplicity="0..1" />
-          <End Role="Task" Type="Self.Task" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Brigade">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Task">
-              <PropertyRef Name="brigadeid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ListOfTas__taski__208CD6FA">
-          <End Role="Task" Type="Self.Task" Multiplicity="1" />
-          <End Role="ListOfTasks" Type="Self.ListOfTasks" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Task">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ListOfTasks">
-              <PropertyRef Name="taskid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ListOfUse__useri__282DF8C2">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="ListOfUsers" Type="Self.ListOfUsers" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ListOfUsers">
-              <PropertyRef Name="userid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__User__profession__19AACF41">
-          <End Role="Profession" Type="Self.Profession" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Profession">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="professionid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ListOfSer__servi__236943A5">
-          <End Role="Service" Type="Self.Service" Multiplicity="1" />
-          <End Role="ListOfServices" Type="Self.ListOfServices" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Service">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ListOfServices">
-              <PropertyRef Name="serviceid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Brigade" EntityType="Self.Brigade" />
-          <EntitySet Name="ListOfTasks" EntityType="Self.ListOfTasks" />
-          <EntitySet Name="ListOfUsers" EntityType="Self.ListOfUsers" />
-          <EntitySet Name="Order" EntityType="Self.Order" />
-          <EntitySet Name="Profession" EntityType="Self.Profession" />
-          <EntitySet Name="Service" EntityType="Self.Service" />
-          <EntitySet Name="Task" EntityType="Self.Task" />
-          <EntitySet Name="User" EntityType="Self.User" />
-          <EntitySet Name="ListOfServices" EntityType="Self.ListOfServices" />
-          <AssociationSet Name="FK__Brigade__brigadi__2739D489" Association="Self.FK__Brigade__brigadi__2739D489">
-            <End Role="User" EntitySet="User" />
-            <End Role="Brigade" EntitySet="Brigade" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Task__brigadeid__3C34F16F" Association="Self.FK__Task__brigadeid__3C34F16F">
-            <End Role="Brigade" EntitySet="Brigade" />
-            <End Role="Task" EntitySet="Task" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ListOfTas__taski__208CD6FA" Association="Self.FK__ListOfTas__taski__208CD6FA">
-            <End Role="Task" EntitySet="Task" />
-            <End Role="ListOfTasks" EntitySet="ListOfTasks" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ListOfUse__useri__282DF8C2" Association="Self.FK__ListOfUse__useri__282DF8C2">
-            <End Role="User" EntitySet="User" />
-            <End Role="ListOfUsers" EntitySet="ListOfUsers" />
-          </AssociationSet>
-          <AssociationSet Name="FK__User__profession__19AACF41" Association="Self.FK__User__profession__19AACF41">
-            <End Role="Profession" EntitySet="Profession" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ListOfSer__servi__236943A5" Association="Self.FK__ListOfSer__servi__236943A5">
-            <End Role="Service" EntitySet="Service" />
-            <End Role="ListOfServices" EntitySet="ListOfServices" />
-          </AssociationSet>
           <FunctionImport Name="GetServices" ReturnType="Collection(vmzModel.GetServices_Result)">
           <Parameter Name="brigadeortaskid" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -462,14 +258,51 @@
             <Parameter Name="uid" Mode="In" Type="Int32" />
             <Parameter Name="pid" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetUserOrders" ReturnType="Collection(vmzModel.GetUserOrders_Result)">
+          <Parameter Name="uid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Brigade" EntityType="vmzModel.Brigade" />
+          <EntitySet Name="JoinBrorTask" EntityType="vmzModel.JoinBrorTask" />
+          <EntitySet Name="JoinService" EntityType="vmzModel.JoinService" />
+          <EntitySet Name="ListOfTasks" EntityType="vmzModel.ListOfTasks" />
+          <EntitySet Name="ListOfUsers" EntityType="vmzModel.ListOfUsers" />
+          <EntitySet Name="Order" EntityType="vmzModel.Order" />
+          <EntitySet Name="Profession" EntityType="vmzModel.Profession" />
+          <EntitySet Name="Service" EntityType="vmzModel.Service" />
+          <EntitySet Name="Task" EntityType="vmzModel.Task" />
+          <EntitySet Name="User" EntityType="vmzModel.User" />
+          <AssociationSet Name="FK__Brigade__brigadi__473C8FC7" Association="vmzModel.FK__Brigade__brigadi__473C8FC7">
+            <End Role="User" EntitySet="User" />
+            <End Role="Brigade" EntitySet="Brigade" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Task__brigadeid__4830B400" Association="vmzModel.FK__Task__brigadeid__4830B400">
+            <End Role="Brigade" EntitySet="Brigade" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__JoinServi__servi__6E565CE8" Association="vmzModel.FK__JoinServi__servi__6E565CE8">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="JoinService" EntitySet="JoinService" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListOfTas__taski__208CD6FA" Association="vmzModel.FK__ListOfTas__taski__208CD6FA">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="ListOfTasks" EntitySet="ListOfTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListOfUse__useri__282DF8C2" Association="vmzModel.FK__ListOfUse__useri__282DF8C2">
+            <End Role="User" EntitySet="User" />
+            <End Role="ListOfUsers" EntitySet="ListOfUsers" />
+          </AssociationSet>
           <AssociationSet Name="FK__Order__clientid__1F2E9E6D" Association="vmzModel.FK__Order__clientid__1F2E9E6D">
             <End Role="User" EntitySet="User" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <FunctionImport Name="GetUserOrders" ReturnType="Collection(vmzModel.GetUserOrders_Result)">
-          <Parameter Name="uid" Mode="In" Type="Int32" />
+          <AssociationSet Name="FK__User__profession__0C1BC9F9" Association="vmzModel.FK__User__profession__0C1BC9F9">
+            <End Role="Profession" EntitySet="Profession" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <FunctionImport Name="GetServicesOnBorT" ReturnType="Collection(vmzModel.GetServicesOnBorT_Result)">
+            <Parameter Name="idbort" Mode="In" Type="Int32" />
           </FunctionImport>
-        </EntityContainer>
+          </EntityContainer>
         <ComplexType Name="GetServices_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
           <Property Type="String" Name="name" Nullable="false" />
@@ -502,18 +335,6 @@
           <Property Type="Int32" Name="cpid" Nullable="true" />
           <Property Type="String" Name="cpname" Nullable="true" />
         </ComplexType>
-        <Association Name="FK__Order__clientid__1F2E9E6D">
-          <End Type="vmzModel.User" Role="User" Multiplicity="1" />
-          <End Type="vmzModel.Order" Role="Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="clientid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="GetUserOrders_Result">
           <Property Type="Int32" Name="oid" Nullable="false" />
           <Property Type="String" Name="oname" Nullable="false" />
@@ -527,114 +348,206 @@
           <Property Type="DateTime" Name="tde" Nullable="true" Precision="23" />
           <Property Type="String" Name="tdesc" Nullable="true" />
         </ComplexType>
-      </Schema>
+        <EntityType Name="Brigade">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="brigadierid" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="vmzModel.FK__Brigade__brigadi__473C8FC7" FromRole="Brigade" ToRole="User" />
+          <NavigationProperty Name="Task" Relationship="vmzModel.FK__Task__brigadeid__4830B400" FromRole="Brigade" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="JoinBrorTask">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="idbrortask" Type="Int32" Nullable="false" />
+          <Property Name="idjs" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="JoinService">
+          <Key>
+            <PropertyRef Name="idjs" />
+          </Key>
+          <Property Name="serviceid" Type="Int32" Nullable="false" />
+          <Property Name="idjs" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Service" Relationship="vmzModel.FK__JoinServi__servi__6E565CE8" FromRole="JoinService" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="ListOfTasks">
+          <Key>
+            <PropertyRef Name="taskid" />
+          </Key>
+          <Property Name="orderid" Type="Int32" Nullable="false" />
+          <Property Name="taskid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="vmzModel.FK__ListOfTas__taski__208CD6FA" FromRole="ListOfTasks" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="ListOfUsers">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="brigadeid" Type="Int32" Nullable="false" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="vmzModel.FK__ListOfUse__useri__282DF8C2" FromRole="ListOfUsers" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="listoftasksid" Type="Int32" />
+          <Property Name="datestart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="dateend" Type="DateTime" Precision="0" />
+          <Property Name="clientid" Type="Int32" Nullable="false" />
+          <Property Name="priority" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="vmzModel.FK__Order__clientid__1F2E9E6D" FromRole="Order" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Profession">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="vmzModel.FK__User__profession__0C1BC9F9" FromRole="Profession" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="JoinService" Relationship="vmzModel.FK__JoinServi__servi__6E565CE8" FromRole="Service" ToRole="JoinService" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="listofservices" Type="Int32" Nullable="false" />
+          <Property Name="datestart" Type="DateTime" Precision="0" />
+          <Property Name="dateend" Type="DateTime" Precision="0" />
+          <Property Name="brigadeid" Type="Int32" />
+          <NavigationProperty Name="Brigade" Relationship="vmzModel.FK__Task__brigadeid__4830B400" FromRole="Task" ToRole="Brigade" />
+          <NavigationProperty Name="ListOfTasks" Relationship="vmzModel.FK__ListOfTas__taski__208CD6FA" FromRole="Task" ToRole="ListOfTasks" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="professionid" Type="Int32" Nullable="false" />
+          <Property Name="md5" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="login" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="confprofid" Type="Int32" />
+          <NavigationProperty Name="Brigade" Relationship="vmzModel.FK__Brigade__brigadi__473C8FC7" FromRole="User" ToRole="Brigade" />
+          <NavigationProperty Name="ListOfUsers" Relationship="vmzModel.FK__ListOfUse__useri__282DF8C2" FromRole="User" ToRole="ListOfUsers" />
+          <NavigationProperty Name="Order" Relationship="vmzModel.FK__Order__clientid__1F2E9E6D" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="Profession" Relationship="vmzModel.FK__User__profession__0C1BC9F9" FromRole="User" ToRole="Profession" />
+        </EntityType>
+        <Association Name="FK__Brigade__brigadi__473C8FC7">
+          <End Type="vmzModel.User" Role="User" Multiplicity="1" />
+          <End Type="vmzModel.Brigade" Role="Brigade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Brigade">
+              <PropertyRef Name="brigadierid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Task__brigadeid__4830B400">
+          <End Type="vmzModel.Brigade" Role="Brigade" Multiplicity="0..1" />
+          <End Type="vmzModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brigade">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="brigadeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__JoinServi__servi__6E565CE8">
+          <End Type="vmzModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="vmzModel.JoinService" Role="JoinService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="JoinService">
+              <PropertyRef Name="serviceid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListOfTas__taski__208CD6FA">
+          <End Type="vmzModel.Task" Role="Task" Multiplicity="1" />
+          <End Type="vmzModel.ListOfTasks" Role="ListOfTasks" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListOfTasks">
+              <PropertyRef Name="taskid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListOfUse__useri__282DF8C2">
+          <End Type="vmzModel.User" Role="User" Multiplicity="1" />
+          <End Type="vmzModel.ListOfUsers" Role="ListOfUsers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListOfUsers">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order__clientid__1F2E9E6D">
+          <End Type="vmzModel.User" Role="User" Multiplicity="1" />
+          <End Type="vmzModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="clientid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__profession__0C1BC9F9">
+          <End Type="vmzModel.Profession" Role="Profession" Multiplicity="1" />
+          <End Type="vmzModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profession">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="professionid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetServicesOnBorT_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" />
+          <Property Type="String" Name="description" Nullable="true" />
+        </ComplexType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище vmzModelContainer" CdmEntityContainer="Entities">
-          <EntitySetMapping Name="Brigade">
-            <EntityTypeMapping TypeName="vmzModel.Brigade">
-              <MappingFragment StoreEntitySet="Brigade">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="listofusersid" ColumnName="listofusersid" />
-                <ScalarProperty Name="brigadierid" ColumnName="brigadierid" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="description" ColumnName="description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ListOfTasks">
-            <EntityTypeMapping TypeName="vmzModel.ListOfTasks">
-              <MappingFragment StoreEntitySet="ListOfTasks">
-                <ScalarProperty Name="orderid" ColumnName="orderid" />
-                <ScalarProperty Name="taskid" ColumnName="taskid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ListOfUsers">
-            <EntityTypeMapping TypeName="vmzModel.ListOfUsers">
-              <MappingFragment StoreEntitySet="ListOfUsers">
-                <ScalarProperty Name="brigadeid" ColumnName="brigadeid" />
-                <ScalarProperty Name="userid" ColumnName="userid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Order">
-            <EntityTypeMapping TypeName="vmzModel.Order">
-              <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="clientid" ColumnName="clientid" />
-                <ScalarProperty Name="priority" ColumnName="priority" />
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="listoftasksid" ColumnName="listoftasksid" />
-                <ScalarProperty Name="datestart" ColumnName="datestart" />
-                <ScalarProperty Name="dateend" ColumnName="dateend" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Profession">
-            <EntityTypeMapping TypeName="vmzModel.Profession">
-              <MappingFragment StoreEntitySet="Profession">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="description" ColumnName="description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Service">
-            <EntityTypeMapping TypeName="vmzModel.Service">
-              <MappingFragment StoreEntitySet="Service">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="description" ColumnName="description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Task">
-            <EntityTypeMapping TypeName="vmzModel.Task">
-              <MappingFragment StoreEntitySet="Task">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="listofservices" ColumnName="listofservices" />
-                <ScalarProperty Name="datestart" ColumnName="datestart" />
-                <ScalarProperty Name="dateend" ColumnName="dateend" />
-                <ScalarProperty Name="brigadeid" ColumnName="brigadeid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="vmzModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="professionid" ColumnName="professionid" />
-                <ScalarProperty Name="md5" ColumnName="md5" />
-                <ScalarProperty Name="login" ColumnName="login" />
-                <ScalarProperty Name="confprofid" ColumnName="confprofid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ListOfServices">
-            <EntityTypeMapping TypeName="vmzModel.ListOfServices">
-              <MappingFragment StoreEntitySet="ListOfServices">
-                <ScalarProperty Name="brigadeortaskid" ColumnName="brigadeortaskid" />
-                <ScalarProperty Name="serviceid" ColumnName="serviceid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetServices" FunctionName="Хранилище vmzModel.GetServices">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="vmzModel.GetServices_Result">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="description" ColumnName="description" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetTasks" FunctionName="Хранилище vmzModel.GetTasks">
             <ResultMapping>
               <ComplexTypeMapping TypeName="vmzModel.GetTasks_Result">
@@ -696,7 +609,117 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Brigade">
+            <EntityTypeMapping TypeName="vmzModel.Brigade">
+              <MappingFragment StoreEntitySet="Brigade">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="brigadierid" ColumnName="brigadierid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JoinBrorTask">
+            <EntityTypeMapping TypeName="vmzModel.JoinBrorTask">
+              <MappingFragment StoreEntitySet="JoinBrorTask">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idjs" ColumnName="idjs" />
+                <ScalarProperty Name="idbrortask" ColumnName="idbrortask" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JoinService">
+            <EntityTypeMapping TypeName="vmzModel.JoinService">
+              <MappingFragment StoreEntitySet="JoinService">
+                <ScalarProperty Name="idjs" ColumnName="idjs" />
+                <ScalarProperty Name="serviceid" ColumnName="serviceid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListOfTasks">
+            <EntityTypeMapping TypeName="vmzModel.ListOfTasks">
+              <MappingFragment StoreEntitySet="ListOfTasks">
+                <ScalarProperty Name="taskid" ColumnName="taskid" />
+                <ScalarProperty Name="orderid" ColumnName="orderid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListOfUsers">
+            <EntityTypeMapping TypeName="vmzModel.ListOfUsers">
+              <MappingFragment StoreEntitySet="ListOfUsers">
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="brigadeid" ColumnName="brigadeid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="vmzModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="priority" ColumnName="priority" />
+                <ScalarProperty Name="clientid" ColumnName="clientid" />
+                <ScalarProperty Name="dateend" ColumnName="dateend" />
+                <ScalarProperty Name="datestart" ColumnName="datestart" />
+                <ScalarProperty Name="listoftasksid" ColumnName="listoftasksid" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profession">
+            <EntityTypeMapping TypeName="vmzModel.Profession">
+              <MappingFragment StoreEntitySet="Profession">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Service">
+            <EntityTypeMapping TypeName="vmzModel.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Task">
+            <EntityTypeMapping TypeName="vmzModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="brigadeid" ColumnName="brigadeid" />
+                <ScalarProperty Name="dateend" ColumnName="dateend" />
+                <ScalarProperty Name="datestart" ColumnName="datestart" />
+                <ScalarProperty Name="listofservices" ColumnName="listofservices" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="vmzModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="confprofid" ColumnName="confprofid" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="md5" ColumnName="md5" />
+                <ScalarProperty Name="professionid" ColumnName="professionid" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetServicesOnBorT" FunctionName="Хранилище vmzModel.GetServicesOnBorT">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="vmzModel.GetServicesOnBorT_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

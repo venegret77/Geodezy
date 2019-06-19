@@ -5,22 +5,23 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="34d6428a3e50434aa80353db7a27fd7c" Name="Diagram1">
-        <EntityTypeShape EntityType="vmzModel.Brigade" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="vmzModel.ListOfTasks" Width="1.5" PointX="9.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="vmzModel.ListOfUsers" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="vmzModel.Order" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="vmzModel.Profession" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="vmzModel.Service" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="vmzModel.Task" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="vmzModel.User" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="vmzModel.ListOfServices" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
-        <AssociationConnector Association="vmzModel.FK__Brigade__brigadi__2739D489" ManuallyRouted="false" />
-        <AssociationConnector Association="vmzModel.FK__Task__brigadeid__3C34F16F" ManuallyRouted="false" />
-        <AssociationConnector Association="vmzModel.FK__ListOfTas__taski__208CD6FA" ManuallyRouted="false" />
-        <AssociationConnector Association="vmzModel.FK__ListOfUse__useri__282DF8C2" ManuallyRouted="false" />
-        <AssociationConnector Association="vmzModel.FK__User__profession__19AACF41" ManuallyRouted="false" />
-        <AssociationConnector Association="vmzModel.FK__ListOfSer__servi__236943A5" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="vmzModel.Brigade" Width="1.5" PointX="5.25" PointY="3.875" />
+        <EntityTypeShape EntityType="vmzModel.JoinBrorTask" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="vmzModel.JoinService" Width="1.5" PointX="10" PointY="8" />
+        <EntityTypeShape EntityType="vmzModel.ListOfTasks" Width="1.5" PointX="9.75" PointY="4.125" />
+        <EntityTypeShape EntityType="vmzModel.ListOfUsers" Width="1.5" PointX="5.25" PointY="1.25" />
+        <EntityTypeShape EntityType="vmzModel.Order" Width="1.5" PointX="5.25" PointY="7.125" />
+        <EntityTypeShape EntityType="vmzModel.Profession" Width="1.5" PointX="0.75" PointY="4.625" />
+        <EntityTypeShape EntityType="vmzModel.Service" Width="1.5" PointX="7.75" PointY="7.875" />
+        <EntityTypeShape EntityType="vmzModel.Task" Width="1.5" PointX="7.5" PointY="3.625" />
+        <EntityTypeShape EntityType="vmzModel.User" Width="1.5" PointX="3" PointY="4" />
+        <AssociationConnector Association="vmzModel.FK__Brigade__brigadi__473C8FC7" />
+        <AssociationConnector Association="vmzModel.FK__Task__brigadeid__4830B400" />
+        <AssociationConnector Association="vmzModel.FK__JoinServi__servi__6E565CE8" />
+        <AssociationConnector Association="vmzModel.FK__ListOfTas__taski__208CD6FA" />
+        <AssociationConnector Association="vmzModel.FK__ListOfUse__useri__282DF8C2" />
         <AssociationConnector Association="vmzModel.FK__Order__clientid__1F2E9E6D" />
+        <AssociationConnector Association="vmzModel.FK__User__profession__0C1BC9F9" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

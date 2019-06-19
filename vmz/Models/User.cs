@@ -32,8 +32,8 @@ namespace vmz.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Brigade> Brigade { get; set; }
         public virtual ListOfUsers ListOfUsers { get; set; }
-        public virtual Profession Profession { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }
+        public virtual Profession Profession { get; set; }
     }
 }

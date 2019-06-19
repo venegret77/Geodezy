@@ -176,53 +176,60 @@ namespace vmz.Controllers
             {
                 using (Entities db = new Entities())
                 {
-                    try
+                    /*try
+                    {*/
+                    switch (model.action)
                     {
-                        switch (model.action)
-                        {
-                            case "addserv":
-                                db.Service.Add(new Service
+                        case "addserv":
+                            db.Service.Add(new Service
+                            {
+                                name = model.servicen,
+                                description = model.serviced,
+                            });
+                            break;
+                        case "createbr":
+                            db.Brigade.Add(new Brigade
+                            {
+                                brigadierid = id,
+                                name = model.name,
+                                description = model.description
+                            });
+                            db.SaveChanges();
+                            var brigade = db.Brigade.FirstOrDefault(b => b.brigadierid == id);
+                            foreach (var u in model.ulist)
+                            {
+                                int uid = Convert.ToInt32(u);
+                                db.ListOfUsers.Add(new ListOfUsers
                                 {
-                                    name = model.servicen,
-                                    description = model.serviced,
+                                    brigadeid = brigade.id,
+                                    userid = uid
                                 });
-                                break;
-                            case "createbr":
-                                db.Brigade.Add(new Brigade
+                            }
+                            foreach (var s in model.slist)
+                            {
+                                int sid = Convert.ToInt32(s);
+                                JoinService js = new JoinService
                                 {
-                                    brigadierid = id,
-                                    name = model.name,
-                                    description = model.description
-                                });
+                                    serviceid = sid
+                                };
+                                db.JoinService.Add(js);
                                 db.SaveChanges();
-                                var brigade = db.Brigade.FirstOrDefault(b => b.brigadierid == id);
-                                foreach(var u in model.ulist)
+                                int jsid = js.idjs;
+                                db.JoinBrorTask.Add(new JoinBrorTask
                                 {
-                                    int uid = Convert.ToInt32(u);
-                                    db.ListOfUsers.Add(new ListOfUsers
-                                    {
-                                        brigadeid = brigade.id,
-                                        userid = uid
-                                    });
-                                }
-                                foreach(var s in model.slist)
-                                {
-                                    int sid = Convert.ToInt32(s);
-                                    db.ListOfServices.Add(new ListOfServices
-                                    {
-                                        brigadeortaskid = brigade.id,
-                                        serviceid = sid
-                                    });
-                                }
-                                break;
-                        }
-                        db.SaveChanges();
-                        return RedirectToAction("Brigadier", "Home");
+                                    idbrortask = brigade.id,
+                                    idjs = jsid
+                                });
+                            }
+                            break;
                     }
-                    catch
+                    db.SaveChanges();
+                    return RedirectToAction("Brigadier", "Home");
+                    /*}
+                    catch(Exception e)
                     {
                         return RedirectToAction("Brigadier", "Home");
-                    }
+                    }*/
                 }
             }
             return RedirectToAction("Profile", "Account");
@@ -266,7 +273,7 @@ namespace vmz.Controllers
                 ViewBag.UserProfession = db.Profession.FirstOrDefault(p => p.id == _user.professionid).name;
                 ViewBag.UserDescription = _user.description;
                 ViewBag.UserErrID = null;
-                switch(ViewBag.UserProfession)
+                switch (ViewBag.UserProfession)
                 {
                     case "Администратор":
                         ViewBag.Prof = db.Profession.Where(p => p.name != "Не подтвержден").ToList();
@@ -278,13 +285,13 @@ namespace vmz.Controllers
                         List<OrderTask> _Orders = new List<OrderTask>();
                         foreach (var o in Orders)
                             _Orders.Add(new OrderTask(o));
-                       
+
                         for (int i = 0; i < _Orders.Count; i++)
                         {
                             var task = from ord in db.Order
                                        join l in db.ListOfTasks on ord.listoftasksid equals l.orderid
                                        select l.Task;
-                            foreach(var t in task)
+                            foreach (var t in task)
                                 _Orders[i].Tasks.Add(t);
                         }
                         _Orders = _Orders.OrderByDescending(o => o.Order.datestart).ToList();
@@ -298,13 +305,10 @@ namespace vmz.Controllers
                             var ListOfUsers = db.ListOfUsers.Where(l => l.brigadeid == idbr).ToList();
                             ViewBag.Brigade = Brigade;
                             ViewBag.ListOfUsers = ListOfUsers;
-                            ViewBag.Workers = db.User.Where(u => (u.Profession.name == "Рабочий") & (u.ListOfUsers == null)).ToList();
+                            ViewBag.ListOfServices = db.GetServicesOnBorT(idbr);
                         }
-                        else
-                        {
-                            ViewBag.Workers = db.User.Where(u => (u.Profession.name == "Рабочий") & (u.ListOfUsers == null)).ToList();
-                            ViewBag.Services = db.Service.ToList();
-                        }
+                        ViewBag.Workers = db.User.Where(u => (u.Profession.name == "Рабочий") & (u.ListOfUsers == null)).ToList();
+                        ViewBag.Services = db.Service.ToList();
                         break;
                     default:
                         break;
@@ -315,6 +319,7 @@ namespace vmz.Controllers
         }
         private int FillViewBag(bool b)
         {
+            //row justify-content-center - элементы по центру
             var cookie = Request.Cookies["user"];
             if (cookie != null)
             {

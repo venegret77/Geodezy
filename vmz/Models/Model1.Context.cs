@@ -28,6 +28,8 @@ namespace vmz.Models
         }
     
         public virtual DbSet<Brigade> Brigade { get; set; }
+        public virtual DbSet<JoinBrorTask> JoinBrorTask { get; set; }
+        public virtual DbSet<JoinService> JoinService { get; set; }
         public virtual DbSet<ListOfTasks> ListOfTasks { get; set; }
         public virtual DbSet<ListOfUsers> ListOfUsers { get; set; }
         public virtual DbSet<Order> Order { get; set; }
@@ -35,7 +37,6 @@ namespace vmz.Models
         public virtual DbSet<Service> Service { get; set; }
         public virtual DbSet<Task> Task { get; set; }
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<ListOfServices> ListOfServices { get; set; }
     
         public virtual ObjectResult<GetServices_Result> GetServices(Nullable<int> brigadeortaskid)
         {
@@ -94,6 +95,15 @@ namespace vmz.Models
                 new ObjectParameter("uid", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserOrders_Result>("GetUserOrders", uidParameter);
+        }
+    
+        public virtual ObjectResult<GetServicesOnBorT_Result> GetServicesOnBorT(Nullable<int> idbort)
+        {
+            var idbortParameter = idbort.HasValue ?
+                new ObjectParameter("idbort", idbort) :
+                new ObjectParameter("idbort", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetServicesOnBorT_Result>("GetServicesOnBorT", idbortParameter);
         }
     }
 }

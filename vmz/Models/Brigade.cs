@@ -21,7 +21,6 @@ namespace vmz.Models
         }
     
         public int id { get; set; }
-        public Nullable<int> listofusersid { get; set; }
         public int brigadierid { get; set; }
         public string name { get; set; }
         public string description { get; set; }
