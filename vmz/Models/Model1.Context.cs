@@ -115,5 +115,30 @@ namespace vmz.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetBrigadeServ_Result>("GetBrigadeServ", idbortParameter);
         }
+    
+        public virtual ObjectResult<GetAllOrdersAndTasks_Result> GetAllOrdersAndTasks()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllOrdersAndTasks_Result>("GetAllOrdersAndTasks");
+        }
+    
+        public virtual ObjectResult<GetBrigadesOrdersAndTasks_Result> GetBrigadesOrdersAndTasks()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetBrigadesOrdersAndTasks_Result>("GetBrigadesOrdersAndTasks");
+        }
+    
+        public virtual ObjectResult<GetOrdersAndTasksCount_Result> GetOrdersAndTasksCount()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetOrdersAndTasksCount_Result>("GetOrdersAndTasksCount");
+        }
+    
+        public virtual ObjectResult<GetTasksAndOName_Result> GetTasksAndOName()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTasksAndOName_Result>("GetTasksAndOName");
+        }
+    
+        public virtual ObjectResult<GetListOfUsersAdm_Result> GetListOfUsersAdm()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetListOfUsersAdm_Result>("GetListOfUsersAdm");
+        }
     }
 }

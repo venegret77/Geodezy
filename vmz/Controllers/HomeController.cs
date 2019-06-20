@@ -312,8 +312,8 @@ namespace vmz.Controllers
             return RedirectToAction("Profile", "Account");
         }
         #endregion
-        #region Тест
-        public ActionResult Test()
+        #region Директор
+        public ActionResult Director()
         {
             bool test = FillViewBag();
             if (test & ViewBag.UserProfession != null)
@@ -322,7 +322,7 @@ namespace vmz.Controllers
                 return RedirectToAction("Profile", "Account");
         }
         [HttpPost]
-        public ActionResult Test(OrderModel model)
+        public ActionResult Director(OrderModel model)
         {
             using (Entities db = new Entities())
             {
@@ -447,9 +447,9 @@ namespace vmz.Controllers
                 {
                     case "Администратор":
                         {
-                            ViewBag.Prof = db.Profession.Where(p => p.name != "Не подтвержден").ToList();
-                            ViewBag.AllUsers = db.ListOfUsersAdm().ToList();
-                            ViewBag._AllUsers = db.ListOfUsersAdm().ToList();
+                            ViewBag.Prof = db.Profession.ToList();
+                            ViewBag.AllUsers = db.GetListOfUsersAdm().ToList();
+                            ViewBag._AllUsers = db.GetListOfUsersAdm().ToList();
                         }
                         break;
                     case "Клиент":
@@ -504,6 +504,14 @@ namespace vmz.Controllers
                                 }
                             }
                             ViewBag.Orders = _Orders.OrderByDescending(o => o.Order.datestart).ToList();
+                        }
+                        break;
+                    case "Директор":
+                        {
+                            ViewBag.BrigadeOrders = db.GetBrigadesOrdersAndTasks();
+                            ViewBag.OrdersAndTasks = db.GetAllOrdersAndTasks();
+                            ViewBag.Orders = db.GetOrdersAndTasksCount();
+                            ViewBag.Tasks = db.GetTasksAndOName();
                         }
                         break;
                     default:

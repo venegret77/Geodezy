@@ -145,13 +145,28 @@
     <Compile Include="Models\BrigadeModel.cs" />
     <Compile Include="Models\ClientModel.cs" />
     <Compile Include="Models\ExternalLoginViewModel.cs" />
+    <Compile Include="Models\GetAllOrdersAndTasks_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetBrigadeServ_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetBrigadesOrdersAndTasks_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetListOfUsersAdm_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetOrdersAndTasksCount_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetServicesOnBorT_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetServices_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetTasksAndOName_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetTasks_Result.cs">
@@ -988,6 +1003,7 @@
     <Content Include="Views\Home\Secretary.cshtml" />
     <Content Include="Views\Home\Brigadier.cshtml" />
     <Content Include="Views\Home\Order.cshtml" />
+    <Content Include="Views\Home\Director.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

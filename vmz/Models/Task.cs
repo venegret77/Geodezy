@@ -19,6 +19,7 @@ namespace vmz.Models
         public string description { get; set; }
         public Nullable<System.DateTime> datestart { get; set; }
         public Nullable<System.DateTime> dateend { get; set; }
+        public string note { get; set; }
     
         public virtual ListOfTasks ListOfTasks { get; set; }
         public virtual TaskToBrigade TaskToBrigade { get; set; }

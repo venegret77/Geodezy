@@ -5,12 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="34d6428a3e50434aa80353db7a27fd7c" Name="Diagram1">
-        <EntityTypeShape EntityType="vmzModel.Brigade" Width="1.5" PointX="5.25" PointY="6.875" />
+        <EntityTypeShape EntityType="vmzModel.Brigade" Width="1.5" PointX="5.25" PointY="1.25" />
         <EntityTypeShape EntityType="vmzModel.JoinBrorTask" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="vmzModel.JoinService" Width="1.5" PointX="10" PointY="6" />
         <EntityTypeShape EntityType="vmzModel.ListOfTasks" Width="1.5" PointX="10" PointY="1" />
-        <EntityTypeShape EntityType="vmzModel.ListOfUsers" Width="1.5" PointX="5.25" PointY="1.25" />
-        <EntityTypeShape EntityType="vmzModel.Order" Width="1.5" PointX="5.25" PointY="3.5" />
+        <EntityTypeShape EntityType="vmzModel.ListOfUsers" Width="1.5" PointX="5.25" PointY="3.875" />
+        <EntityTypeShape EntityType="vmzModel.Order" Width="1.5" PointX="5.25" PointY="6.25" />
         <EntityTypeShape EntityType="vmzModel.Profession" Width="1.5" PointX="0.75" PointY="4.125" />
         <EntityTypeShape EntityType="vmzModel.Service" Width="1.5" PointX="7.75" PointY="5.875" />
         <EntityTypeShape EntityType="vmzModel.Task" Width="1.5" PointX="7.75" PointY="1.75" />

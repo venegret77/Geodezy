@@ -1,0 +1,250 @@
+﻿@{
+    Layout = null;
+}
+
+    <head>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/Content/js", "~/Content/vendor")
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+
+        <!-- favicons -->
+        <link rel="apple-touch-icon" href="~/Content/~/Content/img/favicon-apple.png">
+        <link rel="icon" href="~/Content/img/favicon.png">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="~/Content/vendor/bootstrap-4.1.3/css/bootstrap.min.css">
+
+        <!-- Material design icons CSS -->
+        <link rel="stylesheet" href="~/Content/vendor/materializeicon/material-icons.css">
+
+        <!-- aniamte CSS -->
+        <link rel="stylesheet" href="~/Content/vendor/animatecss/animate.css">
+
+        <!-- swiper carousel CSS -->
+        <link rel="stylesheet" href="~/Content/vendor/swiper/css/swiper.min.css">
+
+        <!-- daterange CSS -->
+        <link rel="stylesheet" href="~/Content/vendor/bootstrap-daterangepicker-master/daterangepicker.css">
+
+        <!-- dataTable CSS -->
+        <link rel="stylesheet" href="~/Content/vendor/DataTables-1.10.18/css/responsive.dataTables.min.css">
+        <link rel="stylesheet" href="~/Content/vendor/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
+
+        <!-- jvector map CSS -->
+        <link rel="stylesheet" href="~/Content/vendor/jquery-jvectormap/jquery-jvectormap-2.0.3.css">
+
+        <!-- app CSS -->
+        <link id="theme" rel="stylesheet" href="~/Content/css/purplesidebar.css" type="text/css">
+
+        <title>GoTRI - Mobile</title>
+
+        @if (ViewBag.UserProfession == "Администратор")
+        {
+            <title>Управление правами доступа</title>
+        }
+    </head>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+<body class="fixed-header sidebar-right-close sidebar-left-close">
+    <!-- page loader -->
+    <div class="loader justify-content-center pink-gradient">
+        <div class="align-self-center text-center">
+            <div class="logo-img-loader">
+                <img src="~/Content/img/loader-hole.png" alt="" class="logo-image">
+                <img src="~/Content/img/loader-bg.png" alt="" class="logo-bg-image">
+            </div>
+        </div>
+    </div>
+    <!-- page loader ends  -->
+
+    <div class="wrapper">
+        <!-- main header -->
+        <header class="main-header">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-auto px-0">
+                        <div class="col-auto pl-15">
+                            <a href="~/Home/Index/" class="btn success-gradient btn-sm rounded d-inline-block">На главную</a>
+                        </div>
+                    </div>
+                    <div class="col px-0 text-right">
+                        <div class="dropdown d-inline-block">
+                            <a class="btn header-color-secondary dropdown-toggle username" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <figure class="userpic"><img src="~/Content/img/avatar.png" alt=""></figure>
+                                <h5 class="text-hide-xs">
+                                    <small class="header-color-secondary">Добро пожаловать,</small>
+                                    <span class="header-color-primary">@ViewBag.UserName</span>
+                                </h5>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right profile-dropdown" aria-labelledby="dropdownMenuLink">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <a href="~/Home/Profile/">
+                                            <figure class="avatar avatar-120 mx-auto my-3">
+                                                <img src="~/Content/img/avatar.png" alt="">
+                                            </figure>
+                                            <h5 class="card-title mb-2 header-color-primary">@ViewBag.UserName</h5>
+                                        </a>
+                                        <h6 class="card-subtitle mb-3 header-color-secondary">@ViewBag.UserProfession</h6>
+                                        <p class="card-text">@ViewBag.UserDescription</p>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider m-0"></div>
+                                <a class="dropdown-item pink-gradient-active" href="~/Account/Logout/">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            Выйти
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="text-danger ml-2"><i class="material-icons vm">exit_to_app</i></div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- content page -->
+        <div class="container mt-4 main-container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card mb-4 fullscreen">
+                        <div class="card-header">
+                            <div class="media">
+                                <div class="media-body">
+                                    <h4 class="content-color-primary mb-0">Список заказов</h4>
+                                </div>
+                                <a href="javascript:void(0);" class="icon-circle icon-30 content-color-secondary fullscreenbtn">
+                                    <i class="material-icons ">crop_free</i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table " id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th class="center text-center">Заказ</th>
+                                        <th class="center text-center">Заказчик</th>
+                                        <th class="center text-center">Дата создания заказа</th>
+                                        <th class="center text-center">Дата завершения заказа</th>
+                                        <th class="center text-center">Потраченое на заказ время (часов)</th>
+                                        <th class="center text-center">Статус заказа</th>
+                                        <th class="center text-center">Количество задач</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var o in ViewBag.Orders)
+                                    {
+                                    <tr class="even">
+                                        <td class="center text-center">@o.oname</td>
+                                        <td class="center text-center">@o.ofio</td>
+                                        <td class="center text-center">@o.ods.ToShortDateString()</td>
+                                        @if (@o.ode != null)
+                                        {
+                                            <td class="center text-center">@o.ode.ToShortDateString()</td>
+                                        }
+                                        else
+                                        {
+                                            <td class="center text-center">-</td>
+                                        }
+                                        @if (@o.oddif != null)
+                                        {
+                                            <td class="center text-center">@o.oddif</td>
+                                        }
+                                        else
+                                        {
+                                            <td class="center">-</td>
+                                        }
+                                        @if (@o.oddif != null)
+                                        {
+                                            <td class="center text-center success-gradient">@o.os</td>
+                                        }
+                                        else
+                                        {
+                                            <td class="center text-center danger-gradient">@o.os</td>
+                                        }
+                                        <td class="center">@o.tc</td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <!-- /.table-responsive -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- main container ends -->
+
+
+    </div>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="~/Content/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/js/popper.min.js"></script>
+    <script src="~/Content/vendor/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+
+    <!-- Cookie jquery file -->
+    <script src="~/Content/vendor/cookie/jquery.cookie.js"></script>
+
+    <!-- sparklines chart jquery file -->
+    <script src="~/Content/vendor/sparklines/jquery.sparkline.min.js"></script>
+
+    <!-- Circular progress gauge jquery file -->
+    <script src="~/Content/vendor/circle-progress/circle-progress.min.js"></script>
+
+    <!-- Swiper carousel jquery file -->
+    <script src="~/Content/vendor/swiper/js/swiper.min.js"></script>
+
+    <!-- Chart js jquery file -->
+    <script src="~/Content/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="~/Content/vendor/chartjs/utils.js"></script>
+
+    <!-- DataTable jquery file -->
+    <script src="~/Content/vendor/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/vendor/DataTables-1.10.18/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Content/vendor/DataTables-1.10.18/js/dataTables.responsive.min.js"></script>
+
+    <!-- datepicker jquery file -->
+    <script src="~/Content/vendor/bootstrap-daterangepicker-master/moment.js"></script>
+    <script src="~/Content/vendor/bootstrap-daterangepicker-master/daterangepicker.js"></script>
+
+    <!-- jVector map jquery file -->
+    <script src="~/Content/vendor/jquery-jvectormap/jquery-jvectormap.js"></script>
+    <script src="~/Content/vendor/jquery-jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+
+    <!-- circular progress file -->
+    <script src="~/Content/vendor/circle-progress/circle-progress.min.js"></script>
+
+    <!-- Application main common jquery file -->
+    <script src="~/Content/js/main.js"></script>
+
+    <!-- page specific script -->
+    <script>
+        "use strict"
+        $(document).ready(function () {
+            $('#dataTables-example').DataTable({
+                responsive: true,
+                "order": [
+                    [3, "desc"]
+                ]
+            });
+        });
+
+    </script>
+</body>
+
+}

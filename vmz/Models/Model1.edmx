@@ -50,8 +50,8 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="description" Type="nvarchar(max)" />
-          <Property Name="datestart" Type="date" Nullable="false" />
-          <Property Name="dateend" Type="date" />
+          <Property Name="datestart" Type="datetime" Nullable="false" />
+          <Property Name="dateend" Type="datetime" />
           <Property Name="clientid" Type="int" Nullable="false" />
           <Property Name="priority" Type="nvarchar(max)" />
         </EntityType>
@@ -78,8 +78,9 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="description" Type="nvarchar(max)" />
-          <Property Name="datestart" Type="date" />
-          <Property Name="dateend" Type="date" />
+          <Property Name="datestart" Type="datetime" />
+          <Property Name="dateend" Type="datetime" />
+          <Property Name="note" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="TaskToBrigade">
           <Key>
@@ -184,15 +185,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetAllOrdersAndTasks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetBrigadeServ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idbort" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetBrigadesOrdersAndTasks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetListOfUsersAdm" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetOrdersAndTasksCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetServicesOnBorT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idbort" Type="int" Mode="In" />
         </Function>
         <Function Name="GetTasks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="orderid" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetTasksAndOName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetUserOrders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="uid" Type="int" Mode="In" />
         </Function>
@@ -200,7 +206,6 @@
           <Parameter Name="brigadeid" Type="int" Mode="In" />
         </Function>
         <Function Name="ListOfProfessions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="ListOfUsersAdm" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SetUserProf" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="uid" Type="int" Mode="In" />
           <Parameter Name="pid" Type="int" Mode="In" />
@@ -272,6 +277,14 @@
           <FunctionImport Name="GetServicesOnBorT" ReturnType="Collection(vmzModel.GetServicesOnBorT_Result)">
           <Parameter Name="idbort" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetBrigadeServ" ReturnType="Collection(vmzModel.GetBrigadeServ_Result)">
+          <Parameter Name="idbort" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllOrdersAndTasks" ReturnType="Collection(vmzModel.GetAllOrdersAndTasks_Result)" />
+          <FunctionImport Name="GetBrigadesOrdersAndTasks" ReturnType="Collection(vmzModel.GetBrigadesOrdersAndTasks_Result)" />
+          <FunctionImport Name="GetOrdersAndTasksCount" ReturnType="Collection(vmzModel.GetOrdersAndTasksCount_Result)" />
+          <FunctionImport Name="GetTasksAndOName" ReturnType="Collection(vmzModel.GetTasksAndOName_Result)" />
+          <FunctionImport Name="GetListOfUsersAdm" ReturnType="Collection(vmzModel.GetListOfUsersAdm_Result)" />
           <EntitySet Name="Brigade" EntityType="vmzModel.Brigade" />
           <EntitySet Name="JoinBrorTask" EntityType="vmzModel.JoinBrorTask" />
           <EntitySet Name="JoinService" EntityType="vmzModel.JoinService" />
@@ -311,9 +324,6 @@
             <End Role="Task" EntitySet="Task" />
             <End Role="TaskToBrigade" EntitySet="TaskToBrigade" />
           </AssociationSet>
-          <FunctionImport Name="GetBrigadeServ" ReturnType="Collection(vmzModel.GetBrigadeServ_Result)">
-          <Parameter Name="idbort" Mode="In" Type="Int32" />
-          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="GetServices_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -365,6 +375,73 @@
           <Property Type="String" Name="name" Nullable="false" />
           <Property Type="String" Name="description" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="GetBrigadeServ_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="brigadierid" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="true" />
+          <Property Type="String" Name="description" Nullable="true" />
+          <Property Type="Int32" Name="id1" Nullable="false" />
+          <Property Type="String" Name="name1" Nullable="false" />
+          <Property Type="String" Name="description1" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetAllOrdersAndTasks_Result">
+          <Property Type="String" Name="oname" Nullable="false" />
+          <Property Type="String" Name="ofio" Nullable="true" />
+          <Property Type="DateTime" Name="ods" Nullable="false" />
+          <Property Type="DateTime" Name="ode" Nullable="true" />
+          <Property Type="Int32" Name="oddif" Nullable="true" />
+          <Property Type="String" Name="os" Nullable="false" MaxLength="11" />
+          <Property Type="String" Name="tname" Nullable="true" />
+          <Property Type="DateTime" Name="tds" Nullable="true" />
+          <Property Type="DateTime" Name="tde" Nullable="true" />
+          <Property Type="Int32" Name="tddif" Nullable="true" />
+          <Property Type="String" Name="ts" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="bname" Nullable="true" />
+          <Property Type="String" Name="bfio" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetBrigadesOrdersAndTasks_Result">
+          <Property Type="String" Name="bname" Nullable="true" />
+          <Property Type="String" Name="bfio" Nullable="true" />
+          <Property Type="String" Name="oname" Nullable="true" />
+          <Property Type="String" Name="ofio" Nullable="true" />
+          <Property Type="DateTime" Name="ods" Nullable="true" />
+          <Property Type="DateTime" Name="ode" Nullable="true" />
+          <Property Type="Int32" Name="oddif" Nullable="true" />
+          <Property Type="String" Name="os" Nullable="false" MaxLength="11" />
+          <Property Type="String" Name="tname" Nullable="true" />
+          <Property Type="DateTime" Name="tds" Nullable="true" />
+          <Property Type="DateTime" Name="tde" Nullable="true" />
+          <Property Type="Int32" Name="tddif" Nullable="true" />
+          <Property Type="String" Name="ts" Nullable="false" MaxLength="12" />
+        </ComplexType>
+        <ComplexType Name="GetOrdersAndTasksCount_Result">
+          <Property Type="String" Name="oname" Nullable="false" />
+          <Property Type="String" Name="ofio" Nullable="true" />
+          <Property Type="DateTime" Name="ods" Nullable="false" />
+          <Property Type="DateTime" Name="ode" Nullable="true" />
+          <Property Type="Int32" Name="oddif" Nullable="true" />
+          <Property Type="String" Name="os" Nullable="false" MaxLength="11" />
+          <Property Type="Int32" Name="tc" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetTasksAndOName_Result">
+          <Property Type="String" Name="oname" Nullable="false" />
+          <Property Type="String" Name="tname" Nullable="true" />
+          <Property Type="DateTime" Name="tds" Nullable="true" />
+          <Property Type="DateTime" Name="tde" Nullable="true" />
+          <Property Type="Int32" Name="tddif" Nullable="true" />
+          <Property Type="String" Name="ts" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="bname" Nullable="true" />
+          <Property Type="String" Name="bfio" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetListOfUsersAdm_Result">
+          <Property Type="Int32" Name="uid" Nullable="false" />
+          <Property Type="String" Name="uname" Nullable="false" />
+          <Property Type="Int32" Name="pid" Nullable="true" />
+          <Property Type="String" Name="pname" Nullable="true" />
+          <Property Type="Int32" Name="cpid" Nullable="true" />
+          <Property Type="String" Name="cpname" Nullable="true" />
+          <Property Type="String" Name="login" Nullable="false" />
+        </ComplexType>
         <EntityType Name="Brigade">
           <Key>
             <PropertyRef Name="id" />
@@ -414,8 +491,8 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="datestart" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="dateend" Type="DateTime" Precision="0" />
+          <Property Name="datestart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dateend" Type="DateTime" Precision="3" />
           <Property Name="clientid" Type="Int32" Nullable="false" />
           <Property Name="priority" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="vmzModel.FK__Order__clientid__1F2E9E6D" FromRole="Order" ToRole="User" />
@@ -445,8 +522,9 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="datestart" Type="DateTime" Precision="0" />
-          <Property Name="dateend" Type="DateTime" Precision="0" />
+          <Property Name="datestart" Type="DateTime" Precision="3" />
+          <Property Name="dateend" Type="DateTime" Precision="3" />
+          <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ListOfTasks" Relationship="vmzModel.FK__ListOfTas__taski__208CD6FA" FromRole="Task" ToRole="ListOfTasks" />
           <NavigationProperty Name="TaskToBrigade" Relationship="vmzModel.FK__TaskToBri__taski__05F8DC4F" FromRole="Task" ToRole="TaskToBrigade" />
         </EntityType>
@@ -558,15 +636,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="GetBrigadeServ_Result">
-          <Property Type="Int32" Name="id" Nullable="false" />
-          <Property Type="Int32" Name="brigadierid" Nullable="false" />
-          <Property Type="String" Name="name" Nullable="true" />
-          <Property Type="String" Name="description" Nullable="true" />
-          <Property Type="Int32" Name="id1" Nullable="false" />
-          <Property Type="String" Name="name1" Nullable="false" />
-          <Property Type="String" Name="description1" Nullable="true" />
-        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -604,18 +673,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ListOfUsersAdm" FunctionName="Хранилище vmzModel.ListOfUsersAdm">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="vmzModel.ListOfUsersAdm_Result">
-                <ScalarProperty Name="uid" ColumnName="uid" />
-                <ScalarProperty Name="uname" ColumnName="uname" />
-                <ScalarProperty Name="pid" ColumnName="pid" />
-                <ScalarProperty Name="pname" ColumnName="pname" />
-                <ScalarProperty Name="cpid" ColumnName="cpid" />
-                <ScalarProperty Name="cpname" ColumnName="cpname" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SetUserProf" FunctionName="Хранилище vmzModel.SetUserProf" />
           <FunctionImportMapping FunctionImportName="GetUserOrders" FunctionName="Хранилище vmzModel.GetUserOrders">
             <ResultMapping>
@@ -640,6 +697,97 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="description" ColumnName="description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetBrigadeServ" FunctionName="Хранилище vmzModel.GetBrigadeServ">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="vmzModel.GetBrigadeServ_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="brigadierid" ColumnName="brigadierid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="id1" ColumnName="id1" />
+                <ScalarProperty Name="name1" ColumnName="name1" />
+                <ScalarProperty Name="description1" ColumnName="description1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllOrdersAndTasks" FunctionName="Хранилище vmzModel.GetAllOrdersAndTasks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="vmzModel.GetAllOrdersAndTasks_Result">
+                <ScalarProperty Name="oname" ColumnName="oname" />
+                <ScalarProperty Name="ofio" ColumnName="ofio" />
+                <ScalarProperty Name="ods" ColumnName="ods" />
+                <ScalarProperty Name="ode" ColumnName="ode" />
+                <ScalarProperty Name="oddif" ColumnName="oddif" />
+                <ScalarProperty Name="os" ColumnName="os" />
+                <ScalarProperty Name="tname" ColumnName="tname" />
+                <ScalarProperty Name="tds" ColumnName="tds" />
+                <ScalarProperty Name="tde" ColumnName="tde" />
+                <ScalarProperty Name="tddif" ColumnName="tddif" />
+                <ScalarProperty Name="ts" ColumnName="ts" />
+                <ScalarProperty Name="bname" ColumnName="bname" />
+                <ScalarProperty Name="bfio" ColumnName="bfio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetBrigadesOrdersAndTasks" FunctionName="Хранилище vmzModel.GetBrigadesOrdersAndTasks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="vmzModel.GetBrigadesOrdersAndTasks_Result">
+                <ScalarProperty Name="bname" ColumnName="bname" />
+                <ScalarProperty Name="bfio" ColumnName="bfio" />
+                <ScalarProperty Name="oname" ColumnName="oname" />
+                <ScalarProperty Name="ofio" ColumnName="ofio" />
+                <ScalarProperty Name="ods" ColumnName="ods" />
+                <ScalarProperty Name="ode" ColumnName="ode" />
+                <ScalarProperty Name="oddif" ColumnName="oddif" />
+                <ScalarProperty Name="os" ColumnName="os" />
+                <ScalarProperty Name="tname" ColumnName="tname" />
+                <ScalarProperty Name="tds" ColumnName="tds" />
+                <ScalarProperty Name="tde" ColumnName="tde" />
+                <ScalarProperty Name="tddif" ColumnName="tddif" />
+                <ScalarProperty Name="ts" ColumnName="ts" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetOrdersAndTasksCount" FunctionName="Хранилище vmzModel.GetOrdersAndTasksCount">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="vmzModel.GetOrdersAndTasksCount_Result">
+                <ScalarProperty Name="oname" ColumnName="oname" />
+                <ScalarProperty Name="ofio" ColumnName="ofio" />
+                <ScalarProperty Name="ods" ColumnName="ods" />
+                <ScalarProperty Name="ode" ColumnName="ode" />
+                <ScalarProperty Name="oddif" ColumnName="oddif" />
+                <ScalarProperty Name="os" ColumnName="os" />
+                <ScalarProperty Name="tc" ColumnName="tc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTasksAndOName" FunctionName="Хранилище vmzModel.GetTasksAndOName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="vmzModel.GetTasksAndOName_Result">
+                <ScalarProperty Name="oname" ColumnName="oname" />
+                <ScalarProperty Name="tname" ColumnName="tname" />
+                <ScalarProperty Name="tds" ColumnName="tds" />
+                <ScalarProperty Name="tde" ColumnName="tde" />
+                <ScalarProperty Name="tddif" ColumnName="tddif" />
+                <ScalarProperty Name="ts" ColumnName="ts" />
+                <ScalarProperty Name="bname" ColumnName="bname" />
+                <ScalarProperty Name="bfio" ColumnName="bfio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetListOfUsersAdm" FunctionName="Хранилище vmzModel.GetListOfUsersAdm">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="vmzModel.GetListOfUsersAdm_Result">
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="uname" ColumnName="uname" />
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="pname" ColumnName="pname" />
+                <ScalarProperty Name="cpid" ColumnName="cpid" />
+                <ScalarProperty Name="cpname" ColumnName="cpname" />
+                <ScalarProperty Name="login" ColumnName="login" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -720,6 +868,7 @@
           <EntitySetMapping Name="Task">
             <EntityTypeMapping TypeName="vmzModel.Task">
               <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="note" ColumnName="note" />
                 <ScalarProperty Name="dateend" ColumnName="dateend" />
                 <ScalarProperty Name="datestart" ColumnName="datestart" />
                 <ScalarProperty Name="description" ColumnName="description" />
@@ -749,19 +898,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetBrigadeServ" FunctionName="Хранилище vmzModel.GetBrigadeServ">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="vmzModel.GetBrigadeServ_Result">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="brigadierid" ColumnName="brigadierid" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="id1" ColumnName="id1" />
-                <ScalarProperty Name="name1" ColumnName="name1" />
-                <ScalarProperty Name="description1" ColumnName="description1" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
