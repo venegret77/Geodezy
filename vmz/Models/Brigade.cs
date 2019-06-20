@@ -14,19 +14,11 @@ namespace vmz.Models
     
     public partial class Brigade
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Brigade()
-        {
-            this.Task = new HashSet<Task>();
-        }
-    
         public int id { get; set; }
         public int brigadierid { get; set; }
         public string name { get; set; }
         public string description { get; set; }
     
         public virtual User User { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Task> Task { get; set; }
     }
 }

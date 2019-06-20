@@ -145,78 +145,103 @@
                     }
                     if (ViewBag.Orders[i].Order.dateend == null)
                     {
-                        <div class="story-block @val border-warning">
-                            <span class="timeline-bubble bg-warning"></span>
-                            <div class="card border-0 rounded-0 mb-3 ">
-                                <div class="card-body p-5">
-                                    <h4>@ViewBag.Orders[i].Order.name</h4>
-                                    <div class="media">
-                                        <div class="media-body">
-                                            <h5>@ViewBag.Orders[i].Order.description</h5>
-                                            <p class=" mb-3"></p>
-                                            Дата начала: @ViewBag.Orders[i].Order.datestart.ToShortDateString()
-                                            <p class=" mb-3"></p>
-                                            Приоритет: @ViewBag.Orders[i].Order.priority
-                                            <p class=" mb-3"></p>
-                                        </div>
-                                    </div>
+                        <div class="story-block @val">
+                            <span class="timeline-bubble bg-danger"></span>
+                            <div class="card mb-4">
+                                <div class="blog-header-img">
+                                    <img class="" src="~/Content/img/geodezy1.png" alt="">
                                 </div>
-                                @if (ViewBag.Orders[i].Tasks != null)
-                                {
-                                    <div class="card-footer text-left border-top">
-                                        <ul class="list-group draglist">
-                                            @foreach (var t in ViewBag.Orders[i].Tasks)
-                                            {
-                                                if (t.dateend == null)
-                                                {
-                                                    <li class="list-group-item list-group-item-success">@t.name</li>
-                                                }
-                                                else
-                                                {
-                                                    <li class="list-group-item list-group-item-danger">t.name</li>
-                                                }
-                                            }
-                                        </ul>
+                                <div class="card-body">
+                                    <h5 class="text-truncate w-100">Наименование: @ViewBag.Orders[i].Order.name</h5>
+                                    <p class="content-color-secondary">Описание: @ViewBag.Orders[i].Order.description</p>
+                                    <p class="content-color-secondary">Приоритет: @ViewBag.Orders[i].Order.priority</p>
+                                    <p class="content-color-secondary text-danger">Статус: Не выполнен</p>
+                                </div>
+                                <div class="card-footer border-top no-gutters content-color-secondary ">
+                                    <div class="row">
+                                        @if (ViewBag.Orders[i].Tasks.Count != 0)
+                                        {
+                                            <div class="card col-lg-12 col-md-12">
+                                                <div class="card-header success-gradient">
+                                                    <div class="media">
+                                                        <div class="media-body">
+                                                            <h5 class="mt-1"><b>Список задач</b></h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body px-0 py-0">
+                                                    <ul class="list-group draglist col-lg-12 col-md-12">
+                                                        @foreach (var t in ViewBag.Orders[i].Tasks)
+                                                        {
+                                                            if (t.dateend == null)
+                                                            {
+                                                                <li class="list-group-item list-group-item-danger">- Задача: "@t.name" Статус:Не Выполнена</li>
+                                                            }
+                                                            else
+                                                            {
+                                                                <li class="list-group-item list-group-item-success">- Задача: "@t.name" Статус: Выполнена</li>
+                                                            }
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        }
                                     </div>
-                                }
-                                else
-                                {
-                                    <div class="card-footer text-left border-top align-items-center">
-                                        <button type="submit" class="btn btn-rounded danger-gradient text-uppercase" name="oid" value="@ViewBag.Orders[i].Order.id">Отменить заказ</button> 
+                                    <div class="row m-md-1">
+                                        <i class="material-icons vm content-color-primary">   person</i> @ViewBag.UserName | с <i class="material-icons vm content-color-primary ml-2">date_range</i> @ViewBag.Orders[i].Order.datestart.ToShortDateString()
                                     </div>
-                                }
+                                    @if (ViewBag.Orders[i].Tasks.Count == 0)
+                                    {
+                                        <div class="row justify-content-center m-md-3 ">
+                                            <input type="text" hidden name="oid" value="@ViewBag.Orders[i].Order.id" />
+                                            <button type="submit" class="btn btn-rounded danger-gradient text-uppercase" name="oid" value="@ViewBag.Orders[i].Order.id">Отменить заказ</button>
+                                        </div>
+                                    }
+                                </div>
                             </div>
                         </div>
                     }
                     else
                     {
-                        <div class="story-block @val border-success">
+                        <div class="story-block @val">
                             <span class="timeline-bubble bg-success"></span>
-                            <div class="card border-0 rounded-0 mb-3 ">
-                                <div class="card-body p-5">
-                                    <h4>@ViewBag.Orders[i].Order.name</h4>
-                                    <div class="media">
-                                        <div class="media-body">
-                                            <h5>@ViewBag.Orders[i].Order.description</h5>
-                                            <p class=" mb-3"></p>
-                                            Дата начала: @ViewBag.Orders[i].Order.datestart.ToShortDateString()
-                                            <p class=" mb-3"></p>
-                                            Приоритет: @ViewBag.Orders[i].Order.priority
-                                            <p class=" mb-3"></p>
-                                        </div>
+                            <div class="card mb-4">
+                                <div class="blog-header-img">
+                                    <img class="" src="~/Content/img/geodezy1.png" alt="">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="text-truncate w-100">Наименование: @ViewBag.Orders[i].Order.name</h5>
+                                    <p class="content-color-secondary">Описание: @ViewBag.Orders[i].Order.description</p>
+                                    <p class="content-color-secondary">Приоритет: @ViewBag.Orders[i].Order.priority</p>
+                                    <p class="content-color-secondary text-success">Статус: Выполнен</p>
+                                </div>
+                                <div class="card-footer border-top no-gutters content-color-secondary">
+                                    <div class="row">
+                                        @if (ViewBag.Orders[i].Tasks.Count != 0)
+                                        {
+                                            <div class="card mb-4 ">
+                                                <div class="card-header success-gradient">
+                                                    <div class="media">
+                                                        <div class="media-body">
+                                                            <h5 class="mt-1"><b>Список задач</b></h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body px-0 py-0">
+                                                    <ul class="list-group draglist col-lg-12 col-md-12">
+                                                        @foreach (var t in ViewBag.Orders[i].Tasks)
+                                                        {
+                                                            <li class="list-group-item list-group-item-success">- Задача: "@t.name" Статус: Выполнена</li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="row m-md-1">
+                                        <i class="material-icons vm content-color-primary">   person</i> @ViewBag.UserName | с <i class="material-icons vm content-color-primary ml-2">date_range</i> @ViewBag.Orders[i].Order.datestart.ToShortDateString()   по <i class="material-icons vm content-color-primary ml-2">date_range</i> @ViewBag.Orders[i].Order.dateend.ToShortDateString()
                                     </div>
                                 </div>
-                                @if (ViewBag.Orders[i].Tasks != null)
-                                {
-                                    <div class="card-footer text-left border-top">
-                                        <ul class="list-group draglist">
-                                            @foreach (var t in ViewBag.Orders[i].Tasks)
-                                            {
-                                                <li class="list-group-item list-group-item-success">@t.name</li>
-                                            }
-                                        </ul>
-                                    </div>
-                                }
                             </div>
                         </div>
                     }
@@ -264,7 +289,7 @@
                             <div class="form-group row">
                                 <div class="col-lg-6 col-md-6">
                                     <label>Дата начала</label>
-                                    <input name ="datestart" type="date" class="form-control form-control-lg" placeholder="">
+                                    <input name="datestart" type="date" class="form-control form-control-lg" placeholder="">
                                 </div>
                             </div>
                         </div>

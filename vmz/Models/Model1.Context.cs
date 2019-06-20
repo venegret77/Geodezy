@@ -36,6 +36,7 @@ namespace vmz.Models
         public virtual DbSet<Profession> Profession { get; set; }
         public virtual DbSet<Service> Service { get; set; }
         public virtual DbSet<Task> Task { get; set; }
+        public virtual DbSet<TaskToBrigade> TaskToBrigade { get; set; }
         public virtual DbSet<User> User { get; set; }
     
         public virtual ObjectResult<GetServices_Result> GetServices(Nullable<int> brigadeortaskid)
@@ -104,6 +105,15 @@ namespace vmz.Models
                 new ObjectParameter("idbort", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetServicesOnBorT_Result>("GetServicesOnBorT", idbortParameter);
+        }
+    
+        public virtual ObjectResult<GetBrigadeServ_Result> GetBrigadeServ(Nullable<int> idbort)
+        {
+            var idbortParameter = idbort.HasValue ?
+                new ObjectParameter("idbort", idbort) :
+                new ObjectParameter("idbort", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetBrigadeServ_Result>("GetBrigadeServ", idbortParameter);
         }
     }
 }

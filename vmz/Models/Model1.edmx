@@ -50,7 +50,6 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="description" Type="nvarchar(max)" />
-          <Property Name="listoftasksid" Type="int" />
           <Property Name="datestart" Type="date" Nullable="false" />
           <Property Name="dateend" Type="date" />
           <Property Name="clientid" Type="int" Nullable="false" />
@@ -79,10 +78,15 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="description" Type="nvarchar(max)" />
-          <Property Name="listofservices" Type="int" Nullable="false" />
           <Property Name="datestart" Type="date" />
           <Property Name="dateend" Type="date" />
-          <Property Name="brigadeid" Type="int" />
+        </EntityType>
+        <EntityType Name="TaskToBrigade">
+          <Key>
+            <PropertyRef Name="taskid" />
+          </Key>
+          <Property Name="brigade" Type="int" Nullable="false" />
+          <Property Name="taskid" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -156,15 +160,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Task__brigadeid__4830B400">
-          <End Role="Brigade" Type="Self.Brigade" Multiplicity="0..1" />
-          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+        <Association Name="FK__TaskToBri__taski__05F8DC4F">
+          <End Role="Task" Type="Self.Task" Multiplicity="1" />
+          <End Role="TaskToBrigade" Type="Self.TaskToBrigade" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="Brigade">
+            <Principal Role="Task">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="Task">
-              <PropertyRef Name="brigadeid" />
+            <Dependent Role="TaskToBrigade">
+              <PropertyRef Name="taskid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -180,6 +184,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetBrigadeServ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idbort" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetServicesOnBorT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idbort" Type="int" Mode="In" />
         </Function>
@@ -208,6 +215,7 @@
           <EntitySet Name="Profession" EntityType="Self.Profession" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskToBrigade" EntityType="Self.TaskToBrigade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Brigade__brigadi__473C8FC7" Association="Self.FK__Brigade__brigadi__473C8FC7">
             <End Role="User" EntitySet="User" />
@@ -229,9 +237,9 @@
             <End Role="User" EntitySet="User" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <AssociationSet Name="FK__Task__brigadeid__4830B400" Association="Self.FK__Task__brigadeid__4830B400">
-            <End Role="Brigade" EntitySet="Brigade" />
+          <AssociationSet Name="FK__TaskToBri__taski__05F8DC4F" Association="Self.FK__TaskToBri__taski__05F8DC4F">
             <End Role="Task" EntitySet="Task" />
+            <End Role="TaskToBrigade" EntitySet="TaskToBrigade" />
           </AssociationSet>
           <AssociationSet Name="FK__User__profession__0C1BC9F9" Association="Self.FK__User__profession__0C1BC9F9">
             <End Role="Profession" EntitySet="Profession" />
@@ -261,6 +269,9 @@
           <FunctionImport Name="GetUserOrders" ReturnType="Collection(vmzModel.GetUserOrders_Result)">
           <Parameter Name="uid" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetServicesOnBorT" ReturnType="Collection(vmzModel.GetServicesOnBorT_Result)">
+          <Parameter Name="idbort" Mode="In" Type="Int32" />
+          </FunctionImport>
           <EntitySet Name="Brigade" EntityType="vmzModel.Brigade" />
           <EntitySet Name="JoinBrorTask" EntityType="vmzModel.JoinBrorTask" />
           <EntitySet Name="JoinService" EntityType="vmzModel.JoinService" />
@@ -270,14 +281,11 @@
           <EntitySet Name="Profession" EntityType="vmzModel.Profession" />
           <EntitySet Name="Service" EntityType="vmzModel.Service" />
           <EntitySet Name="Task" EntityType="vmzModel.Task" />
+          <EntitySet Name="TaskToBrigade" EntityType="vmzModel.TaskToBrigade" />
           <EntitySet Name="User" EntityType="vmzModel.User" />
           <AssociationSet Name="FK__Brigade__brigadi__473C8FC7" Association="vmzModel.FK__Brigade__brigadi__473C8FC7">
             <End Role="User" EntitySet="User" />
             <End Role="Brigade" EntitySet="Brigade" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Task__brigadeid__4830B400" Association="vmzModel.FK__Task__brigadeid__4830B400">
-            <End Role="Brigade" EntitySet="Brigade" />
-            <End Role="Task" EntitySet="Task" />
           </AssociationSet>
           <AssociationSet Name="FK__JoinServi__servi__6E565CE8" Association="vmzModel.FK__JoinServi__servi__6E565CE8">
             <End Role="Service" EntitySet="Service" />
@@ -299,8 +307,12 @@
             <End Role="Profession" EntitySet="Profession" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <FunctionImport Name="GetServicesOnBorT" ReturnType="Collection(vmzModel.GetServicesOnBorT_Result)">
-            <Parameter Name="idbort" Mode="In" Type="Int32" />
+          <AssociationSet Name="FK__TaskToBri__taski__05F8DC4F" Association="vmzModel.FK__TaskToBri__taski__05F8DC4F">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="TaskToBrigade" EntitySet="TaskToBrigade" />
+          </AssociationSet>
+          <FunctionImport Name="GetBrigadeServ" ReturnType="Collection(vmzModel.GetBrigadeServ_Result)">
+          <Parameter Name="idbort" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="GetServices_Result">
@@ -348,6 +360,11 @@
           <Property Type="DateTime" Name="tde" Nullable="true" Precision="23" />
           <Property Type="String" Name="tdesc" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="GetServicesOnBorT_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" />
+          <Property Type="String" Name="description" Nullable="true" />
+        </ComplexType>
         <EntityType Name="Brigade">
           <Key>
             <PropertyRef Name="id" />
@@ -357,7 +374,6 @@
           <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="vmzModel.FK__Brigade__brigadi__473C8FC7" FromRole="Brigade" ToRole="User" />
-          <NavigationProperty Name="Task" Relationship="vmzModel.FK__Task__brigadeid__4830B400" FromRole="Brigade" ToRole="Task" />
         </EntityType>
         <EntityType Name="JoinBrorTask">
           <Key>
@@ -398,7 +414,6 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="listoftasksid" Type="Int32" />
           <Property Name="datestart" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="dateend" Type="DateTime" Precision="0" />
           <Property Name="clientid" Type="Int32" Nullable="false" />
@@ -430,12 +445,18 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="listofservices" Type="Int32" Nullable="false" />
           <Property Name="datestart" Type="DateTime" Precision="0" />
           <Property Name="dateend" Type="DateTime" Precision="0" />
-          <Property Name="brigadeid" Type="Int32" />
-          <NavigationProperty Name="Brigade" Relationship="vmzModel.FK__Task__brigadeid__4830B400" FromRole="Task" ToRole="Brigade" />
           <NavigationProperty Name="ListOfTasks" Relationship="vmzModel.FK__ListOfTas__taski__208CD6FA" FromRole="Task" ToRole="ListOfTasks" />
+          <NavigationProperty Name="TaskToBrigade" Relationship="vmzModel.FK__TaskToBri__taski__05F8DC4F" FromRole="Task" ToRole="TaskToBrigade" />
+        </EntityType>
+        <EntityType Name="TaskToBrigade">
+          <Key>
+            <PropertyRef Name="taskid" />
+          </Key>
+          <Property Name="brigade" Type="Int32" Nullable="false" />
+          <Property Name="taskid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="vmzModel.FK__TaskToBri__taski__05F8DC4F" FromRole="TaskToBrigade" ToRole="Task" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -462,18 +483,6 @@
             </Principal>
             <Dependent Role="Brigade">
               <PropertyRef Name="brigadierid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Task__brigadeid__4830B400">
-          <End Type="vmzModel.Brigade" Role="Brigade" Multiplicity="0..1" />
-          <End Type="vmzModel.Task" Role="Task" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Brigade">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Task">
-              <PropertyRef Name="brigadeid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -537,10 +546,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="GetServicesOnBorT_Result">
+        <Association Name="FK__TaskToBri__taski__05F8DC4F">
+          <End Type="vmzModel.Task" Role="Task" Multiplicity="1" />
+          <End Type="vmzModel.TaskToBrigade" Role="TaskToBrigade" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskToBrigade">
+              <PropertyRef Name="taskid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetBrigadeServ_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
-          <Property Type="String" Name="name" Nullable="false" />
+          <Property Type="Int32" Name="brigadierid" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="true" />
           <Property Type="String" Name="description" Nullable="true" />
+          <Property Type="Int32" Name="id1" Nullable="false" />
+          <Property Type="String" Name="name1" Nullable="false" />
+          <Property Type="String" Name="description1" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -609,6 +634,15 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetServicesOnBorT" FunctionName="Хранилище vmzModel.GetServicesOnBorT">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="vmzModel.GetServicesOnBorT_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <EntitySetMapping Name="Brigade">
             <EntityTypeMapping TypeName="vmzModel.Brigade">
               <MappingFragment StoreEntitySet="Brigade">
@@ -659,7 +693,6 @@
                 <ScalarProperty Name="clientid" ColumnName="clientid" />
                 <ScalarProperty Name="dateend" ColumnName="dateend" />
                 <ScalarProperty Name="datestart" ColumnName="datestart" />
-                <ScalarProperty Name="listoftasksid" ColumnName="listoftasksid" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
@@ -687,13 +720,19 @@
           <EntitySetMapping Name="Task">
             <EntityTypeMapping TypeName="vmzModel.Task">
               <MappingFragment StoreEntitySet="Task">
-                <ScalarProperty Name="brigadeid" ColumnName="brigadeid" />
                 <ScalarProperty Name="dateend" ColumnName="dateend" />
                 <ScalarProperty Name="datestart" ColumnName="datestart" />
-                <ScalarProperty Name="listofservices" ColumnName="listofservices" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskToBrigade">
+            <EntityTypeMapping TypeName="vmzModel.TaskToBrigade">
+              <MappingFragment StoreEntitySet="TaskToBrigade">
+                <ScalarProperty Name="taskid" ColumnName="taskid" />
+                <ScalarProperty Name="brigade" ColumnName="brigade" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -710,12 +749,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetServicesOnBorT" FunctionName="Хранилище vmzModel.GetServicesOnBorT">
+          <FunctionImportMapping FunctionImportName="GetBrigadeServ" FunctionName="Хранилище vmzModel.GetBrigadeServ">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="vmzModel.GetServicesOnBorT_Result">
+              <ComplexTypeMapping TypeName="vmzModel.GetBrigadeServ_Result">
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="brigadierid" ColumnName="brigadierid" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="id1" ColumnName="id1" />
+                <ScalarProperty Name="name1" ColumnName="name1" />
+                <ScalarProperty Name="description1" ColumnName="description1" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

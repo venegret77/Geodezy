@@ -17,12 +17,10 @@ namespace vmz.Models
         public int id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
-        public int listofservices { get; set; }
         public Nullable<System.DateTime> datestart { get; set; }
         public Nullable<System.DateTime> dateend { get; set; }
-        public Nullable<int> brigadeid { get; set; }
     
-        public virtual Brigade Brigade { get; set; }
         public virtual ListOfTasks ListOfTasks { get; set; }
+        public virtual TaskToBrigade TaskToBrigade { get; set; }
     }
 }

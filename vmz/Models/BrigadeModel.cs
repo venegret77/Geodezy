@@ -14,5 +14,6 @@ namespace vmz.Models
         public string serviced { get; set; }
         public List<string> ulist { get; set; }
         public List<string> slist { get; set; }
+        public string tid { get; set; }
     }
 }

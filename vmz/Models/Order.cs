@@ -17,7 +17,6 @@ namespace vmz.Models
         public int id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
-        public Nullable<int> listoftasksid { get; set; }
         public System.DateTime datestart { get; set; }
         public Nullable<System.DateTime> dateend { get; set; }
         public int clientid { get; set; }
