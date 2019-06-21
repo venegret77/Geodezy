@@ -15,5 +15,6 @@ namespace vmz.Models
         public List<string> ulist { get; set; }
         public List<string> slist { get; set; }
         public string tid { get; set; }
+        public string note { get; set; }
     }
 }

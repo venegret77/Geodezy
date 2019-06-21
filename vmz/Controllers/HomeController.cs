@@ -13,7 +13,7 @@ namespace vmz.Controllers
     {
         Entities db = new Entities();
         #region Профиль
-        public new ActionResult Profile()
+        public new ActionResult Index()
         {
             if (FillViewBag(true) != -1)
                 return View();
@@ -22,16 +22,16 @@ namespace vmz.Controllers
         }
         #endregion
         #region Администратор
-        public ActionResult Index()
+        public ActionResult Admin()
         {
             bool test = FillViewBag();
             if (test & ViewBag.UserProfession == "Администратор")
                 return View();
             else
-                return RedirectToAction("Profile", "Home");
+                return RedirectToAction("Index", "Home");
         }
         [HttpPost]
-        public ActionResult Index(AdmModel model)
+        public ActionResult Admin(AdmModel model)
         {
             using (Entities db = new Entities())
             {
@@ -79,7 +79,7 @@ namespace vmz.Controllers
                     user.confprofid = db.Profession.FirstOrDefault(p => p.name == "Не подтвержден").id;
                 }
                 db.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Admin", "Home");
             }
         }
         #endregion
@@ -90,7 +90,7 @@ namespace vmz.Controllers
             if (test & ViewBag.UserProfession == "Клиент")
                 return View();
             else
-                return RedirectToAction("Profile", "Home");
+                return RedirectToAction("Index", "Home");
         }
         [HttpPost]
         public ActionResult Client(ClientModel model)
@@ -129,7 +129,7 @@ namespace vmz.Controllers
                     }
                 }
             }
-            return RedirectToAction("Profile", "Account");
+            return RedirectToAction("Index", "Account");
         }
         #endregion
         #region Секретарь
@@ -139,7 +139,7 @@ namespace vmz.Controllers
             if (test & ViewBag.UserProfession == "Секретарь")
                 return View();
             else
-                return RedirectToAction("Profile", "Home");
+                return RedirectToAction("Index", "Home");
         }
         [HttpPost]
         public ActionResult Secretary(string orderid)
@@ -154,7 +154,7 @@ namespace vmz.Controllers
             if (test & ViewBag.UserProfession != null)
                 return View();
             else
-                return RedirectToAction("Profile", "Home");
+                return RedirectToAction("Index", "Home");
         }
         [HttpPost]
         public ActionResult Brigadier(BrigadeModel model)
@@ -297,6 +297,7 @@ namespace vmz.Controllers
                                 int tid = Convert.ToInt32(model.tid);
                                 var Task = db.Task.FirstOrDefault(t => t.id == tid);
                                 Task.dateend = DateTime.Now;
+                                Task.note = model.note;
                             }
                             break;
                     }
@@ -309,7 +310,7 @@ namespace vmz.Controllers
                     }*/
                 }
             }
-            return RedirectToAction("Profile", "Account");
+            return RedirectToAction("Index", "Account");
         }
         #endregion
         #region Директор
@@ -319,7 +320,7 @@ namespace vmz.Controllers
             if (test & ViewBag.UserProfession != null)
                 return View();
             else
-                return RedirectToAction("Profile", "Home");
+                return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -332,7 +333,7 @@ namespace vmz.Controllers
         public ActionResult Order(string id)
         {
             if (id == null)
-                return RedirectToAction("Profile", "Home");
+                return RedirectToAction("Index", "Home");
             bool test = FillViewBag(id);
             if (test & ViewBag.UserProfession == "Секретарь")
                 return View();
@@ -709,33 +710,5 @@ namespace vmz.Controllers
             return false;
         }
         #endregion
-    }
-    public struct OrderTask
-    {
-        public OrderTask(Order order)
-        {
-            this.Order = order;
-            Tasks = new List<Task>();
-        }
-
-        public Order Order { get; set; }
-        public List<Task> Tasks { get; set; }
-    }
-    public class TasksCount
-    {
-        public string name { get; set; }
-        public int _count { get; set; }
-        public int count { get; set; }
-        public string procent { get; set; }
-    }
-    public class BrigadeInfo
-    {
-        public string bname { get; set; }
-        public string bfio { get; set; }
-        public int isnull { get; set; }
-        public int isnotnull { get; set; }
-        public int? cworkers { get; set; }
-        public int? sumhours { get; set; }
-
     }
 }

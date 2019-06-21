@@ -1,0 +1,291 @@
+﻿@{
+    Layout = null;
+}
+
+<head>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/Content/js", "~/Content/vendor")
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+
+    <!-- favicons -->
+    <link rel="apple-touch-icon" href="~/Content/img/favicon-apple.png">
+    <link rel="icon" href="~/Content/img/favicon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/Content/vendor/bootstrap-4.1.3/css/bootstrap.min.css">
+
+    <!-- Material design icons CSS -->
+    <link rel="stylesheet" href="~/Content/vendor/materializeicon/material-icons.css">
+
+    <!-- aniamte CSS -->
+    <link rel="stylesheet" href="~/Content/vendor/animatecss/animate.css">
+
+    <!-- swiper carousel CSS -->
+    <link rel="stylesheet" href="~/Content/vendor/swiper/css/swiper.min.css">
+
+    <!-- daterange CSS -->
+    <link rel="stylesheet" href="~/Content/vendor/bootstrap-daterangepicker-master/daterangepicker.css">
+
+    <!-- footable CSS -->
+    <link rel="stylesheet" href="~/Content/vendor/footable-bootstrap/css/footable.bootstrap.min.css">
+
+    <!-- jvector map CSS -->
+    <link rel="stylesheet" href="~/Content/vendor/jquery-jvectormap/jquery-jvectormap-2.0.3.css">
+
+    <!-- app CSS -->
+    <link id="theme" rel="stylesheet" href="~/Content/css/purplesidebar.css" type="text/css">
+
+    <title>Управление правами пользователей</title>
+</head>
+
+<html>
+
+<body class="fixed-header sidebar-right-close sidebar-left-close">
+    <!-- page loader -->
+    <div class="loader justify-content-center pink-gradient">
+        <div class="align-self-center text-center">
+            <div class="logo-img-loader">
+                <img src="~/Content/img/loader-hole.png" alt="" class="logo-image">
+                <img src="~/Content/img/loader-bg.png" alt="" class="logo-bg-image">
+            </div>
+        </div>
+    </div>
+    <!-- page loader ends  -->
+
+    <div class="wrapper">
+        <!-- main header -->
+        <header class="main-header">
+            <!--Navbar -->
+            <nav class="mb-1 navbar navbar-expand-lg navbar-light info-color">
+                <a class="btn header-color-secondary dropdown-toggle username" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <figure class="userpic"><img src="~/Content/img/avatar.png" alt=""></figure>
+                    <h5 class="text-hide-xs">
+                        <small class="header-color-secondary">Добро пожаловать,</small>
+                        <span class="header-color-primary">@ViewBag.UserName</span>
+                    </h5>
+                </a>
+                <div class="dropdown-menu dropdown-menu-left profile-dropdown" aria-labelledby="dropdownMenuLink">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <a href="~/Home/Profile/">
+                                <figure class="avatar avatar-120 mx-auto my-3">
+                                    <img src="~/Content/img/avatar.png" alt="">
+                                </figure>
+                                <h5 class="card-title mb-2 header-color-primary">@ViewBag.UserName</h5>
+                            </a>
+                            <h6 class="card-subtitle mb-3 header-color-secondary">@ViewBag.UserProfession</h6>
+                            <p class="card-text">@ViewBag.UserDescription</p>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider m-0"></div>
+                    <a class="dropdown-item pink-gradient-active" href="~/Account/Logout/">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                Выйти
+                            </div>
+                            <div class="col-auto">
+                                <div class="text-danger ml-2"><i class="material-icons vm">exit_to_app</i></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                    <ul class="navbar-nav ml-auto dt-head-center">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="~/Home/Index/">Мой профиль</a>
+                        </li>
+                        <li class="nav-item active">
+                            @switch (ViewBag.UserProfession)
+                            {
+                                case "Администратор":
+                                    <a class="nav-link" href="~/Home/Admin/">Управление правами пользователей</a>
+                                    break;
+                                case "Директор":
+                                    <a class="nav-link" href="~/Home/Director/">Просмотр информации о заказах и бригадах</a>
+                                    break;
+                                case "Секретарь":
+                                    <a class="nav-link" href="~/Home/Secretary/">Работа с заказами</a>
+                                    break;
+                                case "Бригадир":
+                                    <a class="nav-link" href="~/Home/Brigadier/">Моя бригада</a>
+                                    break;
+                                case "Клиент":
+                                    <a class="nav-link" href="~/Home/Client/">Мои заказы</a>
+                                    break;
+                            }
+
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!--/.Navbar -->
+        </header>
+        <!-- content page title -->
+        <div class="container-fluid bg-light-opac">
+            <br />
+            <div class="row">
+                <div class="container my-3 main-container">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h2 class="content-color-primary page-title">Список неподтвержденных пользователей</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- content page title ends -->
+        <!-- unconfusers -->
+        <div class="container mt-4 main-container">
+            <div class="row">
+                @foreach (var user in ViewBag.AllUsers)
+                {
+                    if (user.pid != user.cpid)
+                    {
+                        <div class="col-12 col-md-6">
+                            <form method="post">
+                                <div class="card mb-4 fullscreen">
+                                    <div class="card-header">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <h4 class="content-color-primary mb-0">Профиль пользователя </h4>
+                                            </div>
+                                            <a href="javascript:void(0);" class="icon-circle icon-30 content-color-secondary fullscreenbtn">
+                                                <i class="material-icons ">crop_free</i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="card-body pb-0">
+                                        <div class="row align-items-center no-gutters">
+                                            <figure class="avatar avatar-120 mx-auto mb-3">
+                                                <img src="~/Content/img/avatar.png" alt="">
+                                            </figure>
+                                        </div>
+                                        <input name="uid" type="hidden" value="@user.uid">
+                                        <input name="cpid" type="hidden" value="@user.cpid">
+                                        <h5 class="card-title mb-2 header-color-primary text-center">@user.uname</h5>
+                                        <h6 class="card-subtitle mb-3 header-color-secondary text-center">Имя пользователя: @user.login</h6>
+                                        <h6 class="card-subtitle mb-3 header-color-secondary text-center">Желаемая роль: @user.cpname</h6>
+                                        <h6 class="card-subtitle mb-3 header-color-secondary text-center">Текущая роль: @user.pname</h6>
+                                        <div class="row bg-light-secondary text-center">
+                                            <div class="col py-3">
+                                                <button type="submit" class="btn btn-primary success-gradient" name="submitButton" value="1">Подтвердить</button>
+                                            </div>
+                                            <div class="col py-3">
+                                                <button type="submit" class="btn btn-primary danger-gradient" name="submitButton" value="0">Отказать</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        <!-- unconfusers ends -->
+        <!-- content page title -->
+        <div class="container-fluid bg-light-opac">
+            <div class="row">
+                <div class="container my-3 main-container">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h2 class="content-color-primary page-title">Список подтвержденных пользователей</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- content page title ends -->
+        <!-- content page -->
+        <div class="container mt-4 main-container">
+            <div class="row">
+                @foreach (var user in ViewBag._AllUsers)
+                {
+                    if (user.pid == user.cpid)
+                    {
+                        <div class="col-12 col-md-6">
+                            <form method="post">
+                                <div class="card mb-4 fullscreen">
+                                    <div class="card-header">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <h4 class="content-color-primary mb-0">Профиль пользователя </h4>
+                                            </div>
+                                            <a href="javascript:void(0);" class="icon-circle icon-30 content-color-secondary fullscreenbtn">
+                                                <i class="material-icons ">crop_free</i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="card-body pb-0">
+                                        <div class="row align-items-center no-gutters">
+                                            <figure class="avatar avatar-120 mx-auto mb-3">
+                                                <img src="~/Content/img/avatar.png" alt="">
+                                            </figure>
+                                        </div>
+                                        <input name="uid" type="hidden" value="@user.uid">
+                                        <input name="cpid" type="hidden" value="@user.cpid">
+                                        <h5 class="card-title mb-2 header-color-primary text-center">@user.uname</h5>
+                                        <h6 class="card-subtitle mb-3 header-color-secondary text-center">Имя пользователя: @user.login</h6>
+                                        <h6 class="card-subtitle mb-3 header-color-secondary text-center">Текущая роль: @user.pname</h6>
+                                        <div class="row bg-light-secondary text-center">
+                                            <div class="col py-3">
+                                                @if (ViewBag.UserErrID == user.uid.ToString())
+                                                {
+                                                    <div class="alert alert-danger" role="alert">
+                                                        @Html.ValidationMessage("Err");
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                }
+                                                <div class="form-group border-0">
+                                                    <label for="inputProf" class="sr-only">Должность</label>
+                                                    <select class="form-control" name="ConfProf" id="exampleFormControlSelect1">
+                                                        @foreach (var prof in ViewBag.Prof)
+                                                        {
+                                                            if (prof.id == user.pid)
+                                                            {
+                                                                <option selected="selected">@prof.name</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option>@prof.name</option>
+                                                            }
+                                                        }
+                                                    </select>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary success-gradient" name="submitButton" value="1">Изменить роль пользователя</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <!-- page specific script -->
+    <script src="~/Content/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/js/popper.min.js"></script>
+    <script src="~/Content/vendor/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+    <script src="~/Content/vendor/cookie/jquery.cookie.js"></script>
+    <script src="~/Content/vendor/sparklines/jquery.sparkline.min.js"></script>
+    <script src="~/Content/vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="~/Content/vendor/swiper/js/swiper.min.js"></script>
+    <script src="~/Content/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="~/Content/vendor/chartjs/utils.js"></script>
+    <script src="~/Content/vendor/footable-bootstrap/js/footable.min.js"></script>
+    <script src="~/Content/vendor/bootstrap-daterangepicker-master/moment.js"></script>
+    <script src="~/Content/vendor/bootstrap-daterangepicker-master/daterangepicker.js"></script>
+    <script src="~/Content/vendor/jquery-jvectormap/jquery-jvectormap.js"></script>
+    <script src="~/Content/vendor/jquery-jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="~/Content/vendor/sortable/Sortable.js"></script>
+    <script src="~/Content/js/main.js"></script>
+    <script src="~/Content/js/dragable_sortable.js"></script>
+    <!-- page specific script -->
+</body>
+</html>

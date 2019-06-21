@@ -37,10 +37,7 @@
         <!-- app CSS -->
         <link id="theme" rel="stylesheet" href="~/Content/css/purplesidebar.css" type="text/css">
 
-        @if (ViewBag.UserProfession == "Администратор")
-        {
-            <title>Управление правами доступа</title>
-        }
+        <title>Изменение заказа</title>
     </head>
 
     <body class="fixed-header sidebar-right-close sidebar-left-close">
@@ -57,57 +54,76 @@
         <div class="wrapper">
 
             <header class="main-header">
-                <div class="container-fluid">
-                    <div class="row align-items-center">
-                        <div class="col-auto px-0">
-                            <div class="col-auto pl-15">
-                                <a href="~/Home/Secretary/" class="btn success-gradient btn-sm rounded d-inline-block">Вернуться к списку заказов</a>
+                <!--Navbar -->
+                <nav class="mb-1 navbar navbar-expand-lg navbar-light info-color">
+                    <a class="btn header-color-secondary dropdown-toggle username" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <figure class="userpic"><img src="~/Content/img/avatar.png" alt=""></figure>
+                        <h5 class="text-hide-xs">
+                            <small class="header-color-secondary">Добро пожаловать,</small>
+                            <span class="header-color-primary">@ViewBag.UserName</span>
+                        </h5>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-left profile-dropdown" aria-labelledby="dropdownMenuLink">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <a href="~/Home/Profile/">
+                                    <figure class="avatar avatar-120 mx-auto my-3">
+                                        <img src="~/Content/img/avatar.png" alt="">
+                                    </figure>
+                                    <h5 class="card-title mb-2 header-color-primary">@ViewBag.UserName</h5>
+                                </a>
+                                <h6 class="card-subtitle mb-3 header-color-secondary">@ViewBag.UserProfession</h6>
+                                <p class="card-text">@ViewBag.UserDescription</p>
                             </div>
                         </div>
-                        <div class="col px-0 text-right">
-                            <div class="dropdown d-inline-block">
-                                <a class="btn header-color-secondary dropdown-toggle username" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <figure class="userpic"><img src="~/Content/img/avatar.png" alt=""></figure>
-                                    <h5 class="text-hide-xs">
-                                        <small class="header-color-secondary">Добро пожаловать,</small>
-                                        <span class="header-color-primary">@ViewBag.UserName</span>
-                                    </h5>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right profile-dropdown" aria-labelledby="dropdownMenuLink">
-                                    <div class="card">
-                                        <div class="card-body text-center">
-                                            <a href="~/Home/Profile/">
-                                                <figure class="avatar avatar-120 mx-auto my-3">
-                                                    <img src="~/Content/img/avatar.png" alt="">
-                                                </figure>
-                                                <h5 class="card-title mb-2 header-color-primary">@ViewBag.UserName</h5>
-                                            </a>
-                                            <h6 class="card-subtitle mb-3 header-color-secondary">@ViewBag.UserProfession</h6>
-                                            <p class="card-text">@ViewBag.UserDescription</p>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-divider m-0"></div>
-                                    <a class="dropdown-item pink-gradient-active" href="~/Account/Logout/">
-                                        <div class="row align-items-center">
-                                            <div class="col">
-                                                Выйти
-                                            </div>
-                                            <div class="col-auto">
-                                                <div class="text-danger ml-2"><i class="material-icons vm">exit_to_app</i></div>
-                                            </div>
-                                        </div>
-                                    </a>
+                        <div class="dropdown-divider m-0"></div>
+                        <a class="dropdown-item pink-gradient-active" href="~/Account/Logout/">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    Выйти
+                                </div>
+                                <div class="col-auto">
+                                    <div class="text-danger ml-2"><i class="material-icons vm">exit_to_app</i></div>
                                 </div>
                             </div>
-
-                        </div>
+                        </a>
                     </div>
-                </div>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                        <ul class="navbar-nav ml-auto dt-head-center">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="~/Home/Index/">Мой профиль</a>
+                            </li>
+                            <li class="nav-item active">
+                                @switch (ViewBag.UserProfession)
+                                {
+                                    case "Администратор":
+                                        <a class="nav-link" href="~/Home/Admin/">Управление правами пользователей</a>
+                                        break;
+                                    case "Директор":
+                                        <a class="nav-link" href="~/Home/Director/">Просмотр информации о заказах и бригадах</a>
+                                        break;
+                                    case "Секретарь":
+                                        <a class="nav-link" href="~/Home/Secretary/">Работа с заказами</a>
+                                        break;
+                                    case "Бригадир":
+                                        <a class="nav-link" href="~/Home/Brigadier/">Моя бригада</a>
+                                        break;
+                                    case "Клиент":
+                                        <a class="nav-link" href="~/Home/Client/">Мои заказы</a>
+                                        break;
+                                }
+
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!--/.Navbar -->
             </header>
 
             <!-- page loader ends  -->
             <!-- content page -->
             <div class="container mt-4 main-container">
+                <br />
                 <div class="card mb-12">
                     <div class="card-header border-bottom success-gradient">
                         <h5 class="content-color-primary  mb-0">Изменение выбранного заказа</h5>
@@ -123,7 +139,7 @@
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
-                                    @if (ViewBag.isReady & ViewBag.Order.Order.datestart <= DateTime.Now)
+                                    @if (ViewBag.isReady & ViewBag.Order.Order.datestart <= DateTime.Now & ViewBag.Order.Order.dateend == null)
                                     {
                                         <form method="post">
                                             <input type="text" hidden name="oid" value="@ViewBag.Order.Order.id" />
@@ -133,169 +149,183 @@
                                 </div>
                                 <br />
                                 <br />
-                                <div class="card-header success-gradient">
+                                <div class="card-header text-success">
                                     <h5 class="content-color-primary  mb-0">Список задач</h5>
                                 </div>
                                 <div class="card-body">
-                                <div class="row storyline mb-3 justify-content-center">
-                                    @for (int i = 0; i < ViewBag.Order.Tasks.Count; i++)
-                                    {
-                                        string val = "left";
-                                        if (i % 2 == 0)
+                                    <div class="row storyline mb-3 justify-content-center">
+                                        @for (int i = 0; i < ViewBag.Order.Tasks.Count; i++)
                                         {
-                                            val = "right";
-                                        }
-                                        else
-                                        {
-                                            val = "left";
-                                        }
-                                        <div class="story-block @val">
-                                            @if (ViewBag.Order.Tasks[i].dateend != null)
+                                            string val = "left";
+                                            if (i % 2 == 0)
                                             {
-                                                val = "success";
+                                                val = "right";
                                             }
                                             else
                                             {
-                                                val = "danger";
+                                                val = "left";
                                             }
-                                            <span class="timeline-bubble bg-@val"></span>
-                                            <div class="card mb-4">
-                                                <div class="card-header @val-gradient">
-                                                    <h5 class="mt-1 text-white">Задача: @ViewBag.Order.Tasks[i].name </h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="card-body px-0 py-0">
-                                                            <ul class="list-group border-top border-bottom list-group-flush">
-                                                                <li class="list-group-item">
-                                                                    <div class="media">
-                                                                        <div class="media-body">
-                                                                            <h6 class="my-0 mt-1">Дата начала: @ViewBag.Order.Tasks[i].datestart.ToShortDateString()</h6>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                @if (val == "success")
-                                                                {
+                                            <div class="story-block @val">
+                                                @if (ViewBag.Order.Tasks[i].dateend != null)
+                                                {
+                                                    val = "success";
+                                                }
+                                                else
+                                                {
+                                                    val = "danger";
+                                                }
+                                                <span class="timeline-bubble bg-@val"></span>
+                                                <div class="card mb-4">
+                                                    <div class="card-header @val-gradient">
+                                                        <h5 class="mt-1 text-white">Задача: @ViewBag.Order.Tasks[i].name </h5>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="card-body px-0 py-0">
+                                                                <ul class="list-group border-top border-bottom list-group-flush">
                                                                     <li class="list-group-item">
                                                                         <div class="media">
                                                                             <div class="media-body">
-                                                                                <h6 class="my-0 mt-1">Дата окончания: @ViewBag.Order.Tasks[i].dateend.ToShortDateString()</h6>
+                                                                                <h6 class="my-0 mt-1">Дата начала: @ViewBag.Order.Tasks[i].datestart.ToShortDateString()</h6>
                                                                             </div>
                                                                         </div>
                                                                     </li>
-                                                                }
-                                                                <li class="list-group-item">
-                                                                    <div class="media">
-                                                                        <div class="media-body">
-                                                                            <h6 class="my-0 mt-1">Услуги:</h6>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                @foreach (var s in ViewBag.TasksServ[i])
-                                                                {
-                                                                    <li class="list-group-item">
+                                                                    @if (val == "success")
+                                                                    {
+                                                                        <li class="list-group-item">
+                                                                            <div class="media">
+                                                                                <div class="media-body">
+                                                                                    <h6 class="my-0 mt-1">Дата окончания: @ViewBag.Order.Tasks[i].dateend.ToShortDateString()</h6>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+
+                                                                    }
+                                                                    @if (@ViewBag.Order.Tasks[i].note != null)
+                                                                    {
+                                                                        <li class="list-group-item">
+                                                                            <div class="media">
+                                                                                <div class="media-body">
+                                                                                    <h6 class="my-0 mt-1">Заметка: @ViewBag.Order.Tasks[i].note</h6>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    }
+                                                                    <li class="list-group-item text-uppercase text-danger">
                                                                         <div class="media">
                                                                             <div class="media-body">
-                                                                                <h6 class="my-0 mt-1">- @s.name</h6>
-                                                                                <p class="small">@s.description</p>
+                                                                                <h6 class="my-0 mt-1">Услуги:</h6>
                                                                             </div>
                                                                         </div>
                                                                     </li>
-                                                                }
-                                                                @if (!ViewBag.isBr[i])
-                                                                {
-                                                                    <li class="list-group-item">
-                                                                        <div class="media">
-                                                                            <div class="media-body">
-                                                                                <form method="post">
-                                                                                    <input type="text" hidden name="oid" value="@ViewBag.Order.Order.id" />
-                                                                                    <div class="row justify-content-center">
-                                                                                        <div class="col-lg-12 col-md-12">
-                                                                                            <select name="slist" class="chosen-container form-control" tabindex="2">
-                                                                                                @foreach (var b in ViewBag.TasksBrig[i])
-                                                                                                {
-                                                                                                    <option value="@b.id">@b.name</option>
-                                                                                                }
-                                                                                            </select>
+                                                                    @foreach (var s in ViewBag.TasksServ[i])
+                                                                    {
+                                                                        <li class="list-group-item">
+                                                                            <div class="media">
+                                                                                <div class="media-body">
+                                                                                    <h6 class="my-0 mt-1">- @s.name</h6>
+                                                                                    <p class="small">@s.description</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    }
+                                                                    @if (!ViewBag.isBr[i])
+                                                                    {
+                                                                        <li class="list-group-item">
+                                                                            <div class="media">
+                                                                                <div class="media-body">
+                                                                                    <form method="post">
+                                                                                        <input type="text" hidden name="oid" value="@ViewBag.Order.Order.id" />
+                                                                                        <div class="row justify-content-center">
+                                                                                            <div class="col-lg-12 col-md-12">
+                                                                                                <select name="slist" class="chosen-container form-control" tabindex="2">
+                                                                                                    @foreach (var b in ViewBag.TasksBrig[i])
+                                                                                                    {
+                                                                                                        <option value="@b.id">@b.name</option>
+                                                                                                    }
+                                                                                                </select>
+                                                                                            </div>
                                                                                         </div>
-                                                                                    </div>
-                                                                                    <br />
-                                                                                    <div class="row justify-content-center">
-                                                                                        <input hidden name="tid" value="@ViewBag.Order.Tasks[i].id" />
-                                                                                        <div class="col-lg-5 col-md-5">
-                                                                                            <button class="btn btn-danger float-right" name="action" , value="endtask">Отменить задачу</button>
+                                                                                        <br />
+                                                                                        <div class="row justify-content-center">
+                                                                                            <input hidden name="tid" value="@ViewBag.Order.Tasks[i].id" />
+                                                                                            <div class="col-lg-5 col-md-5">
+                                                                                                <button class="btn btn-danger float-right" name="action" , value="endtask">Отменить задачу</button>
+                                                                                            </div>
+                                                                                            <div class="col-lg-6 col-md-6">
+                                                                                                <button class="btn btn-success float-right" name="action" , value="setbr">Выбрать бригаду</button>
+                                                                                            </div>
                                                                                         </div>
-                                                                                        <div class="col-lg-6 col-md-6">
-                                                                                            <button class="btn btn-success float-right" name="action" , value="setbr">Выбрать бригаду</button>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </form>
+                                                                                    </form>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                    </li>
-                                                                }
-                                                                else
-                                                                {
-                                                                    <li class="list-group-item">
-                                                                        <div class="media">
-                                                                            <div class="media-body">
-                                                                                <h6 class="my-0 mt-1">Испольнитель: @ViewBag.Brigades[i].name</h6>
+                                                                        </li>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <li class="list-group-item">
+                                                                            <div class="media">
+                                                                                <div class="media-body">
+                                                                                    <h6 class="my-0 mt-1">Испольнитель: @ViewBag.Brigades[i].name</h6>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                    </li>
-                                                                }
-                                                            </ul>
+                                                                        </li>
+                                                                    }
+                                                                </ul>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    }
+                                        }
+                                    </div>
                                 </div>
-                            </div>
                                 <br />
                                 <br />
-                                <form method="post">
-                                    <div class="row ">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group ">
-                                                <h6><label>Добавить задачу</label></h6>
+                                @if (ViewBag.Order.Order.dateend == null)
+                                {
+                                    <form method="post">
+                                        <div class="row ">
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="form-group ">
+                                                    <h6><label>Добавить задачу</label></h6>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row ">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group ">
-                                                <input required type="text" name="name" class="form-control" placeholder="Наименование задачи">
+                                        <div class="row ">
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="form-group ">
+                                                    <input required type="text" name="name" class="form-control" placeholder="Наименование задачи">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="form-group ">
+                                                    <input required type="text" name="description" class="form-control" placeholder="Описание задачи">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group ">
-                                                <input required type="text" name="description" class="form-control" placeholder="Описание задачи">
+                                        <div class="row ">
+                                            <div class="col-lg-6 col-md-6">
+                                                <label>Выберите услуги, необходимые для данной задачи</label>
+                                                <select name="slist" required class="chosen-container-multi form-control" tabindex="2" multiple>
+                                                    @foreach (var s in ViewBag.Services)
+                                                    {
+                                                        <option value="@s.id">@s.name</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="form-group ">
+                                                    <label>Дата начала</label>
+                                                    <input type="date" required name="datestart" class="form-control" aria-label="" placeholder="">
+                                                    <br />
+                                                    <input type="text" hidden name="oid" value="@ViewBag.Order.Order.id" />
+                                                    <button class="btn btn-success float-right" name="action" , value="addtask">Добавить задачу</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row ">
-                                        <div class="col-lg-6 col-md-6">
-                                            <label>Выберите услуги, необходимые для данной задачи</label>
-                                            <select name="slist" required class="chosen-container-multi form-control" tabindex="2" multiple>
-                                                @foreach (var s in ViewBag.Services)
-                                                {
-                                                    <option value="@s.id">@s.name</option>
-                                                }
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group ">
-                                                <label>Дата начала</label>
-                                                <input type="date" required name="datestart" class="form-control" aria-label="" placeholder="">
-                                                <br />
-                                                <input type="text" hidden name="oid" value="@ViewBag.Order.Order.id" />
-                                                <button class="btn btn-success float-right" name="action" , value="addtask">Добавить задачу</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                }
                             </div>
                         </div>
                     </div>
