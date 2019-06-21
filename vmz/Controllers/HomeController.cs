@@ -90,7 +90,7 @@ namespace vmz.Controllers
             if (test & ViewBag.UserProfession == "Клиент")
                 return View();
             else
-                return RedirectToAction("Profile", "Account");
+                return RedirectToAction("Profile", "Home");
         }
         [HttpPost]
         public ActionResult Client(ClientModel model)
@@ -154,7 +154,7 @@ namespace vmz.Controllers
             if (test & ViewBag.UserProfession != null)
                 return View();
             else
-                return RedirectToAction("Profile", "Account");
+                return RedirectToAction("Profile", "Home");
         }
         [HttpPost]
         public ActionResult Brigadier(BrigadeModel model)
@@ -313,30 +313,19 @@ namespace vmz.Controllers
         }
         #endregion
         #region Директор
-        public ActionResult Director()
+        public ActionResult Director(DateTime? datestart, DateTime? dateend)
         {
-            bool test = FillViewBag();
+            bool test = FillViewBag(datestart, dateend);
             if (test & ViewBag.UserProfession != null)
                 return View();
             else
-                return RedirectToAction("Profile", "Account");
+                return RedirectToAction("Profile", "Home");
         }
+
         [HttpPost]
-        public ActionResult Director(OrderModel model)
+        public ActionResult Director(DateTime datestart, DateTime dateend)
         {
-            using (Entities db = new Entities())
-            {
-                try
-                {
-                    //
-                    db.SaveChanges();
-                    return RedirectToAction("Secretary", "Home");
-                }
-                catch
-                {
-                    return RedirectToAction("Secretary", "Home");
-                }
-            }
+            return RedirectToAction("Director", "Home", new { @datestart = datestart, @dateend = dateend });
         }
         #endregion
         #region Заказ
@@ -506,14 +495,6 @@ namespace vmz.Controllers
                             ViewBag.Orders = _Orders.OrderByDescending(o => o.Order.datestart).ToList();
                         }
                         break;
-                    case "Директор":
-                        {
-                            ViewBag.BrigadeOrders = db.GetBrigadesOrdersAndTasks();
-                            ViewBag.OrdersAndTasks = db.GetAllOrdersAndTasks();
-                            ViewBag.Orders = db.GetOrdersAndTasksCount();
-                            ViewBag.Tasks = db.GetTasksAndOName();
-                        }
-                        break;
                     default:
                         return false;
                 }
@@ -580,7 +561,7 @@ namespace vmz.Controllers
                             isBr.Add(true);
                         }
                     }
-                    
+
                     foreach (var t in tasks)
                     {
                         if (t.Task.dateend == null)
@@ -595,10 +576,10 @@ namespace vmz.Controllers
                     }
                 }
                 List<List<Service>> _Services = new List<List<Service>>();
-                for(int i = 0; i < Services.Count; i++)
+                for (int i = 0; i < Services.Count; i++)
                 {
                     _Services.Add(new List<Service>());
-                    foreach(var s in Services[i])
+                    foreach (var s in Services[i])
                         _Services[i].Add(db.Service.FirstOrDefault(se => se.id == s.id));
                 }
                 List<List<Brigade>> _Brigades = new List<List<Brigade>>();
@@ -641,6 +622,92 @@ namespace vmz.Controllers
             }
             return false;
         }
+
+        private bool FillViewBag(DateTime? datestart, DateTime? dateend)
+        {
+            var cookie = Request.Cookies["user"];
+            if (cookie != null)
+            {
+                int id = Convert.ToInt32(cookie.Value);
+                var _user = db.User.FirstOrDefault(u => u.id == id);
+                ViewBag.UserName = _user.name;
+                ViewBag.UserProfession = db.Profession.FirstOrDefault(p => p.id == _user.professionid).name;
+                ViewBag.UserDescription = _user.description;
+                ViewBag.UserErrID = null;
+                if (ViewBag.UserProfession == "Директор")
+                {
+                    ViewBag.datestart = datestart;
+                    ViewBag.dateend = dateend;
+                    var BrigadeTasks = db.GetBrigadesAndTasks().ToList();
+                    var Orders = db.GetOrdersAndTasksCount().ToList();
+                    var Tasks = db.GetTasksAndOName().ToList();
+                    if ((datestart != null) & (dateend != null))
+                    {
+                        BrigadeTasks = db.GetBrigadesAndTasks().Where(
+                            b => (b.tde <= dateend) & (b.tde <= dateend) & (b.tds <= dateend) & (b.tds <= dateend)).ToList().Where(
+                            b => (b.tde >= datestart) & (b.tde >= datestart) & (b.tds >= datestart) & (b.tds >= datestart)).ToList();
+                        Orders = db.GetOrdersAndTasksCount().Where(
+                            b => (b.ode <= dateend) & (b.ode <= dateend) & (b.ods <= dateend) & (b.ods <= dateend)).ToList().Where(
+                            b => (b.ode >= datestart) & (b.ode >= datestart) & (b.ods >= datestart) & (b.ods >= datestart)).ToList();
+                        Tasks = db.GetTasksAndOName().Where(
+                            b => (b.tde <= dateend) & (b.tde <= dateend) & (b.tds <= dateend) & (b.tds <= dateend)).ToList().Where(
+                            b => (b.tde >= datestart) & (b.tde >= datestart) & (b.tds >= datestart) & (b.tds >= datestart)).ToList();
+                    }
+                    ViewBag.BrigadeTasks = BrigadeTasks;
+                    var BrigadeInfo = from b in BrigadeTasks
+                                      group b by b.bname
+                                      into _b
+                                      select new
+                                      {
+                                          _b.FirstOrDefault().bname,
+                                          _b.FirstOrDefault().bfio,
+                                          _b.FirstOrDefault().cworkers,
+                                          isnull = _b.Where(bb => bb.tde == null).ToList().Count(),
+                                          isnotnull = _b.Where(bb => bb.tde != null).ToList().Count(),
+                                          sumhours = _b.Where(bb => bb.tde != null).ToList().Sum(bbb => bbb.tddif)
+                                      };
+                    List<BrigadeInfo> _BrigadeInfo = new List<BrigadeInfo>();
+                    foreach (var b in BrigadeInfo)
+                    {
+                        _BrigadeInfo.Add(new Controllers.BrigadeInfo
+                        {
+                            bname = b.bname,
+                            bfio = b.bfio,
+                            cworkers = b.cworkers,
+                            isnotnull = b.isnotnull,
+                            isnull = b.isnull,
+                            sumhours = b.sumhours
+                        });
+                    }
+                    ViewBag.BrigadeInfo = _BrigadeInfo;
+                    ViewBag.Orders = Orders;
+                    ViewBag.Tasks = Tasks;
+                    var TasksCount = from t in Tasks
+                                     group t by t.oname
+                               into _t
+                                     select new
+                                     {
+                                         name = _t.FirstOrDefault().oname,
+                                         _count = _t.Where(ta => ta.tde != null).ToList().Count(),
+                                         count = _t.Count()
+                                     };
+                    List<TasksCount> _TasksCount = new List<TasksCount>();
+                    foreach (var tc in TasksCount)
+                    {
+                        _TasksCount.Add(new Controllers.TasksCount
+                        {
+                            name = tc.name,
+                            count = tc.count,
+                            _count = tc._count,
+                            procent = Convert.ToInt32(Convert.ToDouble(tc._count)/ Convert.ToDouble(tc.count) * 100d).ToString() + "%"
+                        });
+                    }
+                    ViewBag.TasksCount = _TasksCount;
+                }
+                return true;
+            }
+            return false;
+        }
         #endregion
     }
     public struct OrderTask
@@ -653,5 +720,22 @@ namespace vmz.Controllers
 
         public Order Order { get; set; }
         public List<Task> Tasks { get; set; }
+    }
+    public class TasksCount
+    {
+        public string name { get; set; }
+        public int _count { get; set; }
+        public int count { get; set; }
+        public string procent { get; set; }
+    }
+    public class BrigadeInfo
+    {
+        public string bname { get; set; }
+        public string bfio { get; set; }
+        public int isnull { get; set; }
+        public int isnotnull { get; set; }
+        public int? cworkers { get; set; }
+        public int? sumhours { get; set; }
+
     }
 }

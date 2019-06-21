@@ -186,6 +186,7 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="GetAllOrdersAndTasks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetBrigadesAndTasks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetBrigadeServ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idbort" Type="int" Mode="In" />
         </Function>
@@ -324,6 +325,7 @@
             <End Role="Task" EntitySet="Task" />
             <End Role="TaskToBrigade" EntitySet="TaskToBrigade" />
           </AssociationSet>
+          <FunctionImport Name="GetBrigadesAndTasks" ReturnType="Collection(vmzModel.GetBrigadesAndTasks_Result)" />
           </EntityContainer>
         <ComplexType Name="GetServices_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -636,6 +638,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetBrigadesAndTasks_Result">
+          <Property Type="String" Name="bname" Nullable="true" />
+          <Property Type="String" Name="bfio" Nullable="true" />
+          <Property Type="String" Name="oname" Nullable="true" />
+          <Property Type="String" Name="tname" Nullable="true" />
+          <Property Type="DateTime" Name="tds" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="tde" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="tddif" Nullable="true" />
+          <Property Type="String" Name="ts" Nullable="false" MaxLength="12" />
+          <Property Type="Int32" Name="cworkers" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -898,6 +911,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetBrigadesAndTasks" FunctionName="Хранилище vmzModel.GetBrigadesAndTasks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="vmzModel.GetBrigadesAndTasks_Result">
+                <ScalarProperty Name="bname" ColumnName="bname" />
+                <ScalarProperty Name="bfio" ColumnName="bfio" />
+                <ScalarProperty Name="oname" ColumnName="oname" />
+                <ScalarProperty Name="tname" ColumnName="tname" />
+                <ScalarProperty Name="tds" ColumnName="tds" />
+                <ScalarProperty Name="tde" ColumnName="tde" />
+                <ScalarProperty Name="tddif" ColumnName="tddif" />
+                <ScalarProperty Name="ts" ColumnName="ts" />
+                <ScalarProperty Name="cworkers" ColumnName="cworkers" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

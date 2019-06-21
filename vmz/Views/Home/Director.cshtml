@@ -114,83 +114,341 @@
             </div>
         </header>
 
-        <!-- content page -->
         <div class="container mt-4 main-container">
             <div class="row">
-                <div class="col-sm-12">
-                    <div class="card mb-4 fullscreen">
-                        <div class="card-header">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h4 class="content-color-primary mb-0">Список заказов</h4>
-                                </div>
-                                <a href="javascript:void(0);" class="icon-circle icon-30 content-color-secondary fullscreenbtn">
-                                    <i class="material-icons ">crop_free</i>
-                                </a>
-                            </div>
+                <div class="col-12 col-md-12">
+                    <div class="card mb-4 ">
+                        <div class="card-header p-0">
+                            <ul class="nav nav-tabs wizard-1" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active success-gradient-active" id="tabhome1-tab" data-toggle="tab" href="#tabhome1" role="tab" aria-controls="tabhome1" aria-selected="true">
+                                        <span>Заказы</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link success-gradient-active" id="tabhome2-tab" data-toggle="tab" href="#tabhome2" role="tab" aria-controls="tabhome2" aria-selected="false">
+                                        <span>Задачи</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link success-gradient-active" id="tabhome3-tab" data-toggle="tab" href="#tabhome3" role="tab" aria-controls="tabhome3" aria-selected="false">
+                                        <span>Бригады</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                         <div class="card-body">
-                            <table class="table " id="dataTables-example">
-                                <thead>
-                                    <tr>
-                                        <th class="center text-center">Заказ</th>
-                                        <th class="center text-center">Заказчик</th>
-                                        <th class="center text-center">Дата создания заказа</th>
-                                        <th class="center text-center">Дата завершения заказа</th>
-                                        <th class="center text-center">Потраченое на заказ время (часов)</th>
-                                        <th class="center text-center">Статус заказа</th>
-                                        <th class="center text-center">Количество задач</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var o in ViewBag.Orders)
-                                    {
-                                    <tr class="even">
-                                        <td class="center text-center">@o.oname</td>
-                                        <td class="center text-center">@o.ofio</td>
-                                        <td class="center text-center">@o.ods.ToShortDateString()</td>
-                                        @if (@o.ode != null)
-                                        {
-                                            <td class="center text-center">@o.ode.ToShortDateString()</td>
-                                        }
-                                        else
-                                        {
-                                            <td class="center text-center">-</td>
-                                        }
-                                        @if (@o.oddif != null)
-                                        {
-                                            <td class="center text-center">@o.oddif</td>
-                                        }
-                                        else
-                                        {
-                                            <td class="center">-</td>
-                                        }
-                                        @if (@o.oddif != null)
-                                        {
-                                            <td class="center text-center success-gradient">@o.os</td>
-                                        }
-                                        else
-                                        {
-                                            <td class="center text-center danger-gradient">@o.os</td>
-                                        }
-                                        <td class="center">@o.tc</td>
-                                    </tr>
-                                    }
-                                </tbody>
-                            </table>
-                            <!-- /.table-responsive -->
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="tabhome1" role="tabpanel" aria-labelledby="tabhome1-tab">
+                                    <div class="col-sm-12">
+                                        <div class="card mb-4 fullscreen">
+                                            <div class="card-header">
+                                                <div class="media">
+                                                    <div class="media-body">
+                                                    </div>
+                                                    <a href="javascript:void(0);" class="icon-circle icon-30 content-color-secondary fullscreenbtn">
+                                                        <i class="material-icons ">crop_free</i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <table class=" display table " id="dataTables-example">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="center text-center">Заказ</th>
+                                                            <th class="center text-center">Заказчик</th>
+                                                            <th class="center text-center">Дата создания заказа</th>
+                                                            <th class="center text-center">Дата завершения заказа</th>
+                                                            <th class="center text-center">Потраченое на заказ время (часов)</th>
+                                                            <th class="center text-center">Статус заказа</th>
+                                                            <th class="center text-center">Количество задач</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var o in ViewBag.Orders)
+                                                        {
+                                                            <tr class="even">
+                                                                <td class="center text-center">@o.oname</td>
+                                                                <td class="center text-center">@o.ofio</td>
+                                                                <td class="center text-center">@o.ods.ToShortDateString()</td>
+                                                                @if (@o.ode != null)
+                                                                {
+                                                                    <td class="center text-center">@o.ode.ToShortDateString()</td>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <td class="center text-center">-</td>
+                                                                }
+                                                                @if (@o.oddif != null)
+                                                                {
+                                                                    <td class="center text-center">@o.oddif</td>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <td class="center text-center">-</td>
+                                                                }
+                                                                @if (@o.oddif != null)
+                                                                {
+                                                                    <td class="center text-center success-gradient">@o.os</td>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <td class="center text-center danger-gradient">@o.os</td>
+                                                                }
+                                                                <td class="center text-center">@o.tc</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                                <!-- /.table-responsive -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="tab-pane fade" id="tabhome2" role="tabpanel" aria-labelledby="tabhome2-tab">
+                                    <div class="col-sm-12">
+                                        <div class="card mb-4 fullscreen">
+                                            <div class="card-header">
+                                                <div class="media">
+                                                    <div class="media-body">
+                                                    </div>
+                                                    <a href="javascript:void(0);" class="icon-circle icon-30 content-color-secondary fullscreenbtn">
+                                                        <i class="material-icons ">crop_free</i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <table class="display table " id="dataTables-example1">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="center text-center">Заказ</th>
+                                                            <th class="center text-center">Задача</th>
+                                                            <th class="center text-center">Дата создания задачи</th>
+                                                            <th class="center text-center">Дата завершения задачи</th>
+                                                            <th class="center text-center">Потраченое на задачу время (часов)</th>
+                                                            <th class="center text-center">Статус задачи</th>
+                                                            <th class="center text-center">Бригада</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var o in ViewBag.Tasks)
+                                                        {
+                                                            <tr class="even">
+                                                                <td class="center text-center">@o.oname</td>
+                                                                <td class="center text-center">@o.tname</td>
+
+                                                                <td class="center text-center">@o.tds.ToShortDateString()</td>
+                                                                @if (@o.tde != null)
+                                                                {
+                                                                    <td class="center text-center">@o.tde.ToShortDateString()</td>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <td class="center text-center">-</td>
+                                                                }
+                                                                @if (@o.tddif != null)
+                                                                {
+                                                                    <td class="center text-center">@o.tddif</td>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <td class="center text-center">-</td>
+                                                                }
+                                                                @if (@o.tddif != null)
+                                                                {
+                                                                    <td class="center text-center success-gradient">@o.ts</td>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <td class="center text-center danger-gradient">@o.ts</td>
+                                                                }
+                                                                <td class="center text-center">@o.bname</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                                <!-- /.table-responsive -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12">
+                                        <div class="card mb-4">
+                                            <div class="card-header">
+                                                <h4 class="card-title mb-0">Прогресс по выполненным задачам для заказов</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                @foreach (var tc in ViewBag.TasksCount)
+                                                {
+                                                    <label>Заказ: @tc.name</label>
+                                                    <div class="progress mb-3">
+                                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: @tc.procent" aria-valuenow="@tc._count" aria-valuemin="0" aria-valuemax="@tc.count" >@(Convert.ToInt32(Convert.ToDouble(tc._count) / Convert.ToDouble(tc.count) * 100d))%</div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tabhome3" role="tabpanel" aria-labelledby="tabhome3-tab">
+                                    <div class="col-sm-12">
+                                        <div class="card mb-4 fullscreen">
+                                            <div class="card-header">
+                                                <div class="media">
+                                                    <div class="media-body">
+                                                    </div>
+                                                    <a href="javascript:void(0);" class="icon-circle icon-30 content-color-secondary fullscreenbtn">
+                                                        <i class="material-icons ">crop_free</i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <table class="display table " id="dataTables-example2">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="center text-center">Бригада</th>
+                                                            <th class="center text-center">Бригадир</th>
+                                                            <th class="center text-center">Кол-во работников бригады</th>
+                                                            <th class="center text-center">Заказ</th>
+                                                            <th class="center text-center">Задача</th>
+                                                            <th class="center text-center">Потраченое на задачу время (часов)</th>
+                                                            <th class="center text-center">Статус задачи</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var o in ViewBag.BrigadeTasks)
+                                                        {
+                                                            <tr class="even">
+                                                                <td class="center text-center">@o.bname</td>
+                                                                <td class="center text-center">@o.bfio</td>
+                                                                <td class="center text-center">@o.cworkers</td>
+                                                                <td class="center text-center">@o.oname</td>
+                                                                <td class="center text-center">@o.tname</td>
+                                                                @if (@o.tddif != null)
+                                                                {
+                                                                    <td class="center text-center">@o.tddif</td>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <td class="center text-center">-</td>
+                                                                }
+                                                                @if (@o.tddif != null)
+                                                                {
+                                                                    <td class="center text-center success-gradient">@o.ts</td>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <td class="center text-center danger-gradient">@o.ts</td>
+                                                                }
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                                <!-- /.table-responsive -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="card mb-4 fullscreen">
+                                            <div class="card-header">
+                                                <div class="media">
+                                                    <div class="media-body">
+                                                    </div>
+                                                    <a href="javascript:void(0);" class="icon-circle icon-30 content-color-secondary fullscreenbtn">
+                                                        <i class="material-icons ">crop_free</i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <table class="display table " id="dataTables-example3">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="center text-center">Бригада</th>
+                                                            <th class="center text-center">Бригадир</th>
+                                                            <th class="center text-center">Кол-во невыполненных задач</th>
+                                                            <th class="center text-center">Кол-во выполненных задач</th>
+                                                            <th class="center text-center">Кол-во работников бригады</th>
+                                                            <th class="center text-center">Потраченое на задачи время (часы)</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var o in ViewBag.BrigadeInfo)
+                                                        {
+                                                        <tr class="even">
+                                                            <td class="center text-center">@o.bname</td>
+                                                            <td class="center text-center">@o.bfio</td>
+                                                            <td class="center text-center">@o.isnull</td>
+                                                            <td class="center text-center">@o.isnotnull</td>
+                                                            @if (@o.cworkers != null)
+                                                            {
+                                                                <td class="center text-center">@o.cworkers</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td class="center text-center">-</td>
+                                                            }
+                                                            @if (@o.sumhours != null)
+                                                            {
+                                                                <td class="center text-center">@o.sumhours</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td class="center text-center">-</td>
+                                                            }
+                                                        </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                                <!-- /.table-responsive -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
+        <div class="container mt-4 main-container">
+            <h5>Выберите период выборки</h5>
+            <form method="post">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4">
+                        <div class="form-group ">
+                            <br />
+                            <label>C</label>
+                            <input type="date" required name="datestart" class="form-control" aria-label="" placeholder="" value="">
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-4 col-md-4">
+                        <div class="form-group ">
+                            <br />
+                            <label>По</label>
+                            <input type="date" required name="dateend" class="form-control" aria-label="" placeholder="" value="">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4">
+                        <br />
+                        <button class="btn btn-success float-left">Показать за выбранный период</button>
+                    </div>
+                </div>
+            </form>
+        </div>
         <!-- main container ends -->
-
-
     </div>
-    
+
+    <script>
+        $(document).ready(function () {
+            $('table.display').DataTable();
+        });
+    </script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="~/Content/js/jquery-3.2.1.min.js"></script>
@@ -229,6 +487,7 @@
     <!-- circular progress file -->
     <script src="~/Content/vendor/circle-progress/circle-progress.min.js"></script>
 
+
     <!-- Application main common jquery file -->
     <script src="~/Content/js/main.js"></script>
 
@@ -237,6 +496,24 @@
         "use strict"
         $(document).ready(function () {
             $('#dataTables-example').DataTable({
+                responsive: true,
+                "order": [
+                    [3, "desc"]
+                ]
+            });
+            $('#dataTables-example1').DataTable({
+                responsive: true,
+                "order": [
+                    [3, "desc"]
+                ]
+            });
+            $('#dataTables-example2').DataTable({
+                responsive: true,
+                "order": [
+                    [3, "desc"]
+                ]
+            });
+            $('#dataTables-example3').DataTable({
                 responsive: true,
                 "order": [
                     [3, "desc"]

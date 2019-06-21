@@ -140,5 +140,10 @@ namespace vmz.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetListOfUsersAdm_Result>("GetListOfUsersAdm");
         }
+    
+        public virtual ObjectResult<GetBrigadesAndTasks_Result> GetBrigadesAndTasks()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetBrigadesAndTasks_Result>("GetBrigadesAndTasks");
+        }
     }
 }
