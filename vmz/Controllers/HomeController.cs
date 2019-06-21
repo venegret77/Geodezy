@@ -20,6 +20,27 @@ namespace vmz.Controllers
             else
                 return RedirectToAction("Login", "Account");
         }
+        [HttpPost]
+        public new ActionResult Index(string description, string pass, string action)
+        {
+            int id = Convert.ToInt32(ViewBag.UserID);
+            if (action == "changedesc")
+            {
+                db.User.FirstOrDefault(u => u.id == id).description = description;
+            }
+            else if (action == "changepass")
+            {
+                var user = db.User.FirstOrDefault(u => u.id == id);
+                using (MD5 md5Hash = MD5.Create())
+                {
+                    string source = "login:" + user.login + "###password:" + pass;
+                    string hash = AccountController.GetMd5Hash(md5Hash, source);
+                    user.md5 = hash;
+                }
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
         #endregion
         #region Администратор
         public ActionResult Admin()
@@ -429,6 +450,7 @@ namespace vmz.Controllers
             {
                 int id = Convert.ToInt32(cookie.Value);
                 var _user = db.User.FirstOrDefault(u => u.id == id);
+                ViewBag.UserID = id;
                 ViewBag.UserName = _user.name;
                 ViewBag.UserProfession = db.Profession.FirstOrDefault(p => p.id == _user.professionid).name;
                 ViewBag.UserDescription = _user.description;

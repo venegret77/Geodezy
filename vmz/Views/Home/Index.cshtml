@@ -58,66 +58,66 @@
         <header class="main-header">
             <!--Navbar -->
             <nav class="mb-1 navbar navbar-expand-lg navbar-light info-color">
-                    <a class="btn header-color-secondary dropdown-toggle username" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <figure class="userpic"><img src="~/Content/img/avatar.png" alt=""></figure>
-                        <h5 class="text-hide-xs">
-                            <small class="header-color-secondary">Добро пожаловать,</small>
-                            <span class="header-color-primary">@ViewBag.UserName</span>
-                        </h5>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-left profile-dropdown" aria-labelledby="dropdownMenuLink">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <a href="~/Home/Profile/">
-                                    <figure class="avatar avatar-120 mx-auto my-3">
-                                        <img src="~/Content/img/avatar.png" alt="">
-                                    </figure>
-                                    <h5 class="card-title mb-2 header-color-primary">@ViewBag.UserName</h5>
-                                </a>
-                                <h6 class="card-subtitle mb-3 header-color-secondary">@ViewBag.UserProfession</h6>
-                                <p class="card-text">@ViewBag.UserDescription</p>
+                <a class="btn header-color-secondary dropdown-toggle username" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <figure class="userpic"><img src="~/Content/img/avatar.png" alt=""></figure>
+                    <h5 class="text-hide-xs">
+                        <small class="header-color-secondary">Добро пожаловать,</small>
+                        <span class="header-color-primary">@ViewBag.UserName</span>
+                    </h5>
+                </a>
+                <div class="dropdown-menu dropdown-menu-left profile-dropdown" aria-labelledby="dropdownMenuLink">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <a href="~/Home/Profile/">
+                                <figure class="avatar avatar-120 mx-auto my-3">
+                                    <img src="~/Content/img/avatar.png" alt="">
+                                </figure>
+                                <h5 class="card-title mb-2 header-color-primary">@ViewBag.UserName</h5>
+                            </a>
+                            <h6 class="card-subtitle mb-3 header-color-secondary">@ViewBag.UserProfession</h6>
+                            <p class="card-text">@ViewBag.UserDescription</p>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider m-0"></div>
+                    <a class="dropdown-item pink-gradient-active" href="~/Account/Logout/">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                Выйти
+                            </div>
+                            <div class="col-auto">
+                                <div class="text-danger ml-2"><i class="material-icons vm">exit_to_app</i></div>
                             </div>
                         </div>
-                        <div class="dropdown-divider m-0"></div>
-                        <a class="dropdown-item pink-gradient-active" href="~/Account/Logout/">
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    Выйти
-                                </div>
-                                <div class="col-auto">
-                                    <div class="text-danger ml-2"><i class="material-icons vm">exit_to_app</i></div>
-                                </div>
-                            </div>
-                        </a>
+                    </a>
                 </div>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
-                        <ul class="navbar-nav ml-auto dt-head-center">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="~/Home/Index/">Мой профиль</a>
-                            </li>
-                            <li class="nav-item active">
-                                @switch (ViewBag.UserProfession)
-                                {
-                                    case "Администратор":
-                                        <a class="nav-link" href="~/Home/Admin/">Управление правами пользователей</a>
-                                        break;
-                                    case "Директор":
-                                        <a class="nav-link" href="~/Home/Director/">Просмотр информации о заказах и бригадах</a>
-                                        break;
-                                    case "Секретарь":
-                                        <a class="nav-link" href="~/Home/Secretary/">Работа с заказами</a>
-                                        break;
-                                    case "Бригадир":
-                                        <a class="nav-link" href="~/Home/Brigadier/">Моя бригада</a>
-                                        break;
-                                    case "Клиент":
-                                        <a class="nav-link" href="~/Home/Client/">Мои заказы</a>
-                                        break;
-                                }
+                <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                    <ul class="navbar-nav ml-auto dt-head-center">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="~/Home/Index/">Мой профиль</a>
+                        </li>
+                        <li class="nav-item active">
+                            @switch (ViewBag.UserProfession)
+                            {
+                                case "Администратор":
+                                    <a class="nav-link" href="~/Home/Admin/">Управление правами пользователей</a>
+                                    break;
+                                case "Директор":
+                                    <a class="nav-link" href="~/Home/Director/">Просмотр информации о заказах и бригадах</a>
+                                    break;
+                                case "Секретарь":
+                                    <a class="nav-link" href="~/Home/Secretary/">Работа с заказами</a>
+                                    break;
+                                case "Бригадир":
+                                    <a class="nav-link" href="~/Home/Brigadier/">Моя бригада</a>
+                                    break;
+                                case "Клиент":
+                                    <a class="nav-link" href="~/Home/Client/">Мои заказы</a>
+                                    break;
+                            }
 
-                            </li>
-                        </ul>
-                    </div>
+                        </li>
+                    </ul>
+                </div>
             </nav>
             <!--/.Navbar -->
         </header>
@@ -145,6 +145,38 @@
                     </div>
                 </div>
             </div>
+            <br />
+            <br />
+            
+                <div class="row ">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group ">
+                            <h6><label>Изменение информации</label></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-6 justify-content-center">
+                        <form method="post">
+                            <div class="form-group ">
+                                <label>О себе</label>
+                                <input type="text" required name="description" class="form-control" placeholder="О себе" value="@ViewBag.UserDescription">
+                                <br />
+                                <button class="btn btn-success float-center" name="action" , value="changedesc">Изменить информацию "О себе"</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-6 col-md-6 justify-content-center">
+                        <form method="post">
+                            <div class="form-group ">
+                                <label>Новый пароль</label>
+                                <input type="password" required name="pass" class="form-control" aria-label="" placeholder="">
+                                <br />
+                                <button class="btn btn-success float-center" name="action" , value="changepass">Изменить пароль</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
         </div>
     </div>
     <!-- page specific script -->
