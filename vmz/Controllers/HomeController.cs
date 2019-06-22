@@ -21,9 +21,9 @@ namespace vmz.Controllers
                 return RedirectToAction("Login", "Account");
         }
         [HttpPost]
-        public new ActionResult Index(string description, string pass, string action)
+        public new ActionResult Index(string description, string pass, string action, string uid)
         {
-            int id = Convert.ToInt32(ViewBag.UserID);
+            int id = Convert.ToInt32(uid);
             if (action == "changedesc")
             {
                 db.User.FirstOrDefault(u => u.id == id).description = description;
@@ -536,6 +536,7 @@ namespace vmz.Controllers
                 int id = Convert.ToInt32(cookie.Value);
                 var _user = db.User.FirstOrDefault(u => u.id == id);
                 ViewBag.UserName = _user.name;
+                ViewBag.UserID = id;
                 ViewBag.UserProfession = db.Profession.FirstOrDefault(p => p.id == _user.professionid).name;
                 ViewBag.UserDescription = _user.description;
                 ViewBag.UserErrID = null;
@@ -557,6 +558,7 @@ namespace vmz.Controllers
                 ViewBag.UserErrID = null;
                 int oid = Convert.ToInt32(orderid);
                 OrderTask _Order = new OrderTask();
+                _Order.Tasks = new List<Task>();
                 if (db.Order.FirstOrDefault(o => o.id == oid) == null)
                     return false;
                 _Order.Order = db.Order.FirstOrDefault(o => o.id == oid);

@@ -122,6 +122,7 @@
 
             <!-- page loader ends  -->
             <!-- content page -->
+
             <div class="container mt-4 main-container">
                 <br />
                 <div class="card mb-12">
@@ -149,10 +150,9 @@
                                 </div>
                                 <br />
                                 <br />
-                                <div class="card-header text-success">
-                                    <h5 class="content-color-primary  mb-0">Список задач</h5>
-                                </div>
-                                <div class="card-body">
+
+                                <div class="container mt-4 main-container">
+                                    <br />
                                     <div class="row storyline mb-3 justify-content-center">
                                         @for (int i = 0; i < ViewBag.Order.Tasks.Count; i++)
                                         {
@@ -179,7 +179,7 @@
                                                     <div class="card-header @val-gradient">
                                                         <h5 class="mt-1 text-white">Задача: @ViewBag.Order.Tasks[i].name </h5>
                                                     </div>
-                                                    <div class="card-body">
+                                                    <div class="card-footer border-top no-gutters content-color-secondary">
                                                         <div class="row">
                                                             <div class="card-body px-0 py-0">
                                                                 <ul class="list-group border-top border-bottom list-group-flush">
@@ -279,6 +279,12 @@
                                             </div>
                                         }
                                     </div>
+                                </div>
+                                <div class="card-header text-success">
+                                    <h5 class="content-color-primary  mb-0">Список задач</h5>
+                                </div>
+                                <div class="card-body">
+
                                 </div>
                                 <br />
                                 <br />

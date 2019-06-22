@@ -160,6 +160,7 @@
                         <form method="post">
                             <div class="form-group ">
                                 <label>О себе</label>
+                                <input type="text" hidden name="uid"  value="@ViewBag.UserID">
                                 <input type="text" required name="description" class="form-control" placeholder="О себе" value="@ViewBag.UserDescription">
                                 <br />
                                 <button class="btn btn-success float-center" name="action" , value="changedesc">Изменить информацию "О себе"</button>
@@ -170,6 +171,7 @@
                         <form method="post">
                             <div class="form-group ">
                                 <label>Новый пароль</label>
+                                <input type="text" hidden name="uid" value="@ViewBag.UserID">
                                 <input type="password" required name="pass" class="form-control" aria-label="" placeholder="">
                                 <br />
                                 <button class="btn btn-success float-center" name="action" , value="changepass">Изменить пароль</button>

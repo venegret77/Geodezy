@@ -103,7 +103,7 @@ namespace vmz.Controllers
                 {
                     string source = "login:" + model.Login + "###password:" + model.Password;
                     string hash = GetMd5Hash(md5Hash, source);
-                    user = db.User.FirstOrDefault(u => u.login == model.Login);
+                    user = db.User.FirstOrDefault(u => u.md5 == hash);
                 }
                 //Если данные введены верно
                 //Заносим в куки Логин пользователя

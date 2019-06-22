@@ -235,7 +235,7 @@
                                     <div class="row">
                                         @if (ViewBag.Orders[i].Tasks.Count != 0)
                                         {
-                                            <div class="card mb-4 ">
+                                            <div class="card col-lg-12 col-md-12">
                                                 <div class="card-header success-gradient">
                                                     <div class="media">
                                                         <div class="media-body">
@@ -247,7 +247,7 @@
                                                     <ul class="list-group draglist col-lg-12 col-md-12">
                                                         @foreach (var t in ViewBag.Orders[i].Tasks)
                                                         {
-                                                            <li class="list-group-item list-group-item-success">- Задача: "@t.name" Статус: Выполнена</li>
+                                                                <li class="list-group-item list-group-item-success">- Задача: "@t.name" Статус: Выполнена</li>
                                                         }
                                                     </ul>
                                                 </div>
